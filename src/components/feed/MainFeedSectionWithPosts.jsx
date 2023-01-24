@@ -24,7 +24,7 @@ export default function MainFeedSectionWithPosts() {
   const allFeedPosts = useSelector((state) => state.feedPosts.feedPostArray)
   //   reversing the array so we get the newest posts
 
-  const allLatestPosts = allFeedPosts.slice(0).reverse()
+  const allLatestPosts = allFeedPosts
 
   const longerPosts = allLatestPosts.filter((post) => post.text.length > 10)
 
@@ -85,12 +85,12 @@ export default function MainFeedSectionWithPosts() {
       {allFeedPosts && (
         <>
           <div id="feed-main-container">
-            {latestPostSlice.map((post) => (
+            {allLatestPosts.map((post) => (
               <div key={post._id}>
                 {" "}
-                {post.user._id && (
+                {post.user[0]._id && (
                   <div key={post._id} className="feed-post border p-feed pb-1">
-                    {post.user._id === userId ? (
+                    {post.user[0]._id === userId ? (
                       <>
                         <div className="d-flex justify-content-between mr-2 ml-2">
                           <div></div>
@@ -139,16 +139,16 @@ export default function MainFeedSectionWithPosts() {
                     <div className=" border-top mr-2 ml-2">
                       <div className="mt-3 d-flex ">
                         <div className="border recommended-user-image">
-                          <img src={post.user.image} alt="" />
+                          <img src={post.user[0].image} alt="" />
                         </div>{" "}
                         <div className="feed-text-user-wrapper">
                           <div className="mb-0 small-header-text bolder feed-text-name">
-                            <span>{post.user.name} </span>
-                            <span>{post.user.surname}</span>
+                            <span>{post.user[0].name} </span>
+                            <span>{post.user[0].surname}</span>
                           </div>
                           <div className="mb-1 small-height">
                             <span className="feed-post-tiny-text truncate-text">
-                              {post.user.title}
+                              {post.user[0].title}
                             </span>
                           </div>
                           {/* <div className="mb-1 small-height">
