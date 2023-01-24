@@ -17,7 +17,6 @@ const ExperienceComponent = ({ profileData }) => {
   let pathname = window.location.pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
 
   let userId = useSelector((state) => state.myProfile.detailsData._id);
 
@@ -32,9 +31,10 @@ const ExperienceComponent = ({ profileData }) => {
   );
 
   //gets all the experiences from the redux state
-  const experiencesArray = useSelector(
-    (state) => state.experiences.experiences
-  );
+
+  const user = useSelector((state) => state.user.user);
+
+  const experiencesArray = user[0].experiences;
 
   useEffect(() => {
     dispatch(getMyProfileDetailsAction());
