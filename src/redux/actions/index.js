@@ -285,7 +285,7 @@ export const getFeedPostsAction = () => {
     console.log("----------------Fetching Feed Posts---------------------");
 
     try {
-      let resp = await fetch(baseEndPointPosts, options);
+      let resp = await fetch(baseEndPointPosts);
       if (resp.ok) {
         let data = await resp.json();
         let fetchedPosts = data;
@@ -328,11 +328,11 @@ export const getFeedPostsAction = () => {
 //   };
 // };
 
-export const addingNewFeedPostAction = (newFeedPost) => {
+export const addingNewFeedPostAction = (newFeedPost, id) => {
   return async (dispatch) => {
     try {
       let response = await fetch(
-        "http://localhost:3002/posts/63ce652c4f33b5dd6214a4ec",
+        "https://linkedin-backend-production.up.railway.app/posts/" + id,
         {
           method: "POST",
           body: newFeedPost,
