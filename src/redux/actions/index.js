@@ -29,9 +29,9 @@ export const GET_CURRENT_USER_DATA = "GET_CURRENT_USER_DATA"
 export const SHOW_DELETE_MODAL = "SHOW_DELETE_MODAL"
 export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL"
 
-//constants to use for fetching data
+//constants to use for fetching dat
 
-const baseEndPoint = "http://localhost:3004/users/"
+const baseEndPoint = "http:/localhost:3004/users/";
 
 const options = {
   // headers: {
@@ -97,10 +97,8 @@ export const hideUserSearchAction = () => {
 //action for getting the experiences
 
 export const getExperiencesAction = (userId) => {
-  const experiencesUrl = `http://localhost:3004/users/${userId}/experiences`
-  const getOptions = {
-    method: "GET"
-  }
+  const experiencesUrl = `http://localhost:3004/users/${userId}/experiences`;
+
   return async (dispatch) => {
     try {
       let response = await fetch(experiencesUrl, getOptions)
