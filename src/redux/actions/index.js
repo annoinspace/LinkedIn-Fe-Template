@@ -97,7 +97,7 @@ export const hideUserSearchAction = () => {
 //action for getting the experiences
 
 export const getExperiencesAction = (userId) => {
-  const experiencesUrl = `http://localhost:3004/users/${userId}/experiences`;
+  const experiencesUrl = `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences`;
 
   return async (dispatch) => {
     try {
@@ -131,7 +131,8 @@ export const collapseMessengerAction = () => {
 
 // get My Profile Details Fetching Action
 
-const baseUrlMe = "http://localhost:3004/users/63ce652c4f33b5dd6214a4ec";
+const baseUrlMe =
+  "https://linkedin-backend-production.up.railway.app/users/63ce652c4f33b5dd6214a4ec";
 
 export const getMyProfileDetailsAction = () => {
   return async (dispatch) => {
@@ -196,7 +197,7 @@ export const changeProfileDetailsAction = (details) => {
 //POST method for experience modal
 
 export const addExperienceAction = (experience, userId) => {
-  const postUrl = `http://localhost:3004/users/${userId}/experiences`;
+  const postUrl = `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences`;
   return async (dispatch) => {
     const optionsPost = {
       method: "POST",
@@ -234,7 +235,7 @@ export const otherUserProfileAction = (user) => {
 //DELETE experience action
 
 export const deleteExperienceAction = (userId, expId) => {
-  const deleteExperienceUrl = `http://localhost:3004/users/${userId}/experiences/${expId}`;
+  const deleteExperienceUrl = `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences/${expId}`;
 
   const deleteOptions = {
     method: "DELETE",
@@ -271,7 +272,8 @@ export const hideAddPostModalAction = () => {
 };
 
 // getting the posts for the feed
-const baseEndPointPosts = "http://localhost:3004/posts/";
+const baseEndPointPosts =
+  "https://linkedin-backend-production.up.railway.app/posts/";
 
 export const getFeedPostsAction = () => {
   return async (dispatch) => {
@@ -332,7 +334,7 @@ export const getSingleExpAction = (exp) => {
 //action for PUT method on single experience
 
 export const editExperienceAction = (updatedExperience, userId, expId) => {
-  const putUrl = `http://localhost:3004/users/${userId}/experiences/${expId}`;
+  const putUrl = `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences/${expId}`;
   return async (dispatch) => {
     const optionsPut = {
       method: "PUT",
@@ -475,7 +477,7 @@ export const hideShowAction = () => {
 //get a current user data based on id
 
 export const getCurrentUserAction = (userId) => {
-  const currentUserUrl = `http://localhost:3004/users/${userId}`;
+  const currentUserUrl = `https://linkedin-backend-production.up.railway.app/users/${userId}`;
   return async (dispatch) => {
     try {
       let response = await fetch(currentUserUrl, options);
@@ -524,7 +526,7 @@ export const submitFileData = async (image, userId, expId) => {
 
   try {
     let res = await fetch(
-      `http://localhost:3004/users/${userId}/experiences/${expId}/picture`,
+      `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences/${expId}/picture`,
       optionsPost
     );
     console.log(res);
