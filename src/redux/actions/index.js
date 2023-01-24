@@ -31,14 +31,14 @@ export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL"
 
 //constants to use for fetching data
 
-const baseEndPoint = "https://striveschool-api.herokuapp.com/api/profile/"
+const baseEndPoint = "http://localhost:3004/users/"
 
 const options = {
-  headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-    "Content-Type": "application/json"
-  }
+  // headers: {
+  //   Authorization:
+  //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+  //   "Content-Type": "application/json"
+  // }
 }
 
 // action to get the info of users from the api
@@ -97,13 +97,9 @@ export const hideUserSearchAction = () => {
 //action for getting the experiences
 
 export const getExperiencesAction = (userId) => {
-  const experiencesUrl = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`
+  const experiencesUrl = `http://localhost:3004/users/${userId}/experiences`
   const getOptions = {
-    method: "GET",
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
-    }
+    method: "GET"
   }
   return async (dispatch) => {
     try {
@@ -137,13 +133,11 @@ export const collapseMessengerAction = () => {
 
 // get My Profile Details Fetching Action
 
-const baseUrlMe = "https://striveschool-api.herokuapp.com/api/profile/me"
+const baseUrlMe = "http://localhost:3004/users/63ce652c4f33b5dd6214a4ec"
 
 export const getMyProfileDetailsAction = () => {
   return async (dispatch) => {
-    console.log(
-      "----------------fetching My Profile Details---------------------"
-    )
+    console.log("----------------fetching My Profile Details---------------------")
 
     try {
       let response = await fetch(baseUrlMe, options)
@@ -179,15 +173,15 @@ export const changeProfileDetailsAction = (details) => {
       method: "PUT",
       body: JSON.stringify(details),
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         "Content-Type": "application/json"
+        //   Authorization:
+        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
       }
     }
     console.log("----------------CHANGING My Profile Details------------------")
 
     try {
-      let response = await fetch(baseEndPoint, optionsPut)
+      let response = await fetch(baseUrlMe, optionsPut)
       if (response.ok) {
         console.log("Profile Details sucessfully updated ->", response)
       } else {
@@ -208,12 +202,12 @@ export const addExperienceAction = (experience, userId) => {
   return async (dispatch) => {
     const optionsPost = {
       method: "POST",
-      body: JSON.stringify(experience),
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-        "Content-Type": "application/json"
-      }
+      body: JSON.stringify(experience)
+      //   headers: {
+      //     Authorization:
+      //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+      //     "Content-Type": "application/json"
+      //   }
     }
 
     try {
@@ -224,9 +218,7 @@ export const addExperienceAction = (experience, userId) => {
           payload: true
         })
       } else {
-        console.log(
-          "sorry, an error occured while trying to add a new experience"
-        )
+        console.log("sorry, an error occured while trying to add a new experience")
       }
     } catch (error) {
       console.log(error)
@@ -247,11 +239,11 @@ export const deleteExperienceAction = (userId, expId) => {
   const deleteExperienceUrl = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`
 
   const deleteOptions = {
-    method: "DELETE",
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
-    }
+    method: "DELETE"
+    // headers: {
+    //     Authorization:
+    //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
+    //   }
   }
   console.log("deleteding experience - DELETE method")
   return async (dispatch) => {
@@ -321,9 +313,9 @@ export const addingNewFeedPostAction = (newFeedPost) => {
         method: "POST",
         body: JSON.stringify(newFeedPost),
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
           "Content-Type": "application/json"
+          //   Authorization:
+          //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         }
       })
       if (resp.ok) {
@@ -348,15 +340,16 @@ export const getSingleExpAction = (exp) => {
 //action for PUT method on single experience
 
 export const editExperienceAction = (updatedExperience, userId, expId) => {
-  const putUrl = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`
+  const putUrl = `http://localhost:3004/users/${userId}/experiences/${expId}`
   return async (dispatch) => {
     const optionsPut = {
       method: "PUT",
       body: JSON.stringify(updatedExperience),
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         "Content-Type": "application/json"
+        //   Authorization:
+        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+        //
       }
     }
 
@@ -368,9 +361,7 @@ export const editExperienceAction = (updatedExperience, userId, expId) => {
           payload: updatedExperience
         })
       } else {
-        console.log(
-          "sorry, an error occured while trying to edd a new experience"
-        )
+        console.log("sorry, an error occured while trying to edd a new experience")
       }
     } catch (error) {
       console.log(error)
@@ -408,18 +399,15 @@ export const hideEditPostModalAction = () => {
 
 // edit feed post action
 export const editMyFeedPostAction = (editFeedPost, postId) => {
-  console.log(
-    "-------------------editing feed post------------------",
-    editFeedPost
-  )
+  console.log("-------------------editing feed post------------------", editFeedPost)
   return async (dispatch) => {
     const optionsPut = {
       method: "PUT",
       body: JSON.stringify(editFeedPost),
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         "Content-Type": "application/json"
+        // Authorization:
+        //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
       }
     }
     console.log("-------------CHANGING My Feed Post-----------------")
@@ -438,18 +426,16 @@ export const editMyFeedPostAction = (editFeedPost, postId) => {
 
 // delete post action
 export const deleteMyFeedPostAction = (deleteFeedPost, postId) => {
-  console.log(
-    "-------------------deleting feed post------------------",
-    deleteFeedPost
-  )
+  console.log("-------------------deleting feed post------------------", deleteFeedPost)
   return async (dispatch) => {
     const optionsDelete = {
       method: "DELETE",
       body: JSON.stringify(deleteFeedPost),
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         "Content-Type": "application/json"
+        //   Authorization:
+        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+        //
       }
     }
     console.log("-------------DELETING My Feed Post-----------------")
@@ -500,10 +486,8 @@ export const getCurrentUserAction = (userId) => {
 
           payload: data
         })
-         } else {
-        console.log(
-          "error while fetching current user data for random user page"
-        )
+      } else {
+        console.log("error while fetching current user data for random user page")
       }
     } catch (error) {
       console.log(error)
@@ -533,10 +517,7 @@ export const submitFileData = async (image, userId, expId) => {
   const optionsPost = {
     method: "POST",
     body: formData,
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
-    }
+    headers: {}
   }
 
   try {
