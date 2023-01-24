@@ -1,37 +1,34 @@
-import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
-import { Pencil, InfoSquareFill } from "react-bootstrap-icons";
-import { useDispatch, useSelector } from "react-redux";
-import * as Icon from "react-bootstrap-icons";
+import { useState } from "react"
+import { Button, Form, Modal } from "react-bootstrap"
+import { Pencil, InfoSquareFill } from "react-bootstrap-icons"
+import { useDispatch, useSelector } from "react-redux"
+import * as Icon from "react-bootstrap-icons"
 
-import {
-  changeProfileDetailsAction,
-  CHANGE_PROFILE_DETAILS,
-} from "../../redux/actions";
+import { changeProfileDetailsAction, CHANGE_PROFILE_DETAILS } from "../../redux/actions"
 
 function EditUserDetailsModal() {
   // Modal variables
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   // Fetching variables
-  let details = useSelector((state) => state.myProfile.detailsData);
-  let isFetched = useSelector((state) => state.myProfile.isFetched);
+  let details = useSelector((state) => state.myProfile.detailsData)
+  let isFetched = useSelector((state) => state.myProfile.isFetched)
 
-  let dispatch = useDispatch();
+  let dispatch = useDispatch()
 
   // Changing Data via Modal submit
 
-  const [name, setName] = useState(`${details.name}`);
-  const [surname, setSurname] = useState(`${details.surname}`);
-  const [email, setEmail] = useState(`${details.email}`);
-  const [bio, setBio] = useState(`${details.bio}`);
-  const [title, setTitle] = useState(`${details.title}`);
-  const [area, setArea] = useState(`${details.area}`);
-  const [imageUrl, setImageUrl] = useState(`${details.image}`);
-  const [image, setImage] = useState(null);
-  const [imageUploaded, setImageUploaded] = useState(false);
+  const [name, setName] = useState(`${details.name}`)
+  const [surname, setSurname] = useState(`${details.surname}`)
+  const [email, setEmail] = useState(`${details.email}`)
+  const [bio, setBio] = useState(`${details.bio}`)
+  const [title, setTitle] = useState(`${details.title}`)
+  const [area, setArea] = useState(`${details.area}`)
+  const [imageUrl, setImageUrl] = useState(`${details.image}`)
+  const [image, setImage] = useState(null)
+  const [imageUploaded, setImageUploaded] = useState(false)
 
   const changedDetails =
     imageUploaded === true
@@ -41,7 +38,7 @@ function EditUserDetailsModal() {
           email: email,
           bio: bio,
           title: title,
-          area: area,
+          area: area
         }
       : {
           name: name,
@@ -50,72 +47,62 @@ function EditUserDetailsModal() {
           bio: bio,
           title: title,
           area: area,
-          image: imageUrl,
-        };
+          image: imageUrl
+        }
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     dispatch({
       type: CHANGE_PROFILE_DETAILS,
-      payload: changedDetails,
-    });
+      payload: changedDetails
+    })
 
-    dispatch(changeProfileDetailsAction(changedDetails));
-    handleClose();
+    dispatch(changeProfileDetailsAction(changedDetails))
+    handleClose()
 
     if (imageUploaded === true) {
-      submitFileData();
-      setImageUploaded(false);
+      submitFileData()
+      setImageUploaded(false)
     }
-  };
+  }
 
   const onChangeHandler = (value, fieldToSet) => {
-    fieldToSet(value);
-  };
+    fieldToSet(value)
+  }
 
   // File upload
 
   const submitFileData = async () => {
-    const formData = new FormData();
+    const formData = new FormData()
 
-    formData.append("profile", image);
+    formData.append("profile", image)
 
     const optionsPost = {
       method: "POST",
       body: formData,
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-      },
-    };
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
+      }
+    }
 
     try {
-      let res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${details._id}/picture`,
-        optionsPost
-      );
-      console.log(res);
-      window.location.reload();
+      let res = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${details._id}/picture`, optionsPost)
+      console.log(res)
+      window.location.reload()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-  let pathname = window.location.pathname;
+  }
+  let pathname = window.location.pathname
 
   return (
     <>
       {/* Button Open Modal */}
-      <div
-        className="editButtonDivTwo d-flex justify-content-center align-items-center"
-        onClick={handleShow}
-      >
-        {pathname === "/me" && (
-          <Pencil className="text-dark" style={{ fontSize: "20px" }} />
-        )}
-        {pathname !== "/me" && (
-          <Icon.BellFill className="text-dark" style={{ fontSize: "20px" }} />
-        )}
+      <div className="editButtonDivTwo d-flex justify-content-center align-items-center mr-0" onClick={handleShow}>
+        {pathname === "/me" && <Pencil className="text-dark" style={{ fontSize: "20px" }} />}
+        {pathname !== "/me" && <Icon.BellFill className="text-dark" style={{ fontSize: "20px" }} />}
       </div>
 
       <Modal show={show} onHide={handleClose}>
@@ -142,18 +129,14 @@ function EditUserDetailsModal() {
                     type="text"
                     placeholder="Last name"
                     value={surname}
-                    onChange={(e) =>
-                      onChangeHandler(e.target.value, setSurname)
-                    }
+                    onChange={(e) => onChangeHandler(e.target.value, setSurname)}
                   />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Name pronunciation</Form.Label>
                   <div className="d-flex align-items-center mt-2">
                     <InfoSquareFill className="mr-3" />
-                    <p className="mb-0">
-                      this can only be added using our mobile app
-                    </p>
+                    <p className="mb-0">this can only be added using our mobile app</p>
                   </div>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlInput1">
@@ -205,8 +188,8 @@ function EditUserDetailsModal() {
                   <Form.Label>Upload your Avatar</Form.Label>
                   <Form.File
                     onChange={(e) => {
-                      setImage(e.target.files[0]);
-                      setImageUploaded(true);
+                      setImage(e.target.files[0])
+                      setImageUploaded(true)
                     }}
                     name="profile"
                   />
@@ -218,17 +201,13 @@ function EditUserDetailsModal() {
           <Modal.Body></Modal.Body>
         )}
         <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={onSubmitHandler}
-            className="rounded-pill py-0"
-          >
+          <Button variant="primary" onClick={onSubmitHandler} className="rounded-pill py-0">
             Save
           </Button>
         </Modal.Footer>
       </Modal>
     </>
-  );
+  )
 }
 
-export default EditUserDetailsModal;
+export default EditUserDetailsModal
