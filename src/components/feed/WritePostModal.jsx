@@ -16,9 +16,9 @@ export default function WritePostModal() {
   let isFetched = useSelector((state) => state.myProfile.isFetched);
   const dispatch = useDispatch();
 
-  const [newFeedPost, setNewFeedPost] = useState({
-    text: "",
-  });
+  // const [newFeedPost, setNewFeedPost] = useState({
+  //   text: "",
+  // });
 
   // the basic structure of the post
   //   {
@@ -29,19 +29,44 @@ export default function WritePostModal() {
   //     "updatedAt": "2019-10-01T19:44:04.496Z", 	// server generated
   //     "__v": 0 																	// server generated
   // }
-  const onChangeHandler = (value, fieldToSet) => {
-    setNewFeedPost({
-      ...newFeedPost,
-      [fieldToSet]: value,
-    });
-  };
+  // const onChangeHandler = (value, fieldToSet) => {
+  //   setNewFeedPost({
+  //     ...newFeedPost,
+  //     [fieldToSet]: value,
+  //   });
+  // };
+  const [text, setText] = useState("");
+  const [name, setName] = useState("Catriona");
+  const [surname, setSurname] = useState("Ferguson");
+  const [username, setUsername] = useState("@Catriona");
+  const [image, setImage] = useState([]);
+
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
+  //   console.log(newFeedPost.text);
+  //   dispatch(hideAddPostModalAction());
+  //   dispatch(addingNewFeedPostAction(newFeedPost));
+  //   dispatch(getFeedPostsAction());
+  // };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(newFeedPost.text);
-    dispatch(hideAddPostModalAction());
-    dispatch(addingNewFeedPostAction(newFeedPost));
-    dispatch(getFeedPostsAction());
+    const formData = new FormData();
+    formData.append("post", image);
+    formData.append("text", text);
+    formData.append("name", name);
+    formData.append("surname", surname);
+    formData.append("username", username);
+    dispatch(addingNewFeedPostAction(formData));
+    dispatch(hideAddPostModalAction())
+  };
+
+  const imageChangeHandler = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const onChangeHandler = (value, fieldToSet) => {
+    fieldToSet(value);
   };
 
   return (
@@ -72,22 +97,30 @@ export default function WritePostModal() {
         <Form
           onSubmit={onSubmitHandler}
           className="p-feed-left p-feed-right ml-2 mr-2"
-          style={{ color: "grey", height: "20vh" }}
+          style={{ color: "grey", height: "25vh" }}
         >
           <Form.Group className="mb-3 " controlId="formPostText">
             <Form.Control
               className="border-0"
               as="textarea"
               placeholder="What do you want to talk about?"
-              value={newFeedPost.text}
+              value={text}
+              onChange={(e) => onChangeHandler(e.target.value, setText)}
               rows={5}
-              onChange={(e) => onChangeHandler(e.target.value, "text")}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Attach an image to your post:</Form.Label>
+            <Form.File
+              name="post"
+              accept="image/jpg, image/jpeg, image/png, image/gif"
+              onChange={(e) => imageChangeHandler(e)}
             />
           </Form.Group>
         </Form>
       </div>
       <Modal.Footer>
-        <Button variant="primary" onClick={onSubmitHandler}>
+        <Button variant="primary" onClick={(e) => onSubmitHandler(e)}>
           Post
         </Button>
       </Modal.Footer>

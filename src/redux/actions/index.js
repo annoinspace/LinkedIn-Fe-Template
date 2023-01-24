@@ -282,7 +282,11 @@ export const hideAddPostModalAction = () => {
 };
 
 // getting the posts for the feed
+<<<<<<< Updated upstream
 const baseEndPointPosts = "https://striveschool-api.herokuapp.com/api/posts/";
+=======
+const baseEndPointPosts = "http://localhost:3002/posts/";
+>>>>>>> Stashed changes
 
 export const getFeedPostsAction = () => {
   return async (dispatch) => {
@@ -309,11 +313,30 @@ export const getFeedPostsAction = () => {
 };
 
 // adding new feed post
+// export const addingNewFeedPostAction = (newFeedPost) => {
+//   return async (dispatch) => {
+//     console.log("----------------Adding New Feed Post---------------------");
+
+//     try {
+//       let resp = await fetch(baseEndPointPosts, {
+//         method: "POST",
+//         body: JSON.stringify(newFeedPost),
+//       });
+//       if (resp.ok) {
+//         alert("Post added");
+//       } else {
+//         console.log("error");
+//       }
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   };
+// };
+
 export const addingNewFeedPostAction = (newFeedPost) => {
   return async (dispatch) => {
-    console.log("----------------Adding New Feed Post---------------------");
-
     try {
+<<<<<<< Updated upstream
       let resp = await fetch(baseEndPointPosts, {
         method: "POST",
         body: JSON.stringify(newFeedPost),
@@ -325,11 +348,24 @@ export const addingNewFeedPostAction = (newFeedPost) => {
       });
       if (resp.ok) {
         alert("Post added");
+=======
+      let response = await fetch(
+        "http://localhost:3002/posts/63ce652c4f33b5dd6214a4ec",
+        {
+          method: "POST",
+          body: newFeedPost,
+          "Content-Type": "undefined",
+        }
+      );
+      if (response.ok) {
+        console.log("Successfully posted");
+        dispatch(getFeedPostsAction());
+>>>>>>> Stashed changes
       } else {
-        console.log("error");
+        console.log("There was an error posting.");
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 };
