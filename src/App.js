@@ -11,6 +11,7 @@ import MessagingPopup from "./components/global/MessagingPopup";
 import Feed from "./components/feed/Feed";
 import SearchDisplay from "./components/global/SearchDisplay.jsx";
 import OtherUser from "./components/global/OtherUser";
+import LoginPage from "./components/login/LoginPage";
 
 function App() {
   let showSearchResults = useSelector((state) => state.showUsers.show);
@@ -21,20 +22,18 @@ function App() {
         <CustomNavbar />
         {showSearchResults && (
           <>
-            {" "}
-            <SearchDisplay
-              onClick={() => dispatch(showUserSearchAction())}
-            />{" "}
+            <SearchDisplay onClick={() => dispatch(showUserSearchAction())} />
           </>
         )}
         <Routes>
+          <Route path="/" element={<LoginPage />} />
           <Route path="/me" element={<MyProfile />} />
           <Route
             path="/details/resources"
             element={<ResourcesSinglePageComponent />}
           />
           <Route path="/editexperiences" element={<ExperienceComponent />} />
-          <Route path="/" element={<Feed />} />
+          <Route path="/home" element={<Feed />} />
           <Route path="/profile/:id" element={<OtherUser />} />
         </Routes>
       </div>

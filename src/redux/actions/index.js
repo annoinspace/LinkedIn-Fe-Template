@@ -29,10 +29,9 @@ export const GET_CURRENT_USER_DATA = "GET_CURRENT_USER_DATA";
 export const SHOW_DELETE_MODAL = "SHOW_DELETE_MODAL";
 export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL";
 
-//constants to use for fetching data
+//constants to use for fetching dat
 
-
-const baseEndPoint = "http://localhost:3004/users/"
+const baseEndPoint = "http:/localhost:3004/users/";
 
 const options = {
   // headers: {
@@ -40,8 +39,7 @@ const options = {
   //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
   //   "Content-Type": "application/json"
   // }
-}
-
+};
 
 // action to get the info of users from the api
 
@@ -50,7 +48,7 @@ export const getUsersAction = () => {
     console.log("----------------fetching Users---------------------");
 
     try {
-      let resp = await fetch(baseEndPoint);
+      let resp = await fetch(baseEndPoint, options);
       if (resp.ok) {
         let data = await resp.json();
         let fetchedUsers = data;
@@ -99,11 +97,7 @@ export const hideUserSearchAction = () => {
 //action for getting the experiences
 
 export const getExperiencesAction = (userId) => {
-
-  const experiencesUrl = `http://localhost:3004/users/${userId}/experiences`
-  const getOptions = {
-    method: "GET"
-  }
+  const experiencesUrl = `http://localhost:3004/users/${userId}/experiences`;
 
   return async (dispatch) => {
     try {
@@ -137,17 +131,13 @@ export const collapseMessengerAction = () => {
 
 // get My Profile Details Fetching Action
 
-
-const baseUrlMe = "http://localhost:3004/users/63ce652c4f33b5dd6214a4ec"
+const baseUrlMe = "http://localhost:3004/users/63ce652c4f33b5dd6214a4ec";
 
 export const getMyProfileDetailsAction = () => {
   return async (dispatch) => {
-    console.log("----------------fetching My Profile Details---------------------")
-
-const baseUrlMe = "https://striveschool-api.herokuapp.com/api/profile/me";
-
-   
-
+    console.log(
+      "----------------fetching My Profile Details---------------------"
+    );
 
     try {
       let response = await fetch(baseUrlMe, options);
@@ -183,17 +173,17 @@ export const changeProfileDetailsAction = (details) => {
       method: "PUT",
       body: JSON.stringify(details),
       headers: {
-
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         //   Authorization:
         //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-      }
-    }
-    console.log("----------------CHANGING My Profile Details------------------")
+      },
+    };
+    console.log(
+      "----------------CHANGING My Profile Details------------------"
+    );
 
     try {
-      let response = await fetch(baseUrlMe, optionsPut)
-
+      let response = await fetch(baseUrlMe, optionsPut);
       if (response.ok) {
         console.log("Profile Details sucessfully updated ->", response);
       } else {
@@ -210,19 +200,18 @@ export const changeProfileDetailsAction = (details) => {
 //POST method for experience modal
 
 export const addExperienceAction = (experience, userId) => {
-  const postUrl = `https://striveschool-api.herokuapp.com/api/profile/:${userId}/experiences`;
+  const postUrl = `http://localhost:3004/users/${userId}/experiences`;
   return async (dispatch) => {
     const optionsPost = {
       method: "POST",
-
-      body: JSON.stringify(experience)
-      //   headers: {
-      //     Authorization:
-      //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-      //     "Content-Type": "application/json"
-      //   }
-    }
-
+      body: JSON.stringify(experience),
+      headers: {
+        "Content-Type": "application/json",
+        //     Authorization:
+        //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+        //
+      },
+    };
 
     try {
       const response = await fetch(postUrl, optionsPost);
@@ -232,13 +221,9 @@ export const addExperienceAction = (experience, userId) => {
           payload: true,
         });
       } else {
-
-        console.log("sorry, an error occured while trying to add a new experience")
-
         console.log(
           "sorry, an error occured while trying to add a new experience"
         );
-
       }
     } catch (error) {
       console.log(error);
@@ -256,18 +241,16 @@ export const otherUserProfileAction = (user) => {
 //DELETE experience action
 
 export const deleteExperienceAction = (userId, expId) => {
-  const deleteExperienceUrl = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
+  const deleteExperienceUrl = `http://localhost:3004/users/${userId}/experiences/${expId}`;
 
   const deleteOptions = {
-
-    method: "DELETE"
+    method: "DELETE",
     // headers: {
     //     Authorization:
     //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
     //   }
-  }
-  console.log("deleteding experience - DELETE method")
-
+  };
+  console.log("deleteding experience - DELETE method");
   return async (dispatch) => {
     try {
       let response = await fetch(deleteExperienceUrl, deleteOptions);
@@ -299,14 +282,14 @@ export const hideAddPostModalAction = () => {
 };
 
 // getting the posts for the feed
-const baseEndPointPosts = "http://localhost:3002/posts";
+const baseEndPointPosts = "http://localhost:3002/posts/";
 
 export const getFeedPostsAction = () => {
   return async (dispatch) => {
     console.log("----------------Fetching Feed Posts---------------------");
 
     try {
-      let resp = await fetch(baseEndPointPosts);
+      let resp = await fetch(baseEndPointPosts, options);
       if (resp.ok) {
         let data = await resp.json();
         let fetchedPosts = data;
@@ -326,29 +309,45 @@ export const getFeedPostsAction = () => {
 };
 
 // adding new feed post
+// export const addingNewFeedPostAction = (newFeedPost) => {
+//   return async (dispatch) => {
+//     console.log("----------------Adding New Feed Post---------------------");
+
+//     try {
+//       let resp = await fetch(baseEndPointPosts, {
+//         method: "POST",
+//         body: JSON.stringify(newFeedPost),
+//       });
+//       if (resp.ok) {
+//         alert("Post added");
+//       } else {
+//         console.log("error");
+//       }
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   };
+// };
+
 export const addingNewFeedPostAction = (newFeedPost) => {
   return async (dispatch) => {
-    console.log("----------------Adding New Feed Post---------------------");
-
     try {
-      let resp = await fetch(baseEndPointPosts, {
-        method: "POST",
-        body: JSON.stringify(newFeedPost),
-        headers: {
-
-          "Content-Type": "application/json"
-          //   Authorization:
-          //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+      let response = await fetch(
+        "http://localhost:3002/posts/63ce652c4f33b5dd6214a4ec",
+        {
+          method: "POST",
+          body: newFeedPost,
+          "Content-Type": "undefined",
         }
-      })
-
-      if (resp.ok) {
-        alert("Post added");
+      );
+      if (response.ok) {
+        console.log("Successfully posted");
+        dispatch(getFeedPostsAction());
       } else {
-        console.log("error");
+        console.log("There was an error posting.");
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 };
@@ -364,22 +363,18 @@ export const getSingleExpAction = (exp) => {
 //action for PUT method on single experience
 
 export const editExperienceAction = (updatedExperience, userId, expId) => {
-
-  const putUrl = `http://localhost:3004/users/${userId}/experiences/${expId}`
-
+  const putUrl = `http://localhost:3004/users/${userId}/experiences/${expId}`;
   return async (dispatch) => {
     const optionsPut = {
       method: "PUT",
       body: JSON.stringify(updatedExperience),
       headers: {
-
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         //   Authorization:
         //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         //
-      }
-    }
-
+      },
+    };
 
     try {
       const response = await fetch(putUrl, optionsPut);
@@ -389,9 +384,9 @@ export const editExperienceAction = (updatedExperience, userId, expId) => {
           payload: updatedExperience,
         });
       } else {
-
-        console.log("sorry, an error occured while trying to edd a new experience")
-
+        console.log(
+          "sorry, an error occured while trying to edd a new experience"
+        );
       }
     } catch (error) {
       console.log(error);
@@ -429,22 +424,21 @@ export const hideEditPostModalAction = () => {
 
 // edit feed post action
 export const editMyFeedPostAction = (editFeedPost, postId) => {
-
-  console.log("-------------------editing feed post------------------", editFeedPost)
-
+  console.log(
+    "-------------------editing feed post------------------",
+    editFeedPost
+  );
   return async (dispatch) => {
     const optionsPut = {
       method: "PUT",
       body: JSON.stringify(editFeedPost),
       headers: {
-
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         // Authorization:
         //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-      }
-    }
-    console.log("-------------CHANGING My Feed Post-----------------")
-
+      },
+    };
+    console.log("-------------CHANGING My Feed Post-----------------");
     try {
       let response = await fetch(baseEndPointPosts + postId, optionsPut);
       if (response.ok) {
@@ -460,22 +454,22 @@ export const editMyFeedPostAction = (editFeedPost, postId) => {
 
 // delete post action
 export const deleteMyFeedPostAction = (deleteFeedPost, postId) => {
-  console.log("-------------------deleting feed post------------------", deleteFeedPost)
-
+  console.log(
+    "-------------------deleting feed post------------------",
+    deleteFeedPost
+  );
   return async (dispatch) => {
     const optionsDelete = {
       method: "DELETE",
       body: JSON.stringify(deleteFeedPost),
       headers: {
-
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         //   Authorization:
         //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
         //
-      }
-    }
-    console.log("-------------DELETING My Feed Post-----------------")
-
+      },
+    };
+    console.log("-------------DELETING My Feed Post-----------------");
     try {
       let response = await fetch(baseEndPointPosts + postId, optionsDelete);
       if (response.ok) {
@@ -512,7 +506,7 @@ export const hideShowAction = () => {
 //get a current user data based on id
 
 export const getCurrentUserAction = (userId) => {
-  const currentUserUrl = `https://striveschool-api.herokuapp.com/api/profile/${userId}`;
+  const currentUserUrl = `http://localhost:3004/users/${userId}`;
   return async (dispatch) => {
     try {
       let response = await fetch(currentUserUrl, options);
@@ -521,12 +515,12 @@ export const getCurrentUserAction = (userId) => {
         dispatch({
           type: GET_CURRENT_USER_DATA,
 
-
-          payload: data
-        })
+          payload: data,
+        });
       } else {
-        console.log("error while fetching current user data for random user page")
-
+        console.log(
+          "error while fetching current user data for random user page"
+        );
       }
     } catch (error) {
       console.log(error);
@@ -556,14 +550,12 @@ export const submitFileData = async (image, userId, expId) => {
   const optionsPost = {
     method: "POST",
     body: formData,
-
-    headers: {}
-  }
-
+    headers: {},
+  };
 
   try {
     let res = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
+      `http://localhost:3004/users/${userId}/experiences/${expId}/picture`,
       optionsPost
     );
     console.log(res);

@@ -24,7 +24,7 @@ export default function MainFeedSectionWithPosts() {
   const allFeedPosts = useSelector((state) => state.feedPosts.feedPostArray)
   //   reversing the array so we get the newest posts
 
-  const allLatestPosts = allFeedPosts
+  const allLatestPosts = allFeedPosts.slice(0).reverse()
 
   const longerPosts = allLatestPosts.filter((post) => post.text.length > 10)
 
