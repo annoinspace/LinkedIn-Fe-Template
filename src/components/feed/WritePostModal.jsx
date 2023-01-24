@@ -14,6 +14,7 @@ export default function WritePostModal() {
   const showModal = useSelector((state) => state.showPostModal.show);
   let details = useSelector((state) => state.myProfile.detailsData);
   let isFetched = useSelector((state) => state.myProfile.isFetched);
+  let id = details._id;
   const dispatch = useDispatch();
 
   // const [newFeedPost, setNewFeedPost] = useState({
@@ -36,9 +37,9 @@ export default function WritePostModal() {
   //   });
   // };
   const [text, setText] = useState("");
-  const [name, setName] = useState("Catriona");
-  const [surname, setSurname] = useState("Ferguson");
-  const [username, setUsername] = useState("@Catriona");
+  const [name, setName] = useState(details.name);
+  const [surname, setSurname] = useState(details.surname);
+  const [username, setUsername] = useState(details.username);
   const [image, setImage] = useState([]);
 
   // const onSubmitHandler = (e) => {
@@ -57,8 +58,8 @@ export default function WritePostModal() {
     formData.append("name", name);
     formData.append("surname", surname);
     formData.append("username", username);
-    dispatch(addingNewFeedPostAction(formData));
-    dispatch(hideAddPostModalAction())
+    dispatch(addingNewFeedPostAction(formData, id));
+    dispatch(hideAddPostModalAction());
   };
 
   const imageChangeHandler = (e) => {
