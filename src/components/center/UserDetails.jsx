@@ -21,47 +21,6 @@ const UserDetails = ({ profileData }) => {
     <Row className="mt-3">
       {isFetched ? (
         <Col className="firstComponent">
-          {/* <div
-            className="headerImageDiv"
-            style={{
-              borderRadius: "10px 10px 0 0",
-            }}
-          >
-            <div className="position-relative w-100 d-flex justify-content-center">
-              <img
-                src={user[0].background}
-                className="w-100"
-                style={{
-                  borderRadius: "10px 10px 0 0",
-                }}
-                id="background-image"
-              />
-
-              <div
-                className=" position-absolute "
-                style={{ top: "-30%", left: "+30%" }}
-              >
-                <Row className="justify-content-between">
-                  <ProfileImageModal profileData={profileData} {...user} />
-                  <div
-                    className={
-                      pathname === "/me"
-                        ? "editButtonDiv d-flex justify-content-center align-items-center"
-                        : "d-none"
-                    }
-                  >
-                    {pathname === "/me" && (
-                      <Pencil
-                        className="text-dark"
-                        style={{ fontSize: "18px" }}
-                      />
-                    )}
-                  </div>
-                </Row>
-              </div>
-            </div>
-          </div> */}
-
           <div
             className="position-relative headerImageDiv"
             style={{
@@ -81,11 +40,7 @@ const UserDetails = ({ profileData }) => {
               className="d-flex  position-absolute "
               style={{ bottom: "-20%" }}
             >
-              {/* User profile Image */}
-
-              <ProfileImageModal profileData={profileData} {...user} />
-
-              {/* Edit Button User profile Header */}
+              <ProfileImageModal {...user} />
             </Row>
           </div>
           {/* User Info Section*/}
@@ -113,10 +68,10 @@ const UserDetails = ({ profileData }) => {
                     {user[0].name} {user[0].surname}
                   </h4>
 
-                  <h6>{profileData.title}</h6>
+                  <h6>{user[0].job}</h6>
                   <div className="d-flex align-items-center">
                     <p className="text-secondary my-1">
-                      {user[0].job} <Dot />{" "}
+                      {user[0].location} <Dot />
                     </p>
                     <div
                       className="text-primary"
