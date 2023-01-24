@@ -28,6 +28,7 @@ export const HIDE_EDIT_DROPDOWN = "HIDE_EDIT_DROPDOWN";
 export const GET_CURRENT_USER_DATA = "GET_CURRENT_USER_DATA";
 export const SHOW_DELETE_MODAL = "SHOW_DELETE_MODAL";
 export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL";
+export const SET_USER = "SET_USER";
 
 //constants to use for fetching dat
 
@@ -96,6 +97,10 @@ export const hideUserSearchAction = () => {
 
 //action for getting the experiences
 
+//
+
+//
+
 export const getExperiencesAction = (userId) => {
   const experiencesUrl = `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences`;
 
@@ -146,7 +151,7 @@ export const getMyProfileDetailsAction = () => {
         let data = await response.json();
         let myProfileDetailsData = data;
 
-        console.log("My Profile Details are ->", myProfileDetailsData);
+        console.log("(STATIC) My Profile Details are ->", myProfileDetailsData);
         dispatch({
           type: GET_MY_PROFILEDETAILS,
           payload: myProfileDetailsData,

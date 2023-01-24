@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Dot, Linkedin, Pencil, XLg } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
@@ -11,20 +12,24 @@ import ProfileImageModal from "./ProfileImageModal";
 
 const UserDetails = ({ profileData }) => {
   let isFetched = useSelector((state) => state.myProfile.isFetched);
-
   let pathname = window.location.pathname;
-
+  const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    console.log(user);
+  });
   return (
     <Row className="mt-3">
       {isFetched ? (
         <Col className="firstComponent">
           <div
             className="headerImageDiv"
-            style={{ borderRadius: "10px 10px 0 0" }}
+            style={{
+              borderRadius: "10px 10px 0 0",
+            }}
           >
             <Row className="justify-content-between">
               {/* User profile Image */}
-              <ProfileImageModal profileData={profileData} />
+              <ProfileImageModal profileData={profileData} {...user} />
 
               {/* Edit Button User profile Header */}
               <div
@@ -67,13 +72,13 @@ const UserDetails = ({ profileData }) => {
               <Col>
                 <div className="col-6 d-flex flex-column align-items-start pb-2 px-4 userInfoDiv ">
                   <h4>
-                    {profileData.name} {profileData.surname}
+                    {user[0].name} {user[0].surname}
                   </h4>
 
                   <h6>{profileData.title}</h6>
                   <div className="d-flex align-items-center">
                     <p className="text-secondary my-1">
-                      {profileData.area} <Dot />{" "}
+                      {user[0].job} <Dot />{" "}
                     </p>
                     <div
                       className="text-primary"
