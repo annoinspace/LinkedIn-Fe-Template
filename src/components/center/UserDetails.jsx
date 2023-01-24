@@ -21,40 +21,78 @@ const UserDetails = ({ profileData }) => {
     <Row className="mt-3">
       {isFetched ? (
         <Col className="firstComponent">
-          <div
+          {/* <div
             className="headerImageDiv"
             style={{
               borderRadius: "10px 10px 0 0",
             }}
           >
-            <Row className="justify-content-between">
+            <div className="position-relative w-100 d-flex justify-content-center">
+              <img
+                src={user[0].background}
+                className="w-100"
+                style={{
+                  borderRadius: "10px 10px 0 0",
+                }}
+                id="background-image"
+              />
+
+              <div
+                className=" position-absolute "
+                style={{ top: "-30%", left: "+30%" }}
+              >
+                <Row className="justify-content-between">
+                  <ProfileImageModal profileData={profileData} {...user} />
+                  <div
+                    className={
+                      pathname === "/me"
+                        ? "editButtonDiv d-flex justify-content-center align-items-center"
+                        : "d-none"
+                    }
+                  >
+                    {pathname === "/me" && (
+                      <Pencil
+                        className="text-dark"
+                        style={{ fontSize: "18px" }}
+                      />
+                    )}
+                  </div>
+                </Row>
+              </div>
+            </div>
+          </div> */}
+
+          <div
+            className="position-relative headerImageDiv"
+            style={{
+              borderRadius: "10px 10px 0 0",
+            }}
+          >
+            <img
+              src={user[0].background}
+              className="w-100"
+              style={{
+                borderRadius: "10px 10px 0 0",
+                maxHeight: "250px",
+                objectFit: "cover",
+              }}
+            />
+            <Row
+              className="d-flex  position-absolute "
+              style={{ bottom: "-20%" }}
+            >
               {/* User profile Image */}
+
               <ProfileImageModal profileData={profileData} {...user} />
 
               {/* Edit Button User profile Header */}
-              <div
-                className={
-                  pathname === "/me"
-                    ? "editButtonDiv d-flex justify-content-center align-items-center"
-                    : "d-none"
-                }
-              >
-                {pathname === "/me" && (
-                  <Pencil
-                    className="text-dark"
-                    style={{ fontSize: "18px" }}
-                    // className="text-dark"
-                    // style={{ fontSize: "18px" }}
-                  />
-                )}
-              </div>
             </Row>
           </div>
           {/* User Info Section*/}
-          <div className="bg-white" style={{ borderRadius: "0 0 10px 10px" }}>
+          <div className="bg-white " style={{ borderRadius: "0 0 10px 10px" }}>
             {/* User Info Edit Button */}
             <Row className="justify-content-end">
-              <div className="d-flex align-items-center cursor-on-hover">
+              <div className="d-flex align-items-center cursor-on-hover pr-4">
                 <div className="d-flexjustify-content-center align-items-center pt-3 mr-2">
                   {pathname === "/me" ? (
                     <Linkedin fontSize={"20px"} style={{ color: "#aa7520" }} />
@@ -71,7 +109,7 @@ const UserDetails = ({ profileData }) => {
             <Row>
               <Col>
                 <div className="col-6 d-flex flex-column align-items-start pb-2 px-4 userInfoDiv ">
-                  <h4>
+                  <h4 style={{ fontWeight: "500" }}>
                     {user[0].name} {user[0].surname}
                   </h4>
 

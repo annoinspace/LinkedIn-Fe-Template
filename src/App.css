@@ -318,17 +318,6 @@ p {
   height: 100%;
 }
 
-.editButtonDiv {
-  background-color: white;
-  height: 35px;
-  font-size: 0.9em;
-  aspect-ratio: 1/1;
-  margin-top: 20px;
-  margin-right: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
 .editButtonDivTwo {
   background-color: white;
   height: 35px;

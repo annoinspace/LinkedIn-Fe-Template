@@ -17,6 +17,7 @@ const ExperienceComponent = ({ profileData }) => {
   let pathname = window.location.pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   let userId = useSelector((state) => state.myProfile.detailsData._id);
 
