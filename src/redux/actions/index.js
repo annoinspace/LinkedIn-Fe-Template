@@ -282,11 +282,7 @@ export const hideAddPostModalAction = () => {
 };
 
 // getting the posts for the feed
-<<<<<<< Updated upstream
-const baseEndPointPosts = "https://striveschool-api.herokuapp.com/api/posts/";
-=======
 const baseEndPointPosts = "http://localhost:3002/posts/";
->>>>>>> Stashed changes
 
 export const getFeedPostsAction = () => {
   return async (dispatch) => {
@@ -336,19 +332,6 @@ export const getFeedPostsAction = () => {
 export const addingNewFeedPostAction = (newFeedPost) => {
   return async (dispatch) => {
     try {
-<<<<<<< Updated upstream
-      let resp = await fetch(baseEndPointPosts, {
-        method: "POST",
-        body: JSON.stringify(newFeedPost),
-        headers: {
-          "Content-Type": "application/json",
-          //   Authorization:
-          //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-        },
-      });
-      if (resp.ok) {
-        alert("Post added");
-=======
       let response = await fetch(
         "http://localhost:3002/posts/63ce652c4f33b5dd6214a4ec",
         {
@@ -360,7 +343,6 @@ export const addingNewFeedPostAction = (newFeedPost) => {
       if (response.ok) {
         console.log("Successfully posted");
         dispatch(getFeedPostsAction());
->>>>>>> Stashed changes
       } else {
         console.log("There was an error posting.");
       }
