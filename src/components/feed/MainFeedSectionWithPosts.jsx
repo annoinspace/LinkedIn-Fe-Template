@@ -32,7 +32,7 @@ export default function MainFeedSectionWithPosts() {
     return post.user !== null
   })
 
-  const [length, setLength] = useState(25)
+  const [length, setLength] = useState(4)
   const latestPostSlice = userPresent.slice(0, length)
 
   const increaseCurrentLength = (e) => {
@@ -85,7 +85,7 @@ export default function MainFeedSectionWithPosts() {
       {allFeedPosts && (
         <>
           <div id="feed-main-container">
-            {allLatestPosts.map((post) => (
+            {latestPostSlice.map((post) => (
               <div key={post._id}>
                 {" "}
                 {post.user[0]._id && (
