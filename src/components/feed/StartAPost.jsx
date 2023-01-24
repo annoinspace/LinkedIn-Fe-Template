@@ -11,6 +11,7 @@ export default function StartAPost() {
   let details = useSelector((state) => state.myProfile.detailsData);
   let isFetched = useSelector((state) => state.myProfile.isFetched);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   return (
     <>
@@ -20,11 +21,7 @@ export default function StartAPost() {
             className="border recommended-user-image mr-1"
             style={{ objectFit: "cover" }}
           >
-            <img
-              src={isFetched ? details.image : placeholder}
-              alt="Avatar"
-              style={{ height: "100%" }}
-            />
+            <img src={user[0].pfp} alt="Avatar" style={{ height: "100%" }} />
           </div>
           <div
             id="start-a-post"
