@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as Icon from "react-bootstrap-icons";
-import { Button, Modal, Form } from "react-bootstrap";
+import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import * as Icon from "react-bootstrap-icons"
+import { Button, Modal, Form } from "react-bootstrap"
 
-import { addExperienceAction } from "../../redux/actions";
+import { addExperienceAction } from "../../redux/actions"
 
 const ExperienceModal = () => {
   //this is for the modal
-  const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
+  const [show, setShow] = useState(false)
+  const dispatch = useDispatch()
 
   //this is for the checkbox
   // const [checkedInput, setCheckedInput] = useState("");
 
   //this is for the end date experience inputs
-  const [disabledInput, setDisabledInput] = useState("");
+  const [disabledInput, setDisabledInput] = useState("")
 
-  const userId = useSelector((state) => state.myProfile.detailsData._id);
+  const userId = useSelector((state) => state.myProfile.detailsData._id)
 
-  const [day, setDay] = useState("01");
-  const [checked, setChecked] = useState(false);
+  const [day, setDay] = useState("01")
+  const [checked, setChecked] = useState(false)
 
   //this is the template for adding a new experience
   //the end/startMonth/Year is because we have to send something like "2022-12-01" when adding
@@ -34,29 +34,27 @@ const ExperienceModal = () => {
     startYear: "",
     endYear: "",
     startMonth: "",
-    endMonth: "",
-  });
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    endMonth: ""
+  })
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   //changes the value of the inputs
   const onChangeHandler = (value, fieldToSet) => {
-    // setExperience((currentState) => ({ ...currentState, [fieldToSet]: value }));
-
     setExperience({
       ...experience,
-      [fieldToSet]: value,
-    });
-  };
+      [fieldToSet]: value
+    })
+  }
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    let randomDay = Math.floor(Math.random() * 28);
+    let randomDay = Math.floor(Math.random() * 28)
     if (randomDay < 10) {
-      setDay(`0${randomDay}`);
+      setDay(`0${randomDay}`)
     } else {
-      setDay(randomDay);
+      setDay(randomDay)
     }
 
     //this is the newExperience which wwe will send to the API
@@ -69,13 +67,13 @@ const ExperienceModal = () => {
           ? `${experience.endYear}-${experience.endMonth}-${day}`
           : null,
       description: experience.description,
-      area: experience.area,
-    };
+      area: experience.area
+    }
 
-    console.log("new experience", newExperience);
+    console.log("new experience", newExperience)
 
     //fetch function with POST method
-    dispatch(addExperienceAction(newExperience, userId));
+    dispatch(addExperienceAction(newExperience, userId))
 
     //we make the experience template empty again for the next exp we want to add
     setExperience({
@@ -88,10 +86,10 @@ const ExperienceModal = () => {
       startYear: "",
       endYear: "",
       startMonth: "",
-      endMonth: "",
-    });
-    handleClose();
-  };
+      endMonth: ""
+    })
+    handleClose()
+  }
 
   //if the checkbox is checked, than disable the end date inputs
   //and if the checkbox is not checked, than enable the end date inputs
@@ -101,22 +99,14 @@ const ExperienceModal = () => {
 
   return (
     <>
-      <div
-        className="d-flex mb-1 add-position-experience-effect-on-hover"
-        onClick={handleShow}
-      >
+      <div className="d-flex mb-1 add-position-experience-effect-on-hover" onClick={handleShow}>
         <div className="mr-2">
           <Icon.BriefcaseFill />
         </div>
         <div>Add position</div>
       </div>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
         <Modal.Header closeButton>
           <Modal.Title>Add experience</Modal.Title>
         </Modal.Header>
@@ -130,7 +120,7 @@ const ExperienceModal = () => {
                 required
                 value={experience.role}
                 onChange={(e) => {
-                  onChangeHandler(e.target.value, "role");
+                  onChangeHandler(e.target.value, "role")
                 }}
               />
             </Form.Group>
@@ -142,7 +132,7 @@ const ExperienceModal = () => {
                 required
                 value={experience.company}
                 onChange={(e) => {
-                  onChangeHandler(e.target.value, "company");
+                  onChangeHandler(e.target.value, "company")
                 }}
               />
             </Form.Group>
@@ -154,7 +144,7 @@ const ExperienceModal = () => {
                 required
                 value={experience.area}
                 onChange={(e) => {
-                  onChangeHandler(e.target.value, "area");
+                  onChangeHandler(e.target.value, "area")
                 }}
               />
             </Form.Group>
@@ -165,19 +155,17 @@ const ExperienceModal = () => {
                 checked={checked}
                 onChange={(e) => {
                   if (checked === true) {
-                    setDisabledInput(false);
+                    setDisabledInput(false)
                   } else {
-                    onChangeHandler("", "endDate");
-                    onChangeHandler("", "endMonth");
-                    onChangeHandler("", "endYear");
-                    setDisabledInput(true);
+                    onChangeHandler("", "endDate")
+                    onChangeHandler("", "endMonth")
+                    onChangeHandler("", "endYear")
+                    setDisabledInput(true)
                   }
-                  setChecked(e.target.checked);
+                  setChecked(e.target.checked)
                 }}
               />
-              <Form.Label className="mb-0">
-                I am currently working on this role.
-              </Form.Label>
+              <Form.Label className="mb-0">I am currently working on this role.</Form.Label>
             </Form.Group>
             <Form.Group className="d-flex flex-column">
               <Form.Label>Start date</Form.Label>
@@ -188,9 +176,7 @@ const ExperienceModal = () => {
                   className="monthSelectInput"
                   required
                   value={experience.startMonth}
-                  onChange={(e) =>
-                    onChangeHandler(e.target.value, "startMonth")
-                  }
+                  onChange={(e) => onChangeHandler(e.target.value, "startMonth")}
                 >
                   <option>Month</option>
                   <option>01</option>
@@ -227,7 +213,7 @@ const ExperienceModal = () => {
                   className="monthSelectInput"
                   value={experience.endMonth}
                   onChange={(e) => {
-                    onChangeHandler(e.target.value, "endMonth");
+                    onChangeHandler(e.target.value, "endMonth")
                   }}
                 >
                   <option>Month</option>
@@ -271,17 +257,13 @@ const ExperienceModal = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button
-            variant="primary"
-            className="saveButtonExperiencesModal"
-            onClick={onSubmitHandler}
-          >
+          <Button variant="primary" className="saveButtonExperiencesModal" onClick={onSubmitHandler}>
             Add
           </Button>
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ExperienceModal;
+export default ExperienceModal
