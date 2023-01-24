@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const FeedUserDetails = () => {
   let details = useSelector((state) => state.myProfile.detailsData);
   let isFetched = useSelector((state) => state.myProfile.isFetched);
+  const user = useSelector((state) => state.user.user);
 
   return (
     <div
@@ -18,7 +19,7 @@ const FeedUserDetails = () => {
       {/* Header image */}
       <div style={{ height: "56px", overflow: "hidden" }}>
         <img
-          src="https://random.imagecdn.app/v1/image?width=1000&height=300"
+          src={user[0].background}
           alt="User Header"
           style={{
             width: "100%",
@@ -43,7 +44,7 @@ const FeedUserDetails = () => {
           >
             {isFetched ? (
               <img
-                src={details.image}
+                src={user[0].pfp}
                 alt="User Profilepic"
                 style={{ height: "100%" }}
               />

@@ -60,7 +60,7 @@ export default function SearchDisplay() {
                     </span>
                   </div>
                   <div className="border recommended-user-image ml-auto">
-                    <img src={user.image} alt="" />
+                    <img src={user.pfp} alt="" />
                   </div>
                 </div>
               </Link>

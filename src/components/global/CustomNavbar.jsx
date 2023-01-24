@@ -9,7 +9,7 @@ import SearchField from "./SearchField";
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const [meSelected, setMeSelected] = useState(false);
-
+  const user = useSelector((state) => state.user.user);
   const userName = useSelector((state) => state.myProfile.detailsData.name);
   const userTitle = useSelector((state) => state.myProfile.detailsData.title);
   const userImage = useSelector((state) => state.myProfile.detailsData.image);
@@ -106,7 +106,7 @@ const CustomNavbar = () => {
             >
               <div className="me-icon-container d-sm-flex my-auto d-md-block my-md-0">
                 <img
-                  src={userImage}
+                  src={user[0].pfp}
                   alt=""
                   className="d-flex align-items-center justify-content-center"
                 />
@@ -126,15 +126,16 @@ const CustomNavbar = () => {
                       <div className="d-flex mb-2">
                         <div className="me-dropdown-image">
                           <img
-                            src={userImage}
+                            src={user[0].pfp}
                             alt=""
                             className="d-flex align-items-center justify-content-center"
                           />
                         </div>
                         <div className="ml-2 underline-on-hover">
                           <div className="me-dropdown-big-element">
-                            {userName} {userSurname}
+                            {user[0].name} {user[0].surname}
                           </div>
+                          <div>{user[0].job}</div>
                           <div>{userTitle}</div>
                         </div>
                       </div>
