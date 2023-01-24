@@ -28,7 +28,7 @@ const CustomNavbar = () => {
             className="d-flex"
           >
             <div className="my-auto">
-              <Navbar.Brand href="/">
+              <Navbar.Brand href="/home">
                 <Icon.Linkedin className="navbar-logo-icon" />
               </Navbar.Brand>
             </div>

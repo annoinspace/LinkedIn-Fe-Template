@@ -1,4 +1,4 @@
-import { Col, Row, Container, Form, Button } from "react-bootstrap";
+import { Col, Row, Container, Form, Button, Alert } from "react-bootstrap";
 import "./styles.css";
 import * as Icon from "react-bootstrap-icons";
 import LinkedinLogo from "../../assets/linkedin-logo-png-transparent.png";
@@ -8,6 +8,7 @@ import { SET_USER } from "../../redux/actions";
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [wrong, setWrong] = useState(false);
   const dispatch = useDispatch();
   const onChangeHandler = (value, fieldToSet) => {
     fieldToSet(value);
@@ -20,13 +21,16 @@ const LoginPage = () => {
     )
       .then((res) => res.json())
       .then((s) => {
-        if (s) {
+        if (s.length > 0) {
           console.log(s);
           dispatch({
             type: SET_USER,
             payload: s,
           });
           window.location.replace("/home");
+        } else {
+          console.log(s);
+          setWrong(true);
         }
       });
   };
@@ -90,6 +94,7 @@ const LoginPage = () => {
                     }
                   />
                 </Form.Group>
+                {wrong === true ? <Alert variant="danger">Wrong!</Alert> : null}
                 <div className=" d-flex justify-content-end">
                   <Button
                     size="lg"
