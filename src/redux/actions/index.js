@@ -172,11 +172,7 @@ export const changeProfileDetailsAction = (details) => {
     const optionsPut = {
       method: "PUT",
       body: JSON.stringify(details),
-      headers: {
-        "Content-Type": "application/json",
-        //   Authorization:
-        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-      },
+      headers: {},
     };
     console.log(
       "----------------CHANGING My Profile Details------------------"
@@ -207,9 +203,6 @@ export const addExperienceAction = (experience, userId) => {
       body: JSON.stringify(experience),
       headers: {
         "Content-Type": "application/json",
-        //     Authorization:
-        //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-        //
       },
     };
 
@@ -245,10 +238,6 @@ export const deleteExperienceAction = (userId, expId) => {
 
   const deleteOptions = {
     method: "DELETE",
-    // headers: {
-    //     Authorization:
-    //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
-    //   }
   };
   console.log("deleteding experience - DELETE method");
   return async (dispatch) => {
@@ -282,7 +271,7 @@ export const hideAddPostModalAction = () => {
 };
 
 // getting the posts for the feed
-const baseEndPointPosts = "http://localhost:3002/posts/";
+const baseEndPointPosts = "http://localhost:3004/posts/";
 
 export const getFeedPostsAction = () => {
   return async (dispatch) => {
@@ -309,45 +298,25 @@ export const getFeedPostsAction = () => {
 };
 
 // adding new feed post
-// export const addingNewFeedPostAction = (newFeedPost) => {
-//   return async (dispatch) => {
-//     console.log("----------------Adding New Feed Post---------------------");
-
-//     try {
-//       let resp = await fetch(baseEndPointPosts, {
-//         method: "POST",
-//         body: JSON.stringify(newFeedPost),
-//       });
-//       if (resp.ok) {
-//         alert("Post added");
-//       } else {
-//         console.log("error");
-//       }
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   };
-// };
-
 export const addingNewFeedPostAction = (newFeedPost) => {
   return async (dispatch) => {
+    console.log("----------------Adding New Feed Post---------------------");
+
     try {
-      let response = await fetch(
-        "http://localhost:3002/posts/63ce652c4f33b5dd6214a4ec",
-        {
-          method: "POST",
-          body: newFeedPost,
-          "Content-Type": "undefined",
-        }
-      );
-      if (response.ok) {
-        console.log("Successfully posted");
-        dispatch(getFeedPostsAction());
+      let resp = await fetch(baseEndPointPosts, {
+        method: "POST",
+        body: JSON.stringify(newFeedPost),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        alert("Post added");
       } else {
-        console.log("There was an error posting.");
+        console.log("error");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.log(e);
     }
   };
 };
