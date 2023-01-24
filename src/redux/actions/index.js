@@ -31,7 +31,7 @@ export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL";
 
 //constants to use for fetching data
 
-const baseEndPoint = "https://striveschool-api.herokuapp.com/api/profile/";
+const baseEndPoint = "http:/localhost:3003/users/";
 
 const options = {
   headers: {
@@ -48,7 +48,7 @@ export const getUsersAction = () => {
     console.log("----------------fetching Users---------------------");
 
     try {
-      let resp = await fetch(baseEndPoint, options);
+      let resp = await fetch(baseEndPoint);
       if (resp.ok) {
         let data = await resp.json();
         let fetchedUsers = data;
@@ -97,17 +97,11 @@ export const hideUserSearchAction = () => {
 //action for getting the experiences
 
 export const getExperiencesAction = (userId) => {
-  const experiencesUrl = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
-  const getOptions = {
-    method: "GET",
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-    },
-  };
+  const experiencesUrl = `http://localhost:3003/users/${userId}/experiences`;
+
   return async (dispatch) => {
     try {
-      let response = await fetch(experiencesUrl, getOptions);
+      let response = await fetch(experiencesUrl);
       if (response.ok) {
         let data = await response.json();
         dispatch({
