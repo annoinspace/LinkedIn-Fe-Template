@@ -16,6 +16,7 @@ import {
 
 import FeedPostLike from "./FeedPostLike";
 import EditOwnPosts from "./EditOwnPosts";
+import CommentComp from "./CommentComponent";
 
 export default function MainFeedSectionWithPosts() {
   // const [showEdit, setShowEdit] = useState(false)
@@ -26,7 +27,7 @@ export default function MainFeedSectionWithPosts() {
 
   const allLatestPosts = allFeedPosts.slice(0).reverse();
 
-  const longerPosts = allLatestPosts
+  const longerPosts = allLatestPosts;
 
   const userPresent = longerPosts.filter((post) => {
     return post.user !== null;
@@ -59,6 +60,10 @@ export default function MainFeedSectionWithPosts() {
     dispatch(saveSelectedFeedPostAction(post));
     console.log("edit Options click", editOptions);
   };
+
+  const [comment, showComment] = useState(false);
+
+  const toggleComments = () => showComment(!comment);
 
   //unclick the dots button
 
@@ -178,11 +183,17 @@ export default function MainFeedSectionWithPosts() {
                       )}
                     </div>
 
-                    <FeedPostLike />
+                    <FeedPostLike onClick={toggleComments} />
+
+                    {post.comments &&
+                      post.comments.map((comment) => (
+                        <CommentComp comment={comment} />
+                      ))}
                   </div>
                 )}
               </div>
             ))}
+
             <div className="d-flex justify-content-center m-5">
               <BsFillArrowDownCircleFill
                 onClick={increaseCurrentLength}
