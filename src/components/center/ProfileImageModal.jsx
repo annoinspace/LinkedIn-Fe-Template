@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import {
   CameraFill,
@@ -7,13 +7,15 @@ import {
   Pencil,
   TrashFill,
 } from "react-bootstrap-icons";
-
-function ProfileImageModal({ profileData }) {
+import { useSelector } from "react-redux";
+function ProfileImageModal() {
   const [show, setShow] = useState(false);
-
+  const user = useSelector((state) => state.user.user);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  useEffect(() => {
+    console.log(user);
+  });
   return (
     <>
       <div
@@ -21,7 +23,7 @@ function ProfileImageModal({ profileData }) {
         onClick={handleShow}
       >
         <img
-          src={profileData.image}
+          src={user[0].pfp}
           alt="User profile img"
           className="profileImage"
         />
@@ -48,15 +50,11 @@ function ProfileImageModal({ profileData }) {
                 overflow: "hidden",
               }}
             >
-              <img
-                src={profileData.image}
-                alt="avatar"
-                style={{ height: "100%" }}
-              />
+              <img src={user[0].pfp} alt="avatar" style={{ height: "100%" }} />
             </div>
           </div>
           <div className="d-flex">
-            {profileData._id === "6396f013c96dfb001521a5ba" ? (
+            {user[0]._id === user[0]._id ? (
               <div className="hoverWhiteBorder d-flex justify-content-center align-items-center border px-3 py-1 rounded-pill text-white font-weight-bold">
                 <EyeFill className="mr-3" /> Anyone
               </div>
@@ -65,7 +63,7 @@ function ProfileImageModal({ profileData }) {
             )}
           </div>
         </Modal.Body>
-        {profileData._id === "6396f013c96dfb001521a5ba" ? (
+        {user[0]._id === user[0]._id ? (
           <Modal.Footer
             style={{ backgroundColor: "#1D2226" }}
             className="justify-content-between p-0"
