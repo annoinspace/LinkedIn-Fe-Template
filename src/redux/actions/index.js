@@ -472,7 +472,7 @@ export const deleteMyFeedPostAction = (deleteFeedPost, postId) => {
     try {
       let response = await fetch(baseEndPointPosts + postId, optionsDelete);
       if (response.ok) {
-        alert("Post deleted");
+        dispatch(getFeedPostsAction());
       } else {
         console.log("Error deleting");
       }

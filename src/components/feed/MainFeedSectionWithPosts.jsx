@@ -26,7 +26,7 @@ export default function MainFeedSectionWithPosts() {
 
   const allLatestPosts = allFeedPosts.slice(0).reverse();
 
-  const longerPosts = allLatestPosts.filter((post) => post.text.length > 10);
+  const longerPosts = allLatestPosts
 
   const userPresent = longerPosts.filter((post) => {
     return post.user !== null;
@@ -36,7 +36,7 @@ export default function MainFeedSectionWithPosts() {
   const latestPostSlice = userPresent.slice(0, length);
 
   const increaseCurrentLength = (e) => {
-    const increment = 50;
+    const increment = 4;
     setLength(length + increment);
 
     if (
@@ -147,7 +147,7 @@ export default function MainFeedSectionWithPosts() {
                           </div>
                           <div className="mb-1 small-height">
                             <span className="feed-post-tiny-text truncate-text">
-                              {post.user[0].title}
+                              {post.user[0].job}
                             </span>
                           </div>
                           {/* <div className="mb-1 small-height">
