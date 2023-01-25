@@ -92,12 +92,10 @@ export default function MainFeedSectionWithPosts() {
 
   const [text, setText] = useState("");
 
-
-
   const onSubmitComment = (id) => {
-    const formData = new FormData()
-    formData.append("text", text)
-    formData.append("author", userId)
+    const formData = new FormData();
+    formData.append("text", text);
+    formData.append("author", userId);
     dispatch(addCommentToPostAction(id, formData));
     setText("");
   };
@@ -229,10 +227,10 @@ export default function MainFeedSectionWithPosts() {
                         <span>Send</span>
                       </div>
                     </div>
-                      {post.comments &&
-                        post.comments.map((comment, index) => (
-                          <CommentComp key={index} comment={comment} />
-                        ))}
+                    {post.comments &&
+                      post.comments.map((comment, index) => (
+                        <CommentComp key={index} comment={comment} />
+                      ))}
                     <div>
                       <Form.Group>
                         <Form.Control
@@ -249,11 +247,19 @@ export default function MainFeedSectionWithPosts() {
                           }
                         />
                       </Form.Group>
+                      <Form.Group>
+                        <Form.File
+                          accept="image/jpg, image/jpeg, image/png, image/gif"
+                          label="Add an image"
+                        />
+                      </Form.Group>
                       <Button
                         style={{ fontSize: "0.8rem" }}
                         variant="info"
                         className=""
-                        onClick={() => {onSubmitComment(post._id)}}
+                        onClick={() => {
+                          onSubmitComment(post._id);
+                        }}
                       >
                         Add Comment
                       </Button>

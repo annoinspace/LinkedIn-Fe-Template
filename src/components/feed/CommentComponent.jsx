@@ -1,4 +1,11 @@
-import { Container, ListGroup, Row, Col, Collapse } from "react-bootstrap";
+import {
+  Container,
+  ListGroup,
+  Row,
+  Col,
+  Collapse,
+  Image,
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { TiDeleteOutline } from "react-icons/ti";
 import { deleteCommentAction } from "../../redux/actions";
@@ -38,6 +45,23 @@ const CommentComp = ({ comment }) => {
             {comment.author[0].job}
           </div>
           <Container className="p-0 m-0">{comment.text}</Container>
+          <Container>
+            {comment.image && (
+              <div className="post-image-wrapper p-1">
+                <Image
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    overflow: "hidden",
+                    objectFit: "cover",
+                  }}
+                  src={comment.image}
+                  alt="user image"
+                  className="feed-post-image"
+                />
+              </div>
+            )}
+          </Container>
         </div>
       </div>
     </ListGroup.Item>
