@@ -6,15 +6,17 @@ import {
   BsFillArrowDownCircleFill,
   BsThreeDotsVertical,
 } from "react-icons/bs";
-
+import { BsHandThumbsUp } from "react-icons/bs";
+import { FaRegCommentDots } from "react-icons/fa";
+import { BiRepost } from "react-icons/bi";
+import { RiSendPlaneFill } from "react-icons/ri";
+import Collapse from "react-bootstrap/Collapse";
 import {
   editShowToggleAction,
   getFeedPostsAction,
   saveSelectedFeedPostAction,
   myPostUnClickedAction,
 } from "../../redux/actions";
-
-import FeedPostLike from "./FeedPostLike";
 import EditOwnPosts from "./EditOwnPosts";
 import CommentComp from "./CommentComponent";
 
@@ -32,7 +34,7 @@ export default function MainFeedSectionWithPosts() {
   const userPresent = longerPosts.filter((post) => {
     return post.user !== null;
   });
-
+  const [open, setOpen] = useState(false);
   const [length, setLength] = useState(4);
   const latestPostSlice = userPresent.slice(0, length);
 
@@ -85,6 +87,7 @@ export default function MainFeedSectionWithPosts() {
     dispatch(getFeedPostsAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       {allFeedPosts && (
@@ -183,12 +186,43 @@ export default function MainFeedSectionWithPosts() {
                       )}
                     </div>
 
-                    <FeedPostLike onClick={toggleComments} />
+                    <div
+                      id="like-section-wrapper"
+                      className="small-header-text border-top pt-1 pb-0 mr-2 ml-2"
+                    >
+                      <div className="start-a-post-icon-text gray-hover">
+                        <BsHandThumbsUp style={{ fontSize: "20px" }} />
 
-                    {post.comments &&
-                      post.comments.map((comment) => (
-                        <CommentComp comment={comment} />
-                      ))}
+                        <span>Like</span>
+                      </div>
+                      <div
+                        className="start-a-post-icon-text gray-hover"
+                        onClick={() => setOpen(!open)}
+                        aria-controls="example-collapse-text"
+                        aria-expanded={open}
+                      >
+                        <FaRegCommentDots
+                          style={{ fontSize: "20px", cursor: "pointer" }}
+                        />
+                        <span>Comment</span>
+                      </div>
+                      <div className="start-a-post-icon-text gray-hover">
+                        <BiRepost style={{ fontSize: "20px" }} />
+                        <span>Repost</span>
+                      </div>
+                      <div className="start-a-post-icon-text gray-hover">
+                        <RiSendPlaneFill style={{ fontSize: "20px" }} />
+                        <span>Send</span>
+                      </div>
+                    </div>
+                    <Collapse in={open}>
+                      <div id="example-collapse-text">
+                        {post.comments &&
+                          post.comments.map((comment) => (
+                            <CommentComp comment={comment} />
+                          ))}
+                      </div>
+                    </Collapse>
                   </div>
                 )}
               </div>
