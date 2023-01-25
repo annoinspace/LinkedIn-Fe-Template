@@ -2,11 +2,8 @@ import { Container, ListGroup, Row, Col, Collapse } from "react-bootstrap";
 import { useState } from "react";
 
 const CommentComp = ({ comment }) => {
-  const [open, setOpen] = useState(false);
-  
+
   return (
-    <Collapse in={open}>
-      <div id="example-collapse-text">
         <ListGroup.Item
           style={{ backgroundColor: "#F2F2F2", borderRadius: "20px" }}
           className="m-3"
@@ -25,12 +22,10 @@ const CommentComp = ({ comment }) => {
               >
                 {comment.author[0].job}
               </div>
-              <Container fluid>{comment.text}</Container>
+              <Container className="p-0 m-0">{comment.text}</Container>
             </div>
           </div>
         </ListGroup.Item>
-      </div>
-    </Collapse>
   );
 };
 

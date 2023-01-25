@@ -564,3 +564,29 @@ export const submitFileData = async (image, userId, expId) => {
     console.log(error);
   }
 };
+
+// --------Comments on Posts --------------
+
+export const addCommentToPostAction = (parentPost, commentToSend) => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(
+        "https://linkedin-backend-production.up.railway.app/comments/" +
+          parentPost,
+        {
+          method: "POST",
+          body: commentToSend,
+          "Content-Type": "undefined",
+        }
+      );
+      if (response.ok) {
+        console.log("Comment posted successfully.");
+        dispatch(getFeedPostsAction());
+      } else {
+        console.log("Could not post comment.");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, ListGroup } from "react-bootstrap";
+import { Image, ListGroup, Form, Button, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BsThreeDots,
@@ -10,7 +10,6 @@ import { BsHandThumbsUp } from "react-icons/bs";
 import { FaRegCommentDots } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { RiSendPlaneFill } from "react-icons/ri";
-import Collapse from "react-bootstrap/Collapse";
 import {
   editShowToggleAction,
   getFeedPostsAction,
@@ -19,6 +18,7 @@ import {
 } from "../../redux/actions";
 import EditOwnPosts from "./EditOwnPosts";
 import CommentComp from "./CommentComponent";
+import { addCommentToPostAction } from "../../redux/actions";
 
 export default function MainFeedSectionWithPosts() {
   // const [showEdit, setShowEdit] = useState(false)
@@ -65,7 +65,6 @@ export default function MainFeedSectionWithPosts() {
 
   const [open, setOpen] = useState(false);
 
-
   //unclick the dots button
 
   const myPostUnClickedHandler = (post) => {
@@ -86,6 +85,22 @@ export default function MainFeedSectionWithPosts() {
     dispatch(getFeedPostsAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onChangeHandler = (value, fieldToSet) => {
+    fieldToSet(value);
+  };
+
+  const [text, setText] = useState("");
+
+
+
+  const onSubmitComment = (id) => {
+    const formData = new FormData()
+    formData.append("text", text)
+    formData.append("author", userId)
+    dispatch(addCommentToPostAction(id, formData));
+    setText("");
+  };
 
   return (
     <>
@@ -214,12 +229,35 @@ export default function MainFeedSectionWithPosts() {
                         <span>Send</span>
                       </div>
                     </div>
-                    <ListGroup></ListGroup>
-
-                    {post.comments &&
-                      post.comments.map((comment, index) => (
-                        <CommentComp key={index} comment={comment} />
-                      ))}
+                      {post.comments &&
+                        post.comments.map((comment, index) => (
+                          <CommentComp key={index} comment={comment} />
+                        ))}
+                    <div>
+                      <Form.Group>
+                        <Form.Control
+                          style={{
+                            resize: "",
+                            borderRadius: "0rem 10px 10px 10px",
+                          }}
+                          as="textarea"
+                          className="mx-auto p-0"
+                          rows={2}
+                          value={text}
+                          onChange={(e) =>
+                            onChangeHandler(e.target.value, setText)
+                          }
+                        />
+                      </Form.Group>
+                      <Button
+                        style={{ fontSize: "0.8rem" }}
+                        variant="info"
+                        className=""
+                        onClick={() => {onSubmitComment(post._id)}}
+                      >
+                        Add Comment
+                      </Button>
+                    </div>
                   </div>
                 )}
               </div>
