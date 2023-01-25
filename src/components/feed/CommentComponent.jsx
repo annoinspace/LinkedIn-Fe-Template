@@ -13,6 +13,8 @@ import { useDispatch } from "react-redux";
 import { MdOutlineModeEditOutline, MdAddAPhoto } from "react-icons/md";
 import { useState } from "react";
 import { editCommentAction } from "../../redux/actions";
+import { parseISO } from "date-fns";
+import format from "date-fns/format";
 
 const CommentComp = ({ comment }) => {
   const currentUserId = useSelector((state) => state.myProfile.detailsData._id);
@@ -41,15 +43,17 @@ const CommentComp = ({ comment }) => {
       dispatch(editCommentAction(id, formData));
       setImage([]);
       setText("");
-      handleClose()
+      handleClose();
     }
   };
 
   return (
     <>
       <ListGroup.Item
-        style={{ backgroundColor: "#F2F2F2", borderRadius: "20px" }}
-        className="m-1"
+        style={{
+          backgroundColor: "#F2F2F2",
+          borderRadius: "10px",
+        }}
       >
         <div className="d-flex flex-row">
           <div className="border recommended-user-image">
@@ -73,10 +77,12 @@ const CommentComp = ({ comment }) => {
                       color: "grey",
                     }}
                   >
-                    <MdOutlineModeEditOutline onClick={() => {
-                      handleShow()
-                      setText(comment.text)
-                      }} />
+                    <MdOutlineModeEditOutline
+                      onClick={() => {
+                        handleShow();
+                        setText(comment.text);
+                      }}
+                    />
                   </button>
                 </>
               ) : (
@@ -88,11 +94,14 @@ const CommentComp = ({ comment }) => {
               className="mt-1 text-muted feed-text-name"
             >
               {comment.author[0].job}
+              <div className="feed-post-tiny-text  ">
+                {format(parseISO(comment.createdAt), "dd/MM/yyyy' at 'HH:mm")}
+              </div>
             </div>
-            <Container className="p-0 m-0">{comment.text}</Container>
+            <Container className="p-0 mt-4">{comment.text}</Container>
             <Container>
               {comment.image && (
-                <div className="post-image-wrapper p-1">
+                <div className="post-image-wrapper p-1 mx-auto">
                   <Image
                     style={{
                       width: "100%",
@@ -143,12 +152,18 @@ const CommentComp = ({ comment }) => {
             style={{ display: "none" }}
             id="icon-file"
           />
+          <span>{image.name}</span>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => onSubmitComment(comment._id)}>Save Changes</Button>
+          <Button
+            variant="primary"
+            onClick={() => onSubmitComment(comment._id)}
+          >
+            Save Changes
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
