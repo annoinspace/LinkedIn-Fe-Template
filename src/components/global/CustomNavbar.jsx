@@ -1,40 +1,34 @@
-import { useState } from "react";
-import { Container, Navbar, Nav, ListGroup, Button } from "react-bootstrap";
-import * as Icon from "react-bootstrap-icons";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import SearchField from "./SearchField";
-import { SET_USER } from "../../redux/actions";
-import { useDispatch } from "react-redux";
+import { useState } from "react"
+import { Container, Navbar, Nav, ListGroup, Button } from "react-bootstrap"
+import * as Icon from "react-bootstrap-icons"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import SearchField from "./SearchField"
+import { SET_USER } from "../../redux/actions"
+import { useDispatch } from "react-redux"
 const CustomNavbar = () => {
-  const navigate = useNavigate();
-  const [meSelected, setMeSelected] = useState(false);
-  const user = useSelector((state) => state.user.user);
-  const userTitle = useSelector((state) => state.myProfile.detailsData.title);
+  const navigate = useNavigate()
+  const [meSelected, setMeSelected] = useState(false)
+  const user = useSelector((state) => state.user.user)
+  // const userTitle = useSelector((state) => state.myProfile.detailsData.title);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const signOut = () => {
     dispatch({
       type: SET_USER,
-      payload: [],
-    });
-    window.location.replace("/");
-  };
+      payload: []
+    })
+    window.location.replace("/")
+  }
   if (user.length === 0) {
     return (
-      <Navbar
-        expand="lg"
-        variant="light"
-        bg="white"
-        className="sticky-top"
-        style={{ zIndex: 100 }}
-      >
+      <Navbar expand="lg" variant="light" bg="white" className="sticky-top" style={{ zIndex: 100 }}>
         {" "}
         <Container className="d-flex justify-content-between align-items-center navbar-font-sizes">
           <div
             onClick={() => {
-              setMeSelected(false);
+              setMeSelected(false)
             }}
             className="d-flex"
           >
@@ -47,21 +41,14 @@ const CustomNavbar = () => {
           <div className="d-flex border-left">
             <div className="mr-1 ml-1">
               <a href="/">
-                <Button
-                  variant="outline"
-                  className="text-dark"
-                  style={{ borderRadius: "25px" }}
-                >
+                <Button variant="outline" className="text-dark" style={{ borderRadius: "25px" }}>
                   Join now
                 </Button>
               </a>
             </div>
             <div className="mr-1 ml-1">
               <a href="/">
-                <Button
-                  variant="outline-primary"
-                  style={{ borderRadius: "25px" }}
-                >
+                <Button variant="outline-primary" style={{ borderRadius: "25px" }}>
                   Sign in
                 </Button>
               </a>
@@ -69,21 +56,15 @@ const CustomNavbar = () => {
           </div>
         </Container>
       </Navbar>
-    );
+    )
   } else {
     return (
       <>
-        <Navbar
-          expand="lg"
-          variant="light"
-          bg="white"
-          className="sticky-top"
-          style={{ zIndex: 100 }}
-        >
+        <Navbar expand="lg" variant="light" bg="white" className="sticky-top" style={{ zIndex: 100 }}>
           <Container className="d-flex justify-content-between align-items-center navbar-font-sizes">
             <div
               onClick={() => {
-                setMeSelected(false);
+                setMeSelected(false)
               }}
               className="d-flex"
             >
@@ -98,7 +79,7 @@ const CustomNavbar = () => {
             <Nav className="rightSideNavbarContainer d-flex align-items-center justify-content-center flex-row mx-auto mx-md-none">
               <Link
                 onClick={() => {
-                  setMeSelected(false);
+                  setMeSelected(false)
                 }}
                 to={"/home"}
               >
@@ -115,7 +96,7 @@ const CustomNavbar = () => {
               <Link to="/network">
                 <div
                   onClick={() => {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }}
                   className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
                   style={{ fontWeight: "600" }}
@@ -129,7 +110,7 @@ const CustomNavbar = () => {
               <Link to="/home">
                 <div
                   onClick={() => {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }}
                   className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
                   style={{ fontWeight: "600" }}
@@ -143,7 +124,7 @@ const CustomNavbar = () => {
               <Link to="/home">
                 <div
                   onClick={() => {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }}
                   className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
                   style={{ fontWeight: "600" }}
@@ -157,7 +138,7 @@ const CustomNavbar = () => {
               <Link to="/home">
                 <div
                   onClick={() => {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }}
                   className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
                   style={{ fontWeight: "600" }}
@@ -172,18 +153,14 @@ const CustomNavbar = () => {
                 className=" test nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none position-relative"
                 onClick={() => {
                   if (meSelected === false) {
-                    setMeSelected(true);
+                    setMeSelected(true)
                   } else {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }
                 }}
               >
                 <div className="me-icon-container d-sm-flex my-auto d-md-block my-md-0">
-                  <img
-                    src={user[0]?.pfp}
-                    alt=""
-                    className="d-flex align-items-center justify-content-center"
-                  />
+                  <img src={user[0]?.pfp} alt="" className="d-flex align-items-center justify-content-center" />
                 </div>
                 <div className="d-flex justify-content-center align-items-center">
                   <div className="d-none d-md-block">Me</div>
@@ -216,8 +193,8 @@ const CustomNavbar = () => {
                           <Button
                             className="me-dropdown-button w-100"
                             onClick={() => {
-                              navigate("/me");
-                              setMeSelected(false);
+                              navigate("/me")
+                              setMeSelected(false)
                             }}
                           >
                             View Profile
@@ -235,10 +212,7 @@ const CustomNavbar = () => {
                         <div>Posts & Activity</div>
                         <div>Job Posting Account</div>
                       </ListGroup.Item>
-                      <ListGroup.Item
-                        className="underline-on-hover"
-                        onClick={signOut}
-                      >
+                      <ListGroup.Item className="underline-on-hover" onClick={signOut}>
                         <div>Sing Out</div>
                       </ListGroup.Item>
                     </ListGroup>
@@ -247,7 +221,7 @@ const CustomNavbar = () => {
               </div>
               <div
                 onClick={() => {
-                  setMeSelected(false);
+                  setMeSelected(false)
                 }}
                 className="nav-link d-flex flex-column justify-content-around align-items-center border-left cursor-on-hover ml-0 ml-sm-2 ml-md-none pl-4 pl-sm-2 pl-md-none"
               >
@@ -261,20 +235,20 @@ const CustomNavbar = () => {
               </div>
               <div
                 onClick={() => {
-                  setMeSelected(false);
+                  setMeSelected(false)
                 }}
                 className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover ml-4 ml-sm-2 ml-md-none"
               >
                 <div
                   onClick={() => {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }}
                 >
                   <Icon.CardChecklist />
                 </div>
                 <div
                   onClick={() => {
-                    setMeSelected(false);
+                    setMeSelected(false)
                   }}
                   className="d-none d-md-block"
                 >
@@ -291,8 +265,8 @@ const CustomNavbar = () => {
         className="containerTest"
       ></div> */}
       </>
-    );
+    )
   }
-};
+}
 
-export default CustomNavbar;
+export default CustomNavbar
