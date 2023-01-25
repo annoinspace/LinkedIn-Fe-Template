@@ -10,6 +10,7 @@ import { BsHandThumbsUp } from "react-icons/bs";
 import { FaRegCommentDots } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { MdAddAPhoto } from "react-icons/md";
 import {
   editShowToggleAction,
   getFeedPostsAction,
@@ -90,14 +91,26 @@ export default function MainFeedSectionWithPosts() {
     fieldToSet(value);
   };
 
+  const commentImageHandler = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   const [text, setText] = useState("");
+  const [image, setImage] = useState([]);
 
   const onSubmitComment = (id) => {
     const formData = new FormData();
     formData.append("text", text);
     formData.append("author", userId);
-    dispatch(addCommentToPostAction(id, formData));
-    setText("");
+    image !== undefined ? formData.append("post", image) : setImage([]);
+    if (text === "") {
+      alert("You cannot post an empty comment!");
+      return;
+    } else {
+      dispatch(addCommentToPostAction(id, formData));
+      setImage([]);
+      setText("");
+    }
   };
 
   return (
@@ -105,7 +118,7 @@ export default function MainFeedSectionWithPosts() {
       {allFeedPosts && (
         <>
           <div id="feed-main-container">
-            {latestPostSlice.map((post) => (
+            {latestPostSlice.map((post, index) => (
               <div key={post._id}>
                 {post.user[0]?._id && (
                   <div key={post._id} className="feed-post border p-feed pb-1">
@@ -247,22 +260,36 @@ export default function MainFeedSectionWithPosts() {
                           }
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.File
-                          accept="image/jpg, image/jpeg, image/png, image/gif"
-                          label="Add an image"
-                        />
-                      </Form.Group>
-                      <Button
-                        style={{ fontSize: "0.8rem" }}
-                        variant="info"
-                        className=""
-                        onClick={() => {
-                          onSubmitComment(post._id);
-                        }}
-                      >
-                        Add Comment
-                      </Button>
+                      <Row className="justify-content-center">
+                        <div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => commentImageHandler(e)}
+                            style={{ display: "none" }}
+                            id="icon-button-file"
+                          />
+                          <label id="photo-hover" htmlFor="icon-button-file">
+                            <MdAddAPhoto
+                              className="mr-3"
+                              style={{ fontSize: "2rem", color: "#138496" }}
+                            />
+                          </label>
+                          <Button
+                            style={{ fontSize: "0.8rem" }}
+                            variant="info"
+                            className="mr-auto"
+                            onClick={() => {
+                              onSubmitComment(post._id);
+                            }}
+                          >
+                            Add Comment
+                          </Button>
+                          <p className="text-small text-muted mr-2">
+                            {image.name}
+                          </p>
+                        </div>
+                      </Row>
                     </div>
                   </div>
                 )}
