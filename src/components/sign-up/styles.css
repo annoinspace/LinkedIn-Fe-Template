@@ -1,0 +1,35 @@
+#main-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-height: 70%;
+  transform: translate(-50%, -50%);
+}
+#main {
+  background: rgb(0, 114, 180);
+  background: linear-gradient(
+    29deg,
+    rgba(0, 114, 180, 1) 34%,
+    rgba(192, 220, 242, 1) 100%
+  );
+  min-height: 95vh !important;
+  height: 100% !important;
+}
+#col-two {
+  background: linear-gradient(0deg, rgba(0, 52, 180, 0) 0%, #a6ceea 100%),
+    url(https://1.bp.blogspot.com/-z5oJUFp1sUo/YKHvfWbMlSI/AAAAAAABMiM/yO-xg8Ay9XIs3Gs8Jjhs4PuwozvOnHh1QCLcBGAsYHQ/s1920/city_buildings_street_206796_1080x1920.jpg);
+  background-position: center;
+  height: 100%;
+}
+#spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#main-body {
+  opacity: 0.8;
+}
+#overlay {
+  background-color: #a6ceea;
+}

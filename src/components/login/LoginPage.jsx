@@ -7,6 +7,7 @@ import {
   Alert,
   Spinner,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./styles.css";
 import * as Icon from "react-bootstrap-icons";
 import LinkedinLogo from "../../assets/linkedin-logo-png-transparent.png";
@@ -132,17 +133,19 @@ const LoginPage = () => {
                       <Alert variant="success">Logging you in...</Alert>
                     ) : null}
                     <div className=" d-flex justify-content-end">
-                      <Button
-                        size="lg"
-                        style={{
-                          backgroundColor: "#D8E5E9",
-                          color: "#0173B5",
-                          border: "none",
-                          borderRadius: "0",
-                        }}
-                      >
-                        Sign up
-                      </Button>
+                      <Link to="/sign-up">
+                        <Button
+                          size="lg"
+                          style={{
+                            backgroundColor: "#D8E5E9",
+                            color: "#0173B5",
+                            border: "none",
+                            borderRadius: "0",
+                          }}
+                        >
+                          Sign up
+                        </Button>
+                      </Link>
                       <Button
                         type="submit"
                         size="lg"
