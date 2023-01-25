@@ -238,7 +238,7 @@ export default function MainFeedSectionWithPosts() {
                         <FaRegCommentDots
                           style={{ fontSize: "20px", cursor: "pointer" }}
                         />
-                        <span>Comment</span>
+                        <span>Comments ({post.comments.length})</span>
                       </div>
                       <div className="start-a-post-icon-text gray-hover">
                         <BiRepost style={{ fontSize: "20px" }} />
