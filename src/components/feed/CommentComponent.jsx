@@ -2,7 +2,10 @@ import { Container, ListGroup, Row, Col } from "react-bootstrap";
 
 const CommentComp = ({ comment }) => {
   return (
-    <ListGroup.Item style={{ backgroundColor: "#F2F2F2" }}>
+    <ListGroup.Item
+      style={{ backgroundColor: "#F2F2F2", borderRadius: "20px" }}
+      className="m-3"
+    >
       <div className="d-flex flex-row">
         <div className="border recommended-user-image">
           <img src={comment.author[0]?.pfp} alt="" />

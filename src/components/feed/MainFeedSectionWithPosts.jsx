@@ -218,8 +218,8 @@ export default function MainFeedSectionWithPosts() {
                     <Collapse in={open}>
                       <div id="example-collapse-text">
                         {post.comments &&
-                          post.comments.map((comment) => (
-                            <CommentComp comment={comment} />
+                          post.comments.map((comment, index) => (
+                            <CommentComp key={index} comment={comment} />
                           ))}
                       </div>
                     </Collapse>
