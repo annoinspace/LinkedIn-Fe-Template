@@ -20,6 +20,8 @@ import {
 import EditOwnPosts from "./EditOwnPosts";
 import CommentComp from "./CommentComponent";
 import { addCommentToPostAction } from "../../redux/actions";
+import { parseISO } from "date-fns";
+import format from "date-fns/format";
 
 export default function MainFeedSectionWithPosts() {
   // const [showEdit, setShowEdit] = useState(false)
@@ -193,11 +195,11 @@ export default function MainFeedSectionWithPosts() {
                               {post.user[0].job}
                             </span>
                           </div>
-                          {/* <div className="mb-1 small-height">
+                          <div className="mb-1 small-height">
                             <span className="feed-post-tiny-text  ">
-                              {post.user.createdAt}
+                            {format(parseISO(post.createdAt), "dd/MM/yyyy' at 'HH:mm")}
                             </span>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                       <p className="mt-3 mb-3"> {post.text}</p>
@@ -264,7 +266,7 @@ export default function MainFeedSectionWithPosts() {
                                 borderRadius: "0rem 10px 10px 10px",
                               }}
                               as="textarea"
-                              className="mx-auto p-0"
+                              className="mx-auto mt-2 p-0"
                               rows={2}
                               value={text}
                               onChange={(e) =>

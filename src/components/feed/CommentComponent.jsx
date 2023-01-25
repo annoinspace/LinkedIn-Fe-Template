@@ -12,6 +12,7 @@ import { deleteCommentAction } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { MdOutlineModeEditOutline, MdAddAPhoto } from "react-icons/md";
 import { useState } from "react";
+import { editCommentAction } from "../../redux/actions";
 
 const CommentComp = ({ comment }) => {
   const currentUserId = useSelector((state) => state.myProfile.detailsData._id);
@@ -21,9 +22,28 @@ const CommentComp = ({ comment }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const [text, setText] = useState(comment.text)
-  const [image, setImage] = useState([])
+
+  const [text, setText] = useState(comment.text);
+  const [image, setImage] = useState([]);
+
+  const commentImageHandler = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const onSubmitComment = (id) => {
+    const formData = new FormData();
+    formData.append("text", text);
+    image !== undefined ? formData.append("post", image) : setImage([]);
+    if (text === "") {
+      alert("You cannot post an empty comment!");
+      return;
+    } else {
+      dispatch(editCommentAction(id, formData));
+      setImage([]);
+      setText("");
+      handleClose()
+    }
+  };
 
   return (
     <>
@@ -53,7 +73,10 @@ const CommentComp = ({ comment }) => {
                       color: "grey",
                     }}
                   >
-                    <MdOutlineModeEditOutline onClick={() => handleShow()} />
+                    <MdOutlineModeEditOutline onClick={() => {
+                      handleShow()
+                      setText(comment.text)
+                      }} />
                   </button>
                 </>
               ) : (
@@ -100,26 +123,32 @@ const CommentComp = ({ comment }) => {
         <Modal.Body>
           <Form.Group>
             <Form.Label>Comment:</Form.Label>
-            <Form.Control as="textarea" value={text} rows={3} />
+            <Form.Control
+              as="textarea"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              rows={3}
+            />
           </Form.Group>
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            id="icon-button-file"
-          />
-          <label id="photo-hover" htmlFor="icon-button-file">
+          <label id="photo-hover" htmlFor="icon-file">
             <MdAddAPhoto
               className="mr-3"
               style={{ fontSize: "2rem", color: "#138496" }}
             />
           </label>
+          <input
+            onChange={(e) => commentImageHandler(e)}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            id="icon-file"
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Submit</Button>
+          <Button variant="primary" onClick={() => onSubmitComment(comment._id)}>Save Changes</Button>
         </Modal.Footer>
       </Modal>
     </>

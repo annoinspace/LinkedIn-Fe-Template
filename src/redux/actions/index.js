@@ -622,6 +622,7 @@ export const editCommentAction = (commentid, newComment) => {
           commentid,
         {
           method: "PUT",
+          body: newComment,
           "content-type": "undefined",
         }
       );
