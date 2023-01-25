@@ -82,13 +82,16 @@ function EditUserDetailsModal() {
       method: "POST",
       body: formData,
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
+        // Authorization:
+        //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
       }
     }
 
     try {
-      let res = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${details._id}/picture`, optionsPost)
+      let res = await fetch(
+        `https://linkedin-backend-production.up.railway.app/users/${details._id}/picture`,
+        optionsPost
+      )
       console.log(res)
       window.location.reload()
     } catch (error) {
