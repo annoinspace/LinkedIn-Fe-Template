@@ -102,7 +102,10 @@ const CustomNavbar = () => {
                 }}
                 to={"/home"}
               >
-                <div className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none">
+                <div
+                  className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
+                  style={{ fontWeight: "600" }}
+                >
                   <div>
                     <Icon.HouseDoorFill className="mr-sm-3 mr-md-0" />
                   </div>
@@ -115,6 +118,7 @@ const CustomNavbar = () => {
                     setMeSelected(false);
                   }}
                   className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
+                  style={{ fontWeight: "600" }}
                 >
                   <div>
                     <Icon.PeopleFill className="mr-sm-3 mr-md-0" />
@@ -122,39 +126,48 @@ const CustomNavbar = () => {
                   <div className="d-none d-md-block">My Network</div>
                 </div>
               </Link>
-              <div
-                onClick={() => {
-                  setMeSelected(false);
-                }}
-                className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
-              >
-                <div>
-                  <Icon.BriefcaseFill className="mr-sm-3 mr-md-0" />
+              <Link to="/home">
+                <div
+                  onClick={() => {
+                    setMeSelected(false);
+                  }}
+                  className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
+                  style={{ fontWeight: "600" }}
+                >
+                  <div>
+                    <Icon.BriefcaseFill className="mr-sm-3 mr-md-0" />
+                  </div>
+                  <div className="d-none d-md-block">Jobs</div>
                 </div>
-                <div className="d-none d-md-block">Jobs</div>
-              </div>
-              <div
-                onClick={() => {
-                  setMeSelected(false);
-                }}
-                className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
-              >
-                <div>
-                  <Icon.ChatRightDotsFill className="mr-sm-3 mr-md-0" />
+              </Link>
+              <Link to="/home">
+                <div
+                  onClick={() => {
+                    setMeSelected(false);
+                  }}
+                  className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
+                  style={{ fontWeight: "600" }}
+                >
+                  <div>
+                    <Icon.ChatRightDotsFill className="mr-sm-3 mr-md-0" />
+                  </div>
+                  <div className="d-none d-md-block">Messaging</div>
                 </div>
-                <div className="d-none d-md-block">Messaging</div>
-              </div>
-              <div
-                onClick={() => {
-                  setMeSelected(false);
-                }}
-                className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
-              >
-                <div>
-                  <Icon.BellFill className="mr-sm-3 mr-md-0" />
+              </Link>
+              <Link to="/home">
+                <div
+                  onClick={() => {
+                    setMeSelected(false);
+                  }}
+                  className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none"
+                  style={{ fontWeight: "600" }}
+                >
+                  <div>
+                    <Icon.BellFill className="mr-sm-3 mr-md-0" />
+                  </div>
+                  <div className="d-none d-md-block">Notifications</div>
                 </div>
-                <div className="d-none d-md-block">Notifications</div>
-              </div>
+              </Link>
               <div
                 className=" test nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none position-relative"
                 onClick={() => {
