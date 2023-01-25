@@ -78,7 +78,7 @@ export default function WritePostModal() {
       <div className="p-feed ml-2 d-flex">
         {" "}
         <div className="border recommended-user-image">
-          <img src={isFetched ? details.image : placeholder} alt="avatar" />
+          <img src={isFetched ? details.pfp : placeholder} alt="avatar" />
         </div>
         <div>
           <div className="small-header-text font-weight-bold">
