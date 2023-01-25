@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import { Dot, Linkedin, Pencil, XLg } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 
@@ -10,13 +10,11 @@ import MoreDropDownButton from "./MoreDropdownButton";
 import OpenToDropDownButton from "./OpenToDropdownButton";
 import ProfileImageModal from "./ProfileImageModal";
 
-const UserDetails = ({ profileData }) => {
+const UserDetails = () => {
   let isFetched = useSelector((state) => state.myProfile.isFetched);
   let pathname = window.location.pathname;
   const user = useSelector((state) => state.user.user);
-  useEffect(() => {
-    console.log(user);
-  });
+
   return (
     <Row className="mt-3">
       {isFetched ? (
@@ -28,7 +26,7 @@ const UserDetails = ({ profileData }) => {
             }}
           >
             <img
-              src={user[0].background}
+              src={user[0]?.background}
               className="w-100"
               style={{
                 borderRadius: "10px 10px 0 0",
@@ -65,13 +63,13 @@ const UserDetails = ({ profileData }) => {
               <Col>
                 <div className="col-6 d-flex flex-column align-items-start pb-2 px-4 userInfoDiv ">
                   <h4 style={{ fontWeight: "500" }}>
-                    {user[0].name} {user[0].surname}
+                    {user[0]?.name} {user[0]?.surname}
                   </h4>
 
-                  <h6>{user[0].job}</h6>
+                  <h6>{user[0]?.job}</h6>
                   <div className="d-flex align-items-center">
                     <p className="text-secondary my-1">
-                      {user[0].location} <Dot />
+                      {user[0]?.location} <Dot />
                     </p>
                     <div
                       className="text-primary"

@@ -23,10 +23,19 @@ const EducationComponent = ({ profileData }) => {
         </div>
         <div className=" ">
           <ListGroup variant="flush" className="px-0 text-left">
-            <ListGroup.Item className="px-0 pl-5">
-              <h6 className="font-weight-bold">EPICODE</h6>
-              <div>Full-Stack Developer, Computer Software Engineering</div>
-              <div className="light-grey-color">Sept 2022 - Mar 2023</div>
+            <ListGroup.Item className="px-0 pl-2 d-flex ">
+              <div>
+                <img
+                  src="https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/1045/original/EPICODE-pitto-color.png"
+                  style={{ width: "35px" }}
+                  className="mr-2"
+                />
+              </div>
+              <div>
+                <h6 className="font-weight-bold">EPICODE</h6>
+                <div>Full-Stack Developer, Computer Software Engineering</div>
+                <div className="light-grey-color">Sept 2022 - Mar 2023</div>
+              </div>
             </ListGroup.Item>
           </ListGroup>
         </div>

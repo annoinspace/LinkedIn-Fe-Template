@@ -16,85 +16,86 @@ export default function MessagingPopup() {
   let showMessages = useSelector((state) => state.messenger.showMessages);
   let details = useSelector((state) => state.myProfile.detailsData);
   let isFetched = useSelector((state) => state.myProfile.isFetched);
+  const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();
-
-  return (
-    <>
-      {showMessages ? (
-        <div id="messaging-popup-wrapper-full" className="border pointer">
-          <div className="top-messenger-wrapper ">
-            <div className="d-flex align-items-center">
-              <div className="border recommended-user-image ml-1 mr-2">
-                <img
-                  src={isFetched ? details.image : placeholder}
-                  alt="avatar"
-                />
+  if (user.length === 0) {
+    return <></>;
+  } else {
+    return (
+      <>
+        {showMessages ? (
+          <div id="messaging-popup-wrapper-full" className="border pointer">
+            <div className="top-messenger-wrapper ">
+              <div className="d-flex align-items-center">
+                <div className="border recommended-user-image ml-1 mr-2">
+                  <img src={user[0]?.pfp} alt="avatar" />
+                </div>
+                <div className="font-weight-bold small-header-text ">
+                  Messaging
+                </div>
               </div>
-              <div className="font-weight-bold small-header-text ">
-                Messaging
+              <div className="d-flex">
+                <div className="mr-1 gray-hover icon-wrapper-messenger">
+                  <BsThreeDots />
+                </div>
+                <div className="mr-1 gray-hover icon-wrapper-messenger">
+                  <FiEdit />
+                </div>
+                <div
+                  className="mr-1 gray-hover icon-wrapper-messenger"
+                  onClick={() => dispatch(collapseMessengerAction())}
+                >
+                  <SlArrowDown />
+                </div>
               </div>
             </div>
-            <div className="d-flex">
-              <div className="mr-1 gray-hover icon-wrapper-messenger">
-                <BsThreeDots />
-              </div>
-              <div className="mr-1 gray-hover icon-wrapper-messenger">
-                <FiEdit />
-              </div>
-              <div
-                className="mr-1 gray-hover icon-wrapper-messenger"
-                onClick={() => dispatch(collapseMessengerAction())}
-              >
-                <SlArrowDown />
+            <hr className="messenger-hr" />
+            <div id="messenger-search">
+              <div>
+                {" "}
+                <BiSearch className="ml-1" />{" "}
+              </div>{" "}
+              <div id="messenger-search-text">Search Messages</div>
+              <div id="messenger-slider">
+                <FaSlidersH />
               </div>
             </div>
+            <UserMessages />
           </div>
-          <hr className="messenger-hr" />
-          <div id="messenger-search">
-            <div>
-              {" "}
-              <BiSearch className="ml-1" />{" "}
+        ) : (
+          <>
+            {" "}
+            <div
+              id="messaging-popup-wrapper"
+              className="border pointer top-messenger-wrapper"
+            >
+              <div className="d-flex align-items-center">
+                <div className="border recommended-user-image ml-auto mr-2">
+                  <img src={user[0]?.pfp} alt="" />
+                </div>
+                <div className="font-weight-bold  small-header-text">
+                  Messaging
+                </div>
+              </div>
+              <div className="d-flex">
+                <div className="mr-1 gray-hover icon-wrapper-messenger">
+                  <BsThreeDots />
+                </div>
+                <div className="mr-1 gray-hover icon-wrapper-messenger">
+                  <FiEdit />
+                </div>
+                <div
+                  className="mr-1 gray-hover icon-wrapper-messenger"
+                  onClick={() => dispatch(expandMessengerAction())}
+                >
+                  <SlArrowUp />
+                </div>
+              </div>
             </div>{" "}
-            <div id="messenger-search-text">Search Messages</div>
-            <div id="messenger-slider">
-              <FaSlidersH />
-            </div>
-          </div>
-          <UserMessages />
-        </div>
-      ) : (
-        <>
-          {" "}
-          <div
-            id="messaging-popup-wrapper"
-            className="border pointer top-messenger-wrapper"
-          >
-            <div className="d-flex align-items-center">
-              <div className="border recommended-user-image ml-auto mr-2">
-                <img src={isFetched ? details.image : placeholder} alt="" />
-              </div>
-              <div className="font-weight-bold  small-header-text">
-                Messaging
-              </div>
-            </div>
-            <div className="d-flex">
-              <div className="mr-1 gray-hover icon-wrapper-messenger">
-                <BsThreeDots />
-              </div>
-              <div className="mr-1 gray-hover icon-wrapper-messenger">
-                <FiEdit />
-              </div>
-              <div
-                className="mr-1 gray-hover icon-wrapper-messenger"
-                onClick={() => dispatch(expandMessengerAction())}
-              >
-                <SlArrowUp />
-              </div>
-            </div>
-          </div>{" "}
-        </>
-      )}
-    </>
-  );
+          </>
+        )}
+      </>
+    );
+  }
 }

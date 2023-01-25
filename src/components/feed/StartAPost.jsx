@@ -21,7 +21,7 @@ export default function StartAPost() {
             className="border recommended-user-image mr-1"
             style={{ objectFit: "cover" }}
           >
-            <img src={user[0].pfp} alt="Avatar" style={{ height: "100%" }} />
+            <img src={user[0]?.pfp} alt="Avatar" style={{ height: "100%" }} />
           </div>
           <div
             id="start-a-post"

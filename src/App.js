@@ -12,6 +12,7 @@ import Feed from "./components/feed/Feed";
 import SearchDisplay from "./components/global/SearchDisplay.jsx";
 import OtherUser from "./components/global/OtherUser";
 import LoginPage from "./components/login/LoginPage";
+import Network from "./components/network/Network";
 
 function App() {
   let showSearchResults = useSelector((state) => state.showUsers.show);
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/me" element={<MyProfile />} />
+          <Route path="/network" element={<Network />} />
           <Route
             path="/details/resources"
             element={<ResourcesSinglePageComponent />}

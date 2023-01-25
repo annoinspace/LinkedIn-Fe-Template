@@ -23,7 +23,11 @@ function ProfileImageModal() {
         onClick={handleShow}
       >
         <img
-          src={user[0].pfp}
+          src={
+            user[0].pfp.length === 0
+              ? " https://i.stack.imgur.com/l60Hf.png"
+              : user[0]?.pfp
+          }
           alt="User profile img"
           className="profileImage"
         />
@@ -50,11 +54,19 @@ function ProfileImageModal() {
                 overflow: "hidden",
               }}
             >
-              <img src={user[0].pfp} alt="avatar" style={{ height: "100%" }} />
+              <img
+                src={
+                  user[0].pfp.length === 0
+                    ? " https://i.stack.imgur.com/l60Hf.png"
+                    : user[0]?.pfp
+                }
+                alt="avatar"
+                style={{ height: "100%" }}
+              />
             </div>
           </div>
           <div className="d-flex">
-            {user[0]._id === user[0]._id ? (
+            {user[0]?._id === user[0]?._id ? (
               <div className="hoverWhiteBorder d-flex justify-content-center align-items-center border px-3 py-1 rounded-pill text-white font-weight-bold">
                 <EyeFill className="mr-3" /> Anyone
               </div>
@@ -63,7 +75,7 @@ function ProfileImageModal() {
             )}
           </div>
         </Modal.Body>
-        {user[0]._id === user[0]._id ? (
+        {user[0]?._id === user[0]?._id ? (
           <Modal.Footer
             style={{ backgroundColor: "#1D2226" }}
             className="justify-content-between p-0"

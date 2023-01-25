@@ -14,11 +14,22 @@
   );
   min-height: 95vh !important;
   height: 100% !important;
-  overflow: hidden !important;
 }
 #col-two {
   background: linear-gradient(0deg, rgba(0, 52, 180, 0) 0%, #a6ceea 100%),
     url(https://marketplace.canva.com/EAFCzviUlZo/1/0/900w/canva-blue-and-yellow-illustrated-phone-wallpaper-qx1CXTdCU2k.jpg);
   background-position: bottom;
   height: 100%;
+}
+#spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#main-body {
+  opacity: 0.8;
+}
+#overlay {
+  background-color: #a6ceea;
 }

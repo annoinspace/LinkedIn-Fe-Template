@@ -1,5 +1,6 @@
-import MainFeedSectionWithPosts from "./MainFeedSectionWithPosts"
-import StartAPost from "./StartAPost"
+import MainFeedSectionWithPosts from "./MainFeedSectionWithPosts";
+import StartAPost from "./StartAPost";
+import { useSelector } from "react-redux";
 
 const Center = () => {
   return (
@@ -10,7 +11,7 @@ const Center = () => {
       </div>
       <MainFeedSectionWithPosts />
     </>
-  )
-}
+  );
+};
 
-export default Center
+export default Center;

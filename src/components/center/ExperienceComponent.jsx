@@ -34,7 +34,7 @@ const ExperienceComponent = ({ profileData }) => {
 
   const user = useSelector((state) => state.user.user);
 
-  const experiencesArray = user[0].experiences;
+  const experiencesArray = user[0]?.experiences;
 
   useEffect(() => {
     dispatch(getMyProfileDetailsAction());
@@ -204,7 +204,8 @@ const ExperienceComponent = ({ profileData }) => {
                 </div>
               </div>
               <div>
-                {experiencesArray.length !== 0 ? (
+                {experiencesArray?.length !== 0 &&
+                experiencesArray !== undefined ? (
                   <ListGroup variant="flush" className="px-0 text-left">
                     <div className="d-flex align-items-start">
                       <div
@@ -218,10 +219,10 @@ const ExperienceComponent = ({ profileData }) => {
                       >
                         <img
                           src={
-                            experiencesArray[experiencesArray.length - 1].image
-                              ? experiencesArray[experiencesArray.length - 1]
+                            experiencesArray[experiencesArray?.length - 1].image
+                              ? experiencesArray[experiencesArray?.length - 1]
                                   .image
-                              : "https://placekitten.com/300/300"
+                              : "https://www.freeiconspng.com/thumbs/experience/competence-skill-experience-company-product--16.png"
                           }
                           style={{ height: "100%" }}
                           alt="company"

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import Activity from "./Activity";
 import Languages from "./Languages";
 import UserDetails from "./UserDetails";
@@ -8,7 +8,7 @@ import ResourcesComponent from "./ResourcesComponent";
 import AboutComponent from "./AboutComponent";
 import ExperienceComponent from "./ExperienceComponent";
 import EducationComponent from "./EducationComponent";
-
+import { useSelector } from "react-redux";
 const ProfilePageCenter = ({ profileDetails }) => {
   return (
     <Container className="profilePageCenterContainer px-0">
