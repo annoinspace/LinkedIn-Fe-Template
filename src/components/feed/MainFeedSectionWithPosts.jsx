@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, ListGroup, Form, Button, Row } from "react-bootstrap";
+import { Image, ListGroup, Form, Button, Row, Collapse } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BsThreeDots,
@@ -65,6 +65,15 @@ export default function MainFeedSectionWithPosts() {
   };
 
   const [open, setOpen] = useState(false);
+
+  const [toggle, setToggle] = useState({});
+
+  const handleClick = (index) => {
+    setToggle({
+      ...toggle,
+      [index]: !toggle[index],
+    });
+  };
 
   //unclick the dots button
 
@@ -222,9 +231,9 @@ export default function MainFeedSectionWithPosts() {
                       </div>
                       <div
                         className="start-a-post-icon-text gray-hover"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => handleClick(index)}
                         aria-controls="example-collapse-text"
-                        aria-expanded={open}
+                        aria-expanded={toggle[index]}
                       >
                         <FaRegCommentDots
                           style={{ fontSize: "20px", cursor: "pointer" }}
@@ -240,57 +249,64 @@ export default function MainFeedSectionWithPosts() {
                         <span>Send</span>
                       </div>
                     </div>
-                    {post.comments &&
-                      post.comments.map((comment, index) => (
-                        <CommentComp key={index} comment={comment} />
-                      ))}
-                    <div>
-                      <Form.Group>
-                        <Form.Control
-                          style={{
-                            resize: "",
-                            borderRadius: "0rem 10px 10px 10px",
-                          }}
-                          as="textarea"
-                          className="mx-auto p-0"
-                          rows={2}
-                          value={text}
-                          onChange={(e) =>
-                            onChangeHandler(e.target.value, setText)
-                          }
-                        />
-                      </Form.Group>
-                      <Row className="justify-content-center">
+                    <Collapse in={toggle[index]}>
+                      <div id="example-collapse-text">
+                        {post.comments &&
+                          post.comments.map((comment, index) => (
+                            <CommentComp key={index} comment={comment} />
+                          ))}
                         <div>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => commentImageHandler(e)}
-                            style={{ display: "none" }}
-                            id="icon-button-file"
-                          />
-                          <label id="photo-hover" htmlFor="icon-button-file">
-                            <MdAddAPhoto
-                              className="mr-3"
-                              style={{ fontSize: "2rem", color: "#138496" }}
+                          <Form.Group>
+                            <Form.Control
+                              style={{
+                                resize: "",
+                                borderRadius: "0rem 10px 10px 10px",
+                              }}
+                              as="textarea"
+                              className="mx-auto p-0"
+                              rows={2}
+                              value={text}
+                              onChange={(e) =>
+                                onChangeHandler(e.target.value, setText)
+                              }
                             />
-                          </label>
-                          <Button
-                            style={{ fontSize: "0.8rem" }}
-                            variant="info"
-                            className="mr-auto"
-                            onClick={() => {
-                              onSubmitComment(post._id);
-                            }}
-                          >
-                            Add Comment
-                          </Button>
-                          <p className="text-small text-muted mr-2">
-                            {image.name}
-                          </p>
+                          </Form.Group>
+                          <Row className="justify-content-center">
+                            <div>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => commentImageHandler(e)}
+                                style={{ display: "none" }}
+                                id="icon-button-file"
+                              />
+                              <label
+                                id="photo-hover"
+                                htmlFor="icon-button-file"
+                              >
+                                <MdAddAPhoto
+                                  className="mr-3"
+                                  style={{ fontSize: "2rem", color: "#138496" }}
+                                />
+                              </label>
+                              <Button
+                                style={{ fontSize: "0.8rem" }}
+                                variant="info"
+                                className="mr-auto"
+                                onClick={() => {
+                                  onSubmitComment(post._id);
+                                }}
+                              >
+                                Add Comment
+                              </Button>
+                              <p className="text-small text-muted mr-2">
+                                {image.name}
+                              </p>
+                            </div>
+                          </Row>
                         </div>
-                      </Row>
-                    </div>
+                      </div>
+                    </Collapse>
                   </div>
                 )}
               </div>
