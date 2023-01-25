@@ -16,10 +16,12 @@ const UserDetails = () => {
   let pathname = window.location.pathname
   const user = useSelector((state) => state.user.user)
   const dispatch = useDispatch()
+  console.log("user in user details", user)
 
   useEffect(() => {
     dispatch(getMyProfileDetailsAction())
-  }, [])
+  }, [user])
+
   return (
     <Row className="mt-3">
       {isFetched ? (
