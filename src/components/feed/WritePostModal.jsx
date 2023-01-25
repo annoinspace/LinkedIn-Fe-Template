@@ -82,7 +82,7 @@ export default function WritePostModal() {
         </div>
         <div>
           <div className="small-header-text font-weight-bold">
-            Alexander Spomer
+            {details.name} {details.surname}
           </div>
           <div
             id="select-viewing-options"
