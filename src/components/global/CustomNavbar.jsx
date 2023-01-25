@@ -100,7 +100,7 @@ const CustomNavbar = () => {
                 onClick={() => {
                   setMeSelected(false);
                 }}
-                to={"/"}
+                to={"/home"}
               >
                 <div className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover mr-4 mr-sm-2 mr-md-none">
                   <div>
@@ -197,12 +197,11 @@ const CustomNavbar = () => {
                               {user[0]?.name} {user[0]?.surname}
                             </div>
                             <div>{user[0]?.job}</div>
-                            <div>{userTitle}</div>
                           </div>
                         </div>
                         <div className="d-flex justify-content-center">
                           <Button
-                            className="me-dropdown-button"
+                            className="me-dropdown-button w-100"
                             onClick={() => {
                               navigate("/me");
                               setMeSelected(false);
@@ -235,7 +234,7 @@ const CustomNavbar = () => {
               </div>
               <div
                 onClick={() => {
-                  setMeSelected(false)
+                  setMeSelected(false);
                 }}
                 className="nav-link d-flex flex-column justify-content-around align-items-center border-left cursor-on-hover ml-0 ml-sm-2 ml-md-none pl-4 pl-sm-2 pl-md-none"
               >
@@ -249,7 +248,7 @@ const CustomNavbar = () => {
               </div>
               <div
                 onClick={() => {
-                  setMeSelected(false)
+                  setMeSelected(false);
                 }}
                 className="nav-link d-flex flex-column justify-content-around align-items-center cursor-on-hover ml-4 ml-sm-2 ml-md-none"
               >
@@ -283,4 +282,4 @@ const CustomNavbar = () => {
   }
 };
 
-export default CustomNavbar
+export default CustomNavbar;

@@ -4,18 +4,17 @@ import ShowMore from "./ShowMore";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsersAction } from "../../redux/actions";
 
-
 export default function MorePeople({ heading }) {
+  let usersArray = useSelector((state) => state.users.usersFromFetch);
 
-  let usersArray = useSelector((state) => state.users.usersFromFetch)
-
-  const users = usersArray.slice(2, 7)
-  const moreUsers = usersArray.slice(7, 12)
+  const users = usersArray.slice(2, 7);
+  const moreUsers = usersArray.slice(7, 12);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsersAction());
+    console.log(users);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

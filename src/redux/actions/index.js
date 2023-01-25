@@ -32,7 +32,8 @@ export const SET_USER = "SET_USER";
 
 //constants to use for fetching dat
 
-const baseEndPoint = "http:/localhost:3004/users/";
+const baseEndPoint =
+  "https://linkedin-backend-production.up.railway.app/users/";
 
 const options = {
   // headers: {

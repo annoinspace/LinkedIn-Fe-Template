@@ -35,7 +35,7 @@ const UserDetails = () => {
               }}
             />
             <Row
-              className="d-flex  position-absolute "
+              className="d-flex position-absolute "
               style={{ bottom: "-20%" }}
             >
               <ProfileImageModal {...user} />

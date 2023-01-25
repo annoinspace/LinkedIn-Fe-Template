@@ -56,7 +56,7 @@ export default function SearchDisplay() {
                       <BsDot />
                     </span>
                     <span className="recommended-user-job-description-text">
-                      {user.title}
+                      {user.job}
                     </span>
                   </div>
                   <div className="border recommended-user-image ml-auto">
