@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image } from "react-bootstrap";
+import { Image, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BsThreeDots,
@@ -32,9 +32,9 @@ export default function MainFeedSectionWithPosts() {
   const longerPosts = allLatestPosts;
 
   const userPresent = longerPosts.filter((post) => {
-    return post.user !== null;
+    return post.user[0] !== null;
   });
-  const [open, setOpen] = useState(false);
+
   const [length, setLength] = useState(4);
   const latestPostSlice = userPresent.slice(0, length);
 
@@ -63,9 +63,8 @@ export default function MainFeedSectionWithPosts() {
     console.log("edit Options click", editOptions);
   };
 
-  const [comment, showComment] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const toggleComments = () => showComment(!comment);
 
   //unclick the dots button
 
@@ -95,9 +94,9 @@ export default function MainFeedSectionWithPosts() {
           <div id="feed-main-container">
             {latestPostSlice.map((post) => (
               <div key={post._id}>
-                {post.user[0]._id && (
+                {post.user[0]?._id && (
                   <div key={post._id} className="feed-post border p-feed pb-1">
-                    {post.user[0]._id === userId ? (
+                    {post.user[0]?._id === userId ? (
                       <>
                         <div className="d-flex justify-content-between mr-2 ml-2">
                           <div></div>
@@ -215,14 +214,12 @@ export default function MainFeedSectionWithPosts() {
                         <span>Send</span>
                       </div>
                     </div>
-                    <Collapse in={open}>
-                      <div id="example-collapse-text">
-                        {post.comments &&
-                          post.comments.map((comment, index) => (
-                            <CommentComp key={index} comment={comment} />
-                          ))}
-                      </div>
-                    </Collapse>
+                    <ListGroup></ListGroup>
+
+                    {post.comments &&
+                      post.comments.map((comment, index) => (
+                        <CommentComp key={index} comment={comment} />
+                      ))}
                   </div>
                 )}
               </div>
