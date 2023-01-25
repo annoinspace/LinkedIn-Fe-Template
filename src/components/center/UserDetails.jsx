@@ -1,8 +1,9 @@
-import { useEffect } from "react"
-import { Col, Row, Button } from "react-bootstrap"
+// import { useEffect } from "react"
+import { Col, Row } from "react-bootstrap"
 import { Dot, Linkedin, Pencil, XLg } from "react-bootstrap-icons"
-import { useSelector } from "react-redux"
-
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { getMyProfileDetailsAction } from "../../redux/actions"
 import EditAddProfileSectionModal from "./EditAddProfileSectionModal"
 import EditContactInfoModal from "./EditContactInfoModal"
 import EditUserDetailsModal from "./EditUserDetailsModal"
@@ -14,7 +15,11 @@ const UserDetails = () => {
   let isFetched = useSelector((state) => state.myProfile.isFetched)
   let pathname = window.location.pathname
   const user = useSelector((state) => state.user.user)
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(getMyProfileDetailsAction())
+  }, [])
   return (
     <Row className="mt-3">
       {isFetched ? (
@@ -34,6 +39,7 @@ const UserDetails = () => {
                 objectFit: "cover",
                 overflow: "hidden"
               }}
+              alt="user profile banner"
             />
             <Row className="d-flex position-absolute " style={{ bottom: "-20%" }}>
               <ProfileImageModal {...user} />
