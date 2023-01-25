@@ -613,3 +613,25 @@ export const deleteCommentAction = (commentid) => {
     }
   };
 };
+
+export const editCommentAction = (commentid, newComment) => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(
+        "https://linkedin-backend-production.up.railway.app/comments/" +
+          commentid,
+        {
+          method: "PUT",
+          "content-type": "undefined",
+        }
+      );
+      if (response.ok) {
+        dispatch(getFeedPostsAction());
+      } else {
+        console.log("Problem editing post");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

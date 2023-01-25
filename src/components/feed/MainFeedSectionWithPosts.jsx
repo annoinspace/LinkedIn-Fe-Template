@@ -122,6 +122,7 @@ export default function MainFeedSectionWithPosts() {
     }
   };
 
+
   return (
     <>
       {allFeedPosts && (
