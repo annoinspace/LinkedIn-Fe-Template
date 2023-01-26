@@ -1,7 +1,7 @@
-import { Card, Col, Button } from "react-bootstrap";
+import { Card, Col, Button } from "react-bootstrap"
 
-const Single_connection = (props) => {
-  const { name, surname, pfp, background, job, description, createdAt } = props;
+const SingleConnection = (props) => {
+  const { name, surname, pfp, background, job, description, createdAt } = props
   return (
     <Col xs={4} className="p-1">
       <Card style={{ maxHeight: "13rem" }}>
@@ -11,21 +11,19 @@ const Single_connection = (props) => {
             style={{
               objectFit: "cover",
               backgroundSize: "cover",
-              aspectRatio: "32/9",
+              aspectRatio: "32/9"
             }}
           />
-          <div
-            className="d-flex position-absolute pt-4 pl-3"
-            style={{ bottom: "-20%" }}
-          >
+          <div className="d-flex position-absolute pt-4 pl-3" style={{ bottom: "-20%" }}>
             <img
               src={pfp}
               style={{
                 borderRadius: "50%",
                 maxWidth: "65px",
                 width: "100%",
-                aspectRatio: "1/1",
+                aspectRatio: "1/1"
               }}
+              alt=""
             />
           </div>
         </div>
@@ -34,16 +32,12 @@ const Single_connection = (props) => {
             {name} {surname}
           </Card.Title>
           <Card.Text className="text-truncate">{job}</Card.Text>
-          <Button
-            variant="outline-primary"
-            style={{ borderRadius: "20px" }}
-            className="w-100 pt-1 pb-1"
-          >
+          <Button variant="outline-primary" style={{ borderRadius: "20px" }} className="w-100 pt-1 pb-1">
             Follow
           </Button>
         </Card.Body>
       </Card>
     </Col>
-  );
-};
-export default Single_connection;
+  )
+}
+export default SingleConnection
