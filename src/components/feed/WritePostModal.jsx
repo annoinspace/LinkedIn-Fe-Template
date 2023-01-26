@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +13,8 @@ import { ImEarth } from "react-icons/im";
 export default function WritePostModal() {
   const showModal = useSelector((state) => state.showPostModal.show);
   let details = useSelector((state) => state.myProfile.detailsData);
-  let isFetched = useSelector((state) => state.myProfile.isFetched);
+
+  const user = useSelector((state) => state.user.user);
   let id = details._id;
   const dispatch = useDispatch();
 
@@ -41,14 +42,6 @@ export default function WritePostModal() {
   const [surname, setSurname] = useState(details.surname);
   const [username, setUsername] = useState(details.username);
   const [image, setImage] = useState([]);
-
-  // const onSubmitHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(newFeedPost.text);
-  //   dispatch(hideAddPostModalAction());
-  //   dispatch(addingNewFeedPostAction(newFeedPost));
-  //   dispatch(getFeedPostsAction());
-  // };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -78,11 +71,11 @@ export default function WritePostModal() {
       <div className="p-feed ml-2 d-flex">
         {" "}
         <div className="border recommended-user-image">
-          <img src={isFetched ? details.pfp : placeholder} alt="avatar" />
+          <img src={user[0]?.pfp} alt="avatar" />
         </div>
         <div>
           <div className="small-header-text font-weight-bold">
-            {details.name} {details.surname}
+            {user[0]?.name} {user[0]?.surname}
           </div>
           <div
             id="select-viewing-options"
