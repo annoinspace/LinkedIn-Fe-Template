@@ -1,8 +1,12 @@
 import { Row, ListGroup } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
-
-const EducationComponent = ({ profileData }) => {
+import { useSelector } from "react-redux";
+import SingleEducation from "./SingleEducation";
+import SingleExperienceMainPage from "./SingleExperienceMainPage";
+const EducationComponent = () => {
   let pathname = window.location.pathname;
+  const user = useSelector((state) => state.user.user);
+  console.log(user[0]?.educations);
   return (
     <Row className="my-2">
       <div className="col education-container-design p-4 normal-cursor-on-hover">
@@ -23,20 +27,13 @@ const EducationComponent = ({ profileData }) => {
         </div>
         <div className=" ">
           <ListGroup variant="flush" className="px-0 text-left">
-            <ListGroup.Item className="px-0 pl-2 d-flex ">
-              <div>
-                <img
-                  src="https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/1045/original/EPICODE-pitto-color.png"
-                  style={{ width: "35px" }}
-                  className="mr-2"
-                />
-              </div>
-              <div>
-                <h6 className="font-weight-bold">EPICODE</h6>
-                <div>Full-Stack Developer, Computer Software Engineering</div>
-                <div className="light-grey-color">Sept 2022 - Mar 2023</div>
-              </div>
-            </ListGroup.Item>
+            {user[0]?.educations.length !== 0
+              ? user[0]?.educations.map((education) => {
+                  return (
+                    <SingleEducation key={education._id} edu={education} />
+                  );
+                })
+              : "No experience yet"}
           </ListGroup>
         </div>
       </div>
