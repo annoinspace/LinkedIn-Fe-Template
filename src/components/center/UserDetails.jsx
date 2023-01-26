@@ -65,7 +65,7 @@ const UserDetails = () => {
               <Col>
                 <div className="col-6 d-flex flex-column align-items-start pb-2 px-4 userInfoDiv ">
                   <h4 style={{ fontWeight: "500" }}>
-                    {user[0]?.name} {user[0]?.surname}
+                    {user.name} {user[0]?.surname}
                   </h4>
 
                   <h6>{user[0]?.job}</h6>
