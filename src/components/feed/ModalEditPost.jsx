@@ -26,6 +26,7 @@ export default function ModalEditPost() {
   const postId = currentText._id;
 
   // Uploading image for POST
+  const [text, setText] = useState(currentText.text)
   const [image, setImage] = useState([]);
   const [imageUploaded, setImageUploaded] = useState(false);
 
@@ -46,7 +47,7 @@ export default function ModalEditPost() {
 
   const onSubmitHandler = () => {
     const formData = new FormData();
-    formData.append("text", textToEdit);
+    formData.append("text", text);
     imageUploaded ? formData.append("post", image) : setImage([]);
 
     // console.log(editFeedPost.text);
@@ -122,10 +123,9 @@ export default function ModalEditPost() {
             <Form.Control
               className="border-0"
               as="textarea"
-              placeholder={textToEdit}
-              value={editFeedPost.text}
+              value={text}
               rows={5}
-              onChange={(e) => onChangeHandler(e.target.value, "text")}
+              onChange={(e) => setText(e.target.value)}
             />
           </Form.Group>
           <Form.Group>
