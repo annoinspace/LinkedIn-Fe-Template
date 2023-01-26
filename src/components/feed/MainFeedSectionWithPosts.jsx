@@ -215,7 +215,7 @@ export default function MainFeedSectionWithPosts() {
                           }}
                         >
                           <Image
-                            src={post.image}
+                            src={post?.image}
                             style={{objectFit: "cover"}}
                             alt="user image"
                             className="feed-post-image"
