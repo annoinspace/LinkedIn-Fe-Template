@@ -6,7 +6,7 @@ import SingleExperienceMainPage from "./SingleExperienceMainPage";
 const EducationComponent = () => {
   let pathname = window.location.pathname;
   const user = useSelector((state) => state.user.user);
-  console.log(user[0]?.educations);
+  console.log(user[0]?.education);
   return (
     <Row className="my-2">
       <div className="col education-container-design p-4 normal-cursor-on-hover">
@@ -27,8 +27,8 @@ const EducationComponent = () => {
         </div>
         <div className=" ">
           <ListGroup variant="flush" className="px-0 text-left">
-            {user[0]?.educations.length !== 0
-              ? user[0]?.educations.map((education) => {
+            {user[0]?.education.length !== 0
+              ? user[0]?.education.map((education) => {
                   return (
                     <SingleEducation key={education._id} edu={education} />
                   );
