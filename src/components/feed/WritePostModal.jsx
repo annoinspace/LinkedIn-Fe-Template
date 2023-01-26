@@ -96,7 +96,7 @@ export default function WritePostModal() {
         <Form
           onSubmit={onSubmitHandler}
           className="p-feed-left p-feed-right ml-2 mr-2"
-          style={{ color: "grey", height: "25vh" }}
+          style={{ color: "grey", height: "15vh" }}
         >
           {/* <Form.Group className="mb-3 " controlId="formPostText">
                 <Form.Control
