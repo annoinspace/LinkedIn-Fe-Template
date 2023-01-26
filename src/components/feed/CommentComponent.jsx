@@ -54,18 +54,24 @@ const CommentComp = ({ comment }) => {
           backgroundColor: "#F2F2F2",
           borderRadius: "10px",
         }}
+        className="m-2"
       >
         <div className="d-flex flex-row">
-          <div className="border recommended-user-image">
-            <img src={comment.author[0]?.pfp} alt="" />
+          <div>
+            <img
+              src={comment.author[0]?.pfp}
+              alt=""
+              className="recommended-user-image"
+            />
           </div>
-          <div className="d-flex flex-column">
-            <div className="mb-0 small-header-text bolder feed-text-name">
+          <div className="d-flex flex-column ">
+            <div className="small-header-text d-flex align-items-center">
               {comment.author[0].name} {comment.author[0].surname}{" "}
               {currentUserId === comment.author[0]._id ? (
                 <>
                   <button
                     style={{ background: "none", border: "none", color: "red" }}
+                    className="d-flex align-items-center"
                     onClick={() => dispatch(deleteCommentAction(comment._id))}
                   >
                     <TiDeleteOutline />
@@ -76,6 +82,7 @@ const CommentComp = ({ comment }) => {
                       border: "none",
                       color: "grey",
                     }}
+                    className="d-flex align-items-center"
                   >
                     <MdOutlineModeEditOutline
                       onClick={() => {
@@ -91,7 +98,7 @@ const CommentComp = ({ comment }) => {
             </div>
             <div
               style={{ fontSize: "0.6rem" }}
-              className="mt-1 text-muted feed-text-name"
+              className="text-muted feed-text-name"
             >
               {comment.author[0].job}
               <div className="feed-post-tiny-text  ">

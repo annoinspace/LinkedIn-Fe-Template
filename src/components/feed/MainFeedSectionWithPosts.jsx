@@ -115,7 +115,9 @@ export default function MainFeedSectionWithPosts() {
       setImage([])
       setText("")
     }
+
   }
+
 
   return (
     <>
@@ -159,7 +161,7 @@ export default function MainFeedSectionWithPosts() {
                     )}
                     <div className=" border-top mr-2 ml-2">
                       <div className="mt-3 d-flex ">
-                        <div className="border recommended-user-image">
+                        <div className="border recommended-user-image d-flex align-items-start">
                           <img src={post.user[0]?.pfp} alt="" />
                         </div>{" "}
                         <div className="feed-text-user-wrapper">
@@ -167,12 +169,21 @@ export default function MainFeedSectionWithPosts() {
                             <span>{post.user[0].name} </span>
                             <span>{post.user[0].surname}</span>
                           </div>
-                          <div className="mb-1 small-height">
-                            <span className="feed-post-tiny-text truncate-text">{post.user[0].job}</span>
+
+                          <div className="small-height">
+                            <span className="feed-post-tiny-text truncate-text">
+                              {post.user[0].job}
+                            </span>
+
                           </div>
-                          <div className="mb-1 small-height">
+                          <div className="small-height">
                             <span className="feed-post-tiny-text  ">
-                              {format(parseISO(post.createdAt), "dd/MM/yyyy' at 'HH:mm")}
+
+                              {format(
+                                parseISO(post.createdAt),
+                                "dd/MM/yyyy' at 'HH:mm"
+                              )}
+
                             </span>
                           </div>
                         </div>
@@ -190,7 +201,9 @@ export default function MainFeedSectionWithPosts() {
                           }}
                         >
                           <Image
-                            src={post.image}
+
+                            src={post?.image}
+
                             style={{ objectFit: "cover" }}
                             alt="user image"
                             className="feed-post-image"
