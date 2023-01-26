@@ -16,11 +16,10 @@ export default function SideComponentsMyProfile() {
       </div>
       {/* promoted section component */}
       <Promoted />
-      {/* People also viewed component */}
+
       <MorePeople heading="People also viewed" />
-      {/* People you may know section, component */}
+
       <MorePeopleYouKnow heading="People you may know" />
-      {/* <PeopleYouMayKnow /> */}
     </>
   )
 }

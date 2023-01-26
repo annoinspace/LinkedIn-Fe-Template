@@ -1,129 +1,121 @@
-import React, { useEffect, useState } from "react";
-import { Image, ListGroup, Form, Button, Row, Collapse } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  BsThreeDots,
-  BsFillArrowDownCircleFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
-import { BsHandThumbsUp } from "react-icons/bs";
-import { FaRegCommentDots } from "react-icons/fa";
-import { BiRepost } from "react-icons/bi";
-import { RiSendPlaneFill } from "react-icons/ri";
-import { MdAddAPhoto } from "react-icons/md";
+import React, { useEffect, useState } from "react"
+import { Image, Form, Button, Row, Collapse } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { BsThreeDots, BsFillArrowDownCircleFill, BsThreeDotsVertical } from "react-icons/bs"
+import { BsHandThumbsUp } from "react-icons/bs"
+import { FaRegCommentDots } from "react-icons/fa"
+import { BiRepost } from "react-icons/bi"
+import { RiSendPlaneFill } from "react-icons/ri"
+import { MdAddAPhoto } from "react-icons/md"
 import {
   editShowToggleAction,
   getFeedPostsAction,
   saveSelectedFeedPostAction,
-  myPostUnClickedAction,
-} from "../../redux/actions";
-import EditOwnPosts from "./EditOwnPosts";
-import CommentComp from "./CommentComponent";
-import { addCommentToPostAction } from "../../redux/actions";
-import { parseISO } from "date-fns";
-import format from "date-fns/format";
+  myPostUnClickedAction
+} from "../../redux/actions"
+import EditOwnPosts from "./EditOwnPosts"
+import CommentComp from "./CommentComponent"
+import { addCommentToPostAction } from "../../redux/actions"
+import { parseISO } from "date-fns"
+import format from "date-fns/format"
 
 export default function MainFeedSectionWithPosts() {
   // const [showEdit, setShowEdit] = useState(false)
-  const editOptions = useSelector((state) => state.editPostModal.openDropdown);
+  const editOptions = useSelector((state) => state.editPostModal.openDropdown)
 
-  const allFeedPosts = useSelector((state) => state.feedPosts.feedPostArray);
+  const allFeedPosts = useSelector((state) => state.feedPosts.feedPostArray)
   //   reversing the array so we get the newest posts
 
-  const allLatestPosts = allFeedPosts.slice(0).reverse();
+  const allLatestPosts = allFeedPosts.slice(0).reverse()
 
-  const longerPosts = allLatestPosts;
+  const longerPosts = allLatestPosts
 
   const userPresent = longerPosts.filter((post) => {
-    return post.user[0] !== null;
-  });
+    return post.user[0] !== null
+  })
 
-  const [length, setLength] = useState(4);
-  const latestPostSlice = userPresent.slice(0, length);
+  const [length, setLength] = useState(4)
+  const latestPostSlice = userPresent.slice(0, length)
 
   const increaseCurrentLength = (e) => {
-    const increment = 4;
-    setLength(length + increment);
+    const increment = 4
+    setLength(length + increment)
 
-    if (
-      length.length >= userPresent.length ||
-      userPresent.length - length.length < increment
-    ) {
-      alert("you have read all the posts!");
+    if (length.length >= userPresent.length || userPresent.length - length.length < increment) {
+      alert("you have read all the posts!")
     }
-  };
+  }
 
-  const userId = useSelector((state) => state.myProfile.detailsData._id);
-  const savedPost = useSelector((state) => state.editThisPost.selectedPost);
-  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.myProfile.detailsData._id)
+  const savedPost = useSelector((state) => state.editThisPost.selectedPost)
+  const dispatch = useDispatch()
 
   const myPostClickedHandler = (post) => {
-    console.log("my post is clicked");
-    dispatch(editShowToggleAction());
-    console.log("saved post----------", post);
+    console.log("my post is clicked")
+    dispatch(editShowToggleAction())
+    console.log("saved post----------", post)
     // use this post when editing
-    dispatch(saveSelectedFeedPostAction(post));
-    console.log("edit Options click", editOptions);
-  };
+    dispatch(saveSelectedFeedPostAction(post))
+    console.log("edit Options click", editOptions)
+  }
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const [toggle, setToggle] = useState({});
+  const [toggle, setToggle] = useState({})
 
   const handleClick = (index) => {
     setToggle({
       ...toggle,
-      [index]: !toggle[index],
-    });
-  };
+      [index]: !toggle[index]
+    })
+  }
 
   //unclick the dots button
 
   const myPostUnClickedHandler = (post) => {
-    console.log("my post is UNclicked");
-    dispatch(editShowToggleAction());
-    dispatch(myPostUnClickedAction(post));
-    console.log("unsaved post----------", post);
-    console.log("edit Options unclick", editOptions);
-  };
+    console.log("my post is UNclicked")
+    dispatch(editShowToggleAction())
+    dispatch(myPostUnClickedAction(post))
+    console.log("unsaved post----------", post)
+    console.log("edit Options unclick", editOptions)
+  }
 
   // back to top button
 
   const backToTop = () => {
-    window.scrollTo({ top: 0, behaviour: "smooth" });
-  };
+    window.scrollTo({ top: 0, behaviour: "smooth" })
+  }
 
   useEffect(() => {
-    dispatch(getFeedPostsAction());
+    dispatch(getFeedPostsAction())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   const onChangeHandler = (value, fieldToSet) => {
-    fieldToSet(value);
-  };
+    fieldToSet(value)
+  }
 
   const commentImageHandler = (e) => {
-    setImage(e.target.files[0]);
-  };
+    setImage(e.target.files[0])
+  }
 
-  const [text, setText] = useState("");
-  const [image, setImage] = useState([]);
+  const [text, setText] = useState("")
+  const [image, setImage] = useState([])
 
   const onSubmitComment = (id) => {
-    const formData = new FormData();
-    formData.append("text", text);
-    formData.append("author", userId);
-    image !== undefined ? formData.append("post", image) : setImage([]);
+    const formData = new FormData()
+    formData.append("text", text)
+    formData.append("author", userId)
+    image !== undefined ? formData.append("post", image) : setImage([])
     if (text === "") {
-      alert("You cannot post an empty comment!");
-      return;
+      alert("You cannot post an empty comment!")
+      return
     } else {
-      dispatch(addCommentToPostAction(id, formData));
-      setImage([]);
-      setText("");
+      dispatch(addCommentToPostAction(id, formData))
+      setImage([])
+      setText("")
     }
-  };
-
+  }
 
   return (
     <>
@@ -141,36 +133,21 @@ export default function MainFeedSectionWithPosts() {
                           {editOptions ? (
                             editOptions &&
                             (savedPost._id === post._id ? (
-                              <div
-                                className="post-dots  gray-hover"
-                                onClick={myPostUnClickedHandler.bind(
-                                  null,
-                                  post
-                                )}
-                              >
+                              <div className="post-dots  gray-hover" onClick={myPostUnClickedHandler.bind(null, post)}>
                                 <BsThreeDotsVertical />
                               </div>
                             ) : (
-                              <div
-                                className="post-dots  gray-hover"
-                                onClick={myPostClickedHandler.bind(null, post)}
-                              >
+                              <div className="post-dots  gray-hover" onClick={myPostClickedHandler.bind(null, post)}>
                                 <BsThreeDots />
                               </div>
                             ))
                           ) : (
-                            <div
-                              className="post-dots  gray-hover"
-                              onClick={myPostClickedHandler.bind(null, post)}
-                            >
+                            <div className="post-dots  gray-hover" onClick={myPostClickedHandler.bind(null, post)}>
                               <BsThreeDots />
                             </div>
                           )}
                         </div>
-                        {editOptions &&
-                          (savedPost._id === post._id ? (
-                            <EditOwnPosts id={post._id} />
-                          ) : null)}
+                        {editOptions && (savedPost._id === post._id ? <EditOwnPosts id={post._id} /> : null)}
                       </>
                     ) : (
                       <div className="d-flex justify-content-between mr-2 ml-2">
@@ -191,13 +168,11 @@ export default function MainFeedSectionWithPosts() {
                             <span>{post.user[0].surname}</span>
                           </div>
                           <div className="mb-1 small-height">
-                            <span className="feed-post-tiny-text truncate-text">
-                              {post.user[0].job}
-                            </span>
+                            <span className="feed-post-tiny-text truncate-text">{post.user[0].job}</span>
                           </div>
                           <div className="mb-1 small-height">
                             <span className="feed-post-tiny-text  ">
-                            {format(parseISO(post.createdAt), "dd/MM/yyyy' at 'HH:mm")}
+                              {format(parseISO(post.createdAt), "dd/MM/yyyy' at 'HH:mm")}
                             </span>
                           </div>
                         </div>
@@ -211,12 +186,12 @@ export default function MainFeedSectionWithPosts() {
                             width: "100%",
                             height: "300px",
                             overflow: "hidden",
-                            objectFit: "cover",
+                            objectFit: "cover"
                           }}
                         >
                           <Image
                             src={post.image}
-                            style={{objectFit: "cover"}}
+                            style={{ objectFit: "cover" }}
                             alt="user image"
                             className="feed-post-image"
                           />
@@ -224,10 +199,7 @@ export default function MainFeedSectionWithPosts() {
                       )}
                     </div>
 
-                    <div
-                      id="like-section-wrapper"
-                      className="small-header-text border-top pt-1 pb-0 mr-2 ml-2"
-                    >
+                    <div id="like-section-wrapper" className="small-header-text border-top pt-1 pb-0 mr-2 ml-2">
                       <div className="start-a-post-icon-text gray-hover">
                         <BsHandThumbsUp style={{ fontSize: "20px" }} />
 
@@ -239,9 +211,7 @@ export default function MainFeedSectionWithPosts() {
                         aria-controls="example-collapse-text"
                         aria-expanded={toggle[index]}
                       >
-                        <FaRegCommentDots
-                          style={{ fontSize: "20px", cursor: "pointer" }}
-                        />
+                        <FaRegCommentDots style={{ fontSize: "20px", cursor: "pointer" }} />
                         <span>Comments ({post.comments.length})</span>
                       </div>
                       <div className="start-a-post-icon-text gray-hover">
@@ -256,23 +226,19 @@ export default function MainFeedSectionWithPosts() {
                     <Collapse in={toggle[index]}>
                       <div id="example-collapse-text">
                         {post.comments &&
-                          post.comments.map((comment, index) => (
-                            <CommentComp key={index} comment={comment} />
-                          ))}
+                          post.comments.map((comment, index) => <CommentComp key={index} comment={comment} />)}
                         <div>
                           <Form.Group>
                             <Form.Control
                               style={{
                                 resize: "",
-                                borderRadius: "0rem 10px 10px 10px",
+                                borderRadius: "0rem 10px 10px 10px"
                               }}
                               as="textarea"
                               className="mx-auto mt-2 p-0"
                               rows={2}
                               value={text}
-                              onChange={(e) =>
-                                onChangeHandler(e.target.value, setText)
-                              }
+                              onChange={(e) => onChangeHandler(e.target.value, setText)}
                             />
                           </Form.Group>
                           <Row className="justify-content-center">
@@ -284,28 +250,20 @@ export default function MainFeedSectionWithPosts() {
                                 style={{ display: "none" }}
                                 id="icon-button-file"
                               />
-                              <label
-                                id="photo-hover"
-                                htmlFor="icon-button-file"
-                              >
-                                <MdAddAPhoto
-                                  className="mr-3"
-                                  style={{ fontSize: "2rem", color: "#138496" }}
-                                />
+                              <label id="photo-hover" htmlFor="icon-button-file">
+                                <MdAddAPhoto className="mr-3" style={{ fontSize: "2rem", color: "#138496" }} />
                               </label>
                               <Button
                                 style={{ fontSize: "0.8rem" }}
                                 variant="info"
                                 className="mr-auto"
                                 onClick={() => {
-                                  onSubmitComment(post._id);
+                                  onSubmitComment(post._id)
                                 }}
                               >
                                 Add Comment
                               </Button>
-                              <p className="text-small text-muted mr-2">
-                                {image.name}
-                              </p>
+                              <p className="text-small text-muted mr-2">{image.name}</p>
                             </div>
                           </Row>
                         </div>
@@ -324,11 +282,7 @@ export default function MainFeedSectionWithPosts() {
               />
             </div>
             {length > 25 && (
-              <div
-                onClick={backToTop}
-                id="back-to-top"
-                className="gray-hover font-weight-light"
-              >
+              <div onClick={backToTop} id="back-to-top" className="gray-hover font-weight-light">
                 {" "}
                 back to top
               </div>
@@ -337,5 +291,5 @@ export default function MainFeedSectionWithPosts() {
         </>
       )}
     </>
-  );
+  )
 }

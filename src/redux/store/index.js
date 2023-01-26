@@ -12,6 +12,7 @@ import selectedFeedPostReducer from "../reducers/selectedFeedPostReducer"
 import editFeedPostModalReducer from "../reducers/editFeedPostModalReducer"
 import localStorage from "redux-persist/lib/storage"
 import addMainLogin from "../reducers/LoginReducer"
+import getConnectionsReducer from "../reducers/connectionsReducer"
 import { persistReducer, persistStore } from "redux-persist"
 
 // configureStore will set up the Redux Store for us!
@@ -34,7 +35,8 @@ const bigReducer = combineReducers({
   feedPosts: getFeedPostsReducer,
   editThisPost: selectedFeedPostReducer,
   editPostModal: editFeedPostModalReducer,
-  user: addMainLogin
+  user: addMainLogin,
+  connections: getConnectionsReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, bigReducer)

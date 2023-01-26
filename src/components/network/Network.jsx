@@ -3,20 +3,32 @@ import * as Icon from "react-bootstrap-icons"
 import React from "react"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { getUsersAction } from "../../redux/actions"
+import { useSelector, useDispatch } from "react-redux"
+import { getUserConnectionsAction } from "../../redux/actions"
 import FeedFooter from "../feed/FeedFooter"
 import "./styles.css"
-import Single_connection from "./Single_connection"
+import SingleConnection from "./SingleConnection"
 const Network = () => {
+  const currentUser = useSelector((state) => state.myProfile.detailsData)
+  const connections = useSelector((state) => state.connections.allConnections)
+  const currentUserId = currentUser._id
+  console.log(currentUser._id, "user id")
+  console.log("--------------------------------user connections", connections)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserConnectionsAction(currentUserId))
+  }, [dispatch, currentUserId])
+
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
+
   const fetchAllUsers = async () => {
     try {
       const response = await fetch("https://linkedin-backend-production.up.railway.app/users/")
       if (response.ok) {
         const users = await response.json()
-        console.log("Users are here", users)
+        console.log("-------------------------------All users are here", users)
         setUsers(users)
         setLoading(false)
       } else {
@@ -28,10 +40,15 @@ const Network = () => {
     }
   }
 
+  const filteredUsers = users.filter((obj1) => !connections.some((obj2) => obj2._id === obj1._id))
+  console.log("---------------------filtered users", filteredUsers)
+
+  const filteredUsersCurrentUser = filteredUsers.filter((user) => user._id !== currentUserId)
+
   React.useEffect(() => {
     fetchAllUsers().then(setLoading(true))
   }, [])
-  const shuffledArray = users.sort((a, b) => 0.5 - Math.random())
+  const shuffledArray = filteredUsersCurrentUser.sort((a, b) => 0.5 - Math.random())
   if (loading) {
     return (
       <div>
@@ -57,7 +74,7 @@ const Network = () => {
                       <div>Connections</div>
                     </Link>
                   </div>
-                  <span>65</span>
+                  <span>{connections.length}</span>
                 </div>
                 <div id="network-item">
                   <div id="network-item-inside">
@@ -117,6 +134,7 @@ const Network = () => {
 
                     objectFit: "cover"
                   }}
+                  alt=""
                 />
               </div>
               <div className="text-center mt-3 mb-5">
@@ -152,7 +170,7 @@ const Network = () => {
                 <div>
                   <Row className="g-0">
                     {shuffledArray.map((connection, index) => {
-                      return <Single_connection {...connection} />
+                      return <SingleConnection {...connection} key={connection._id} />
                     })}
                   </Row>
                 </div>
