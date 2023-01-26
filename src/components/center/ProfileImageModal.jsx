@@ -8,9 +8,21 @@ import {
   TrashFill,
 } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 function ProfileImageModal() {
   const [show, setShow] = useState(false);
-  const user = useSelector((state) => state.user.user);
+  const currentUser = useSelector((state) => state.myProfile.detailsData);
+  const profileToView = useSelector((state) => state.otherUser.selectedUser);
+  let pathname = window.location.pathname;
+  // const user = useSelector((state) => state.user.user)
+  const params = useParams();
+  const id = params.id;
+  const currentUserId = params.id;
+
+  const user =
+    currentUser._id === id || window.location.pathname === "/me"
+      ? currentUser
+      : profileToView;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   useEffect(() => {
@@ -24,9 +36,9 @@ function ProfileImageModal() {
       >
         <img
           src={
-            user[0].pfp.length === 0
+            user.pfp.length === 0
               ? " https://i.stack.imgur.com/l60Hf.png"
-              : user[0]?.pfp
+              : user?.pfp
           }
           alt="User profile img"
           className="profileImage"
@@ -56,9 +68,9 @@ function ProfileImageModal() {
             >
               <img
                 src={
-                  user[0].pfp.length === 0
+                  user.pfp.length === 0
                     ? " https://i.stack.imgur.com/l60Hf.png"
-                    : user[0]?.pfp
+                    : user?.pfp
                 }
                 alt="avatar"
                 style={{ height: "100%" }}
@@ -66,7 +78,7 @@ function ProfileImageModal() {
             </div>
           </div>
           <div className="d-flex">
-            {user[0]?._id === user[0]?._id ? (
+            {user?._id === user?._id ? (
               <div className="hoverWhiteBorder d-flex justify-content-center align-items-center border px-3 py-1 rounded-pill text-white font-weight-bold">
                 <EyeFill className="mr-3" /> Anyone
               </div>
@@ -75,7 +87,7 @@ function ProfileImageModal() {
             )}
           </div>
         </Modal.Body>
-        {user[0]?._id === user[0]?._id ? (
+        {user?._id === user?._id ? (
           <Modal.Footer
             style={{ backgroundColor: "#1D2226" }}
             className="justify-content-between p-0"

@@ -516,7 +516,6 @@ export const getCurrentUserAction = (userId) => {
         let data = await response.json();
         dispatch({
           type: GET_CURRENT_USER_DATA,
-
           payload: data,
         });
       } else {
