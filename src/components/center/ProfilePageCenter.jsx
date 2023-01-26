@@ -9,7 +9,10 @@ import AboutComponent from "./AboutComponent";
 import ExperienceComponent from "./ExperienceComponent";
 import EducationComponent from "./EducationComponent";
 import { useSelector } from "react-redux";
+
 const ProfilePageCenter = ({ profileDetails }) => {
+  const user = useSelector((state) => state.user.user);
+
   return (
     <Container className="profilePageCenterContainer px-0">
       <UserDetails profileData={profileDetails} />
@@ -17,7 +20,7 @@ const ProfilePageCenter = ({ profileDetails }) => {
       <ResourcesComponent profileData={profileDetails} />
       <AboutComponent profileData={profileDetails} />
       <Activity profileData={profileDetails} />
-      <ExperienceComponent profileData={profileDetails} />
+      <ExperienceComponent user={user} />
       <EducationComponent profileData={profileDetails} />
       <Languages profileData={profileDetails} />
     </Container>

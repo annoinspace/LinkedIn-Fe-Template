@@ -12,6 +12,7 @@ import { UPDATE_STATE_OF_EXPERIENCES } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import SingleExperience from "./SingleExperience";
+import SingleExperienceMainPage from "./SingleExperienceMainPage";
 
 const ExperienceComponent = ({ profileData }) => {
   let pathname = window.location.pathname;
@@ -207,59 +208,21 @@ const ExperienceComponent = ({ profileData }) => {
                 {experiencesArray?.length !== 0 &&
                 experiencesArray !== undefined ? (
                   <ListGroup variant="flush" className="px-0 text-left">
-                    <div className="d-flex align-items-start">
-                      <div
-                        className="d-flex mr-2 mt-3 justify-content-start align-items-start rounded-circle"
-                        style={{
-                          height: "45px",
-                          aspectRatio: "1/1",
-                          objectFit: "cover",
-                          overflow: "hidden",
-                        }}
-                      >
-                        <img
-                          src={
-                            experiencesArray[experiencesArray?.length - 1].image
-                              ? experiencesArray[experiencesArray?.length - 1]
-                                  .image
-                              : "https://www.freeiconspng.com/thumbs/experience/competence-skill-experience-company-product--16.png"
-                          }
-                          style={{ height: "100%" }}
-                          alt="company"
-                        />
-                      </div>
-                      <ListGroup.Item className="px-0 border-0">
-                        <h6 className="font-weight-bold">
-                          {experiencesArray[experiencesArray.length - 1].role}
-                        </h6>
-                        <div>
-                          {
-                            experiencesArray[experiencesArray.length - 1]
-                              .company
-                          }
-                        </div>
-                        <div className="light-grey-color">
-                          {experiencesArray[experiencesArray.length - 1]
-                            .endDate !== null
-                            ? `${moment(
-                                experiencesArray[experiencesArray.length - 1]
-                                  .startDate
-                              ).format("MMMM YYYY")} - ${moment(
-                                experiencesArray[experiencesArray.length - 1]
-                                  .endDate
-                              ).format("MMMM YYYY")}`
-                            : `${moment(
-                                experiencesArray[experiencesArray.length - 1]
-                                  .startDate
-                              ).format("MMMM YYYY")} - Present`}
-                        </div>
-                        <div className="light-grey-color">
-                          {experiencesArray[experiencesArray.length - 1].area}
-                        </div>
-                      </ListGroup.Item>
+                    <div className="">
+                      {/* we are mapping all the experiences and displaying them with SingleExp comp */}
+                      {experiencesArray.length !== 0
+                        ? experiencesArray.map((experience) => {
+                            return (
+                              <SingleExperienceMainPage
+                                key={experience._id}
+                                exp={experience}
+                              />
+                            );
+                          })
+                        : "No experience yet"}
                     </div>
                     <ListGroup.Item className="px-0 text-center pb-0">
-                      <div className="d-flex align-items-center justify-content-center border-top pt-4">
+                      <div className="d-flex align-items-center justify-content-center  pt-4">
                         <div
                           className="cursor-on-hover"
                           onClick={() => {
