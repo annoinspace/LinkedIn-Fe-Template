@@ -433,9 +433,8 @@ export const editMyFeedPostAction = (editFeedPost, postId) => {
   return async (dispatch) => {
     const optionsPut = {
       method: "PUT",
-      body: JSON.stringify(editFeedPost),
+      body: editFeedPost,
       headers: {
-        "Content-Type": "application/json",
         // Authorization:
         //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
       },
@@ -445,6 +444,7 @@ export const editMyFeedPostAction = (editFeedPost, postId) => {
       let response = await fetch(baseEndPointPosts + postId, optionsPut);
       if (response.ok) {
         console.log("Post content successfully updated ->", response);
+        dispatch(getFeedPostsAction());
       } else {
         console.log("Error changing your post content");
       }

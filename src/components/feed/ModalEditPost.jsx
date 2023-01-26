@@ -26,7 +26,7 @@ export default function ModalEditPost() {
   const postId = currentText._id;
 
   // Uploading image for POST
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
   const [imageUploaded, setImageUploaded] = useState(false);
 
   const onChangeHandler = (value, fieldToSet) => {
@@ -39,15 +39,21 @@ export default function ModalEditPost() {
     text: textToEdit,
   });
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    console.log(editFeedPost.text);
-    dispatch(hideEditPostModalAction());
-    dispatch(editMyFeedPostAction(editFeedPost, postId));
-    dispatch(updateSelectedFeedPost(editFeedPost));
-    dispatch(editShowToggleAction());
-    dispatch(getFeedPostsAction());
+  const imageChangeHandler = (e) => {
+    setImage(e.target.files[0]);
+    console.log(image);
+  };
 
+  const onSubmitHandler = () => {
+    const formData = new FormData();
+    formData.append("text", textToEdit);
+    imageUploaded ? formData.append("post", image) : setImage([]);
+
+    // console.log(editFeedPost.text);
+    dispatch(hideEditPostModalAction());
+    dispatch(editMyFeedPostAction(formData, postId));
+    // dispatch(updateSelectedFeedPost(editFeedPost));
+    dispatch(editShowToggleAction());
     // if (imageUploaded === true) {
     //   submitFileData();
     //   setImageUploaded(false);
@@ -125,17 +131,18 @@ export default function ModalEditPost() {
           <Form.Group>
             <Form.Label>Upload your Image</Form.Label>
             <Form.File
+              name="post"
+              accept="image/jpg, image/jpeg, image/png, image/gif"
               onChange={(e) => {
-                setImage(e.target.files[0]);
+                imageChangeHandler(e);
                 setImageUploaded(true);
               }}
-              name={"post"}
             />
           </Form.Group>
         </Form>
       </div>
       <Modal.Footer>
-        <Button variant="primary" onClick={onSubmitHandler}>
+        <Button variant="primary" onClick={() => onSubmitHandler()}>
           Save Changes
         </Button>
       </Modal.Footer>

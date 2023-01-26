@@ -83,6 +83,7 @@ const LoginPage = () => {
                 <div className="w-100">
                   <img
                     src="https://blog.waalaxy.com/wp-content/uploads/2021/01/Linkedin-Logo-2048x1280.png"
+                    alt=""
                     style={{ width: "50%", marginRight: "20px" }}
                   />
                 </div>
