@@ -195,11 +195,23 @@ export default function MainFeedSectionWithPosts() {
                             </span>
                           </div>
                           <div className="small-height">
-                            <span className="feed-post-tiny-text  ">
+                            <span className="feed-post-tiny-text ">
                               {format(
                                 parseISO(post.createdAt),
                                 "dd/MM/yyyy' at 'HH:mm"
                               )}
+                            </span>
+                          </div>
+                          <div className="small-height">
+                            <span className="feed-post-tiny-text text-muted">
+                              {" "}
+                              {post.createdAt !== post.updatedAt
+                                ? "Edited on: " +
+                                  format(
+                                    parseISO(post.updatedAt),
+                                    "dd/MM/yyyy' at 'HH:mm"
+                                  )
+                                : ""}
                             </span>
                           </div>
                         </div>

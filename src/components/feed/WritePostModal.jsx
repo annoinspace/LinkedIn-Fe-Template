@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   hideAddPostModalAction,
   addingNewFeedPostAction,
-  getFeedPostsAction,
 } from "../../redux/actions";
 import placeholder from "../../assets/v-team-logo.png";
 import { AiFillCaretDown } from "react-icons/ai";
 import { ImEarth } from "react-icons/im";
+import InputEmoji from "react-input-emoji";
 
 export default function WritePostModal() {
   const showModal = useSelector((state) => state.showPostModal.show);
@@ -64,7 +64,11 @@ export default function WritePostModal() {
   };
 
   return (
-    <Modal show={showModal} onHide={() => dispatch(hideAddPostModalAction())}>
+    <Modal
+      centered
+      show={showModal}
+      onHide={() => dispatch(hideAddPostModalAction())}
+    >
       <Modal.Header closeButton>
         <h5 className="font-weight-light ml-1 mb-0">Create a post</h5>
       </Modal.Header>
@@ -87,22 +91,28 @@ export default function WritePostModal() {
           </div>
         </div>
       </div>
+
       <div id="feed-modal-form">
         <Form
           onSubmit={onSubmitHandler}
           className="p-feed-left p-feed-right ml-2 mr-2"
           style={{ color: "grey", height: "25vh" }}
         >
-          <Form.Group className="mb-3 " controlId="formPostText">
-            <Form.Control
-              className="border-0"
-              as="textarea"
-              placeholder="What do you want to talk about?"
-              value={text}
-              onChange={(e) => onChangeHandler(e.target.value, setText)}
-              rows={5}
-            />
-          </Form.Group>
+          {/* <Form.Group className="mb-3 " controlId="formPostText">
+                <Form.Control
+                  className="border-0"
+                  as="textarea"
+                  placeholder="What do you want to talk about?"
+                  value={text}
+                  onChange={(e) => onChangeHandler(e.target.value, setText)}
+                  rows={5}
+                />
+              </Form.Group> */}
+          <InputEmoji
+            value={text}
+            onChange={setText}
+            placeholder="What do you want to talk about?"
+          />
           <Form.Group>
             <Form.Label>Attach an image to your post:</Form.Label>
             <Form.File
