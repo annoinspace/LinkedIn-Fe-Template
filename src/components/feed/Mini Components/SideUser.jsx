@@ -1,10 +1,9 @@
-
 import { useSelector, useDispatch } from "react-redux"
 
 import FollowButton from "./FollowButton"
 
 const SideUser = (user) => {
-  const { name, surname, pfp, bio, posts, _id } = user
+  const { name, surname, pfp, bio, posts, _id, job } = user
   console.log(user)
 
   return (
@@ -22,7 +21,6 @@ const SideUser = (user) => {
         >
           <img
             src={pfp ? pfp : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-
             alt="feed logo"
             style={{ width: "100%" }}
           />
@@ -32,8 +30,8 @@ const SideUser = (user) => {
             {name} {surname}
           </div>
 
-          <div className="pb-1 text-truncate" style={{ fontSize: "12px", width: "100px" }}>
-            {bio ? bio : "Author of " + posts?.length + " posts."}
+          <div className="pb-1 text-truncate" style={{ fontSize: "12px", width: "170px" }}>
+            {job ? job : "Author of " + posts?.length + " posts."}
           </div>
 
           <FollowButton id={_id} />
@@ -43,4 +41,3 @@ const SideUser = (user) => {
   )
 }
 export default SideUser
-
