@@ -10,16 +10,19 @@ import {
 } from "../../redux/actions";
 import { UPDATE_STATE_OF_EXPERIENCES } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import SingleExperience from "./SingleExperience";
 import SingleExperienceMainPage from "./SingleExperienceMainPage";
+import { useParams } from "react-router-dom";
 
 const ExperienceComponent = ({ profileData }) => {
   let pathname = window.location.pathname;
+  const params = useParams();
+  const id = params.id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   let userId = useSelector((state) => state.myProfile.detailsData._id);
+  const otherUserID = useSelector((state) => state.otherUser.selectedUser._id);
 
   //checks if a new experience has been added
   let isNewExperienceAdded = useSelector(
@@ -33,13 +36,23 @@ const ExperienceComponent = ({ profileData }) => {
 
   //gets all the experiences from the redux state
 
-  const user = useSelector((state) => state.user.user);
+  // const experiencesArray = useSelector((state) => state.experiences.experiences)
 
-  const experiencesArray = user[0]?.experiences;
+  const myExperiencesArray = useSelector(
+    (state) => state.experiences.experiences
+  );
+  const otherUserExperiences = useSelector(
+    (state) => state.otherUser.selectedUser.experiences
+  );
 
-  useEffect(() => {
-    dispatch(getMyProfileDetailsAction());
-  }, []);
+  const experiencesArray =
+    userId === otherUserID || window.location.pathname === "/me"
+      ? myExperiencesArray
+      : otherUserExperiences
+
+  // useEffect(() => {
+  //   dispatch(getMyProfileDetailsAction());
+  // }, []);
 
   //fetches all the experiences with GET method
   useEffect(() => {
