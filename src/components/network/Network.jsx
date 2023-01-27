@@ -74,7 +74,7 @@ const Network = () => {
                       <div>Connections</div>
                     </Link>
                   </div>
-                  <span>{connections.length}</span>
+                  {connections && <span>{connections.length}</span>}
                 </div>
                 <div id="network-item">
                   <div id="network-item-inside">
@@ -161,7 +161,7 @@ const Network = () => {
                 <h6 className="m-0">No pending invitations</h6>
                 <h6 className="m-0">Manage</h6>
               </div>
-              <div className="bg-light border p-3" style={{ height: "200vh", borderRadius: "10px" }}>
+              <div className="bg-light border p-3" style={{ maxheight: "100%", borderRadius: "10px" }}>
                 <div className="d-flex justify-content-between">
                   <h6> People who follow Shakira also follow </h6>
                   <h6> See all </h6>

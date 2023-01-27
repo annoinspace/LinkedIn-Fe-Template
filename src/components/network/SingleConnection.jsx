@@ -1,7 +1,16 @@
 import { Card, Col, Button } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import { addNewConnection } from "../../redux/actions"
 
 const SingleConnection = (props) => {
-  const { name, surname, pfp, background, job, description, createdAt } = props
+  const { name, surname, pfp, background, job, _id, description, createdAt } = props
+  const currentUser = useSelector((state) => state.myProfile.detailsData)
+  const dispatch = useDispatch()
+  const currentUserId = currentUser._id
+  const onclickHandler = () => {
+    console.log("userId clicked", _id)
+    dispatch(addNewConnection(currentUserId, _id))
+  }
   return (
     <Col xs={4} className="p-1">
       <Card style={{ maxHeight: "13rem" }}>
@@ -32,7 +41,12 @@ const SingleConnection = (props) => {
             {name} {surname}
           </Card.Title>
           <Card.Text className="text-truncate">{job}</Card.Text>
-          <Button variant="outline-primary" style={{ borderRadius: "20px" }} className="w-100 pt-1 pb-1">
+          <Button
+            variant="outline-primary"
+            style={{ borderRadius: "20px" }}
+            className="w-100 pt-1 pb-1"
+            onClick={onclickHandler}
+          >
             Follow
           </Button>
         </Card.Body>
