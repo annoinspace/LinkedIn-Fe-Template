@@ -11,8 +11,12 @@ import {
 import { useSelector } from "react-redux";
 
 export default function MoreDropDownButton() {
-  const currentUserId = useSelector((state) => state.myProfile.detailsData._id)
-
+  const currentProfileId = useSelector(
+    (state) => state.myProfile.detailsData._id
+  );
+  const redirectMe = () => {
+    window.location.href = `https://linkedin-backend-production.up.railway.app/users/${currentProfileId}/cv`;
+  };
   return (
     <div className="d-flex ml-0">
       <Dropdown>
@@ -31,7 +35,7 @@ export default function MoreDropDownButton() {
               </p>
             </div>
           </Dropdown.Item>
-          <Dropdown.Item eventKey="2">
+          <Dropdown.Item onClick={redirectMe}>
             <div className="d-flex align-items-center">
               <Download height={"20px"} />
               <p className="m-0 ml-2" style={{ color: "grey" }}>
@@ -42,9 +46,9 @@ export default function MoreDropDownButton() {
           <Dropdown.Item eventKey="3">
             <div className="d-flex align-items-center">
               <FileEarmark height={"20px"} />
-                <p className="m-0 ml-2" style={{ color: "grey" }}>
-                  Build a resume
-                </p>
+              <p className="m-0 ml-2" style={{ color: "grey" }}>
+                Build a resume
+              </p>
             </div>
           </Dropdown.Item>
           <Dropdown.Item eventKey="1">
