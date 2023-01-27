@@ -46,7 +46,9 @@ const ExperienceComponent = ({ profileData }) => {
   );
 
   const experiencesArray =
-    userId === otherUserID || window.location.pathname === "/me" || window.location.pathname === "/editexperiences"
+    userId === otherUserID ||
+    window.location.pathname === "/me" ||
+    window.location.pathname === "/editexperiences"
       ? myExperiencesArray
       : otherUserExperiences;
 
@@ -55,11 +57,15 @@ const ExperienceComponent = ({ profileData }) => {
   // }, []);
 
   //fetches all the experiences with GET method
-  useEffect(() => {
-    if (userId) {
-      dispatch(getExperiencesAction(userId));
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (userId) {
+        dispatch(getExperiencesAction(userId));
+      }
+    },
+    [myExperiencesArray],
+    [otherUserExperiences]
+  );
 
   useEffect(() => {
     if (userId) {
