@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { getMyProfileDetailsAction } from "../../redux/actions";
 import Center from "./Center";
 import Leftside from "./Leftside";
 import Rightside from "./Rightside";
@@ -9,10 +8,6 @@ import { useSelector } from "react-redux";
 const Feed = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getMyProfileDetailsAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const user = useSelector((state) => state.user.user);
   if (user.length === 0) {
     return (

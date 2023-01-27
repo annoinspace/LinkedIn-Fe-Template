@@ -4,22 +4,23 @@ import * as Icon from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ExperienceModal from "./ExperienceModal";
-import {
-  getExperiencesAction,
-  getMyProfileDetailsAction,
-} from "../../redux/actions";
+import { getExperiencesAction } from "../../redux/actions";
 import { UPDATE_STATE_OF_EXPERIENCES } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import SingleExperience from "./SingleExperience";
 import SingleExperienceMainPage from "./SingleExperienceMainPage";
-
-const ExperienceComponent = ({ profileData }) => {
+import { useParams } from "react-router-dom";
+const ExperienceComponent = () => {
   let pathname = window.location.pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  let userId = useSelector((state) => state.myProfile.detailsData._id);
+  const currentUser = useSelector((state) => state.user.user);
+  const [fetched, setFetched] = useState([]);
+  const params = useParams();
+  const id = params.id;
+  //if random user then main user
+  let userId = id;
 
   //checks if a new experience has been added
   let isNewExperienceAdded = useSelector(
@@ -31,16 +32,16 @@ const ExperienceComponent = ({ profileData }) => {
     (state) => state.experiences.deletedExp
   );
 
-  //gets all the experiences from the redux state
-
   const user = useSelector((state) => state.user.user);
 
-  const experiencesArray = user[0]?.experiences;
-
-  useEffect(() => {
-    dispatch(getMyProfileDetailsAction());
-  }, []);
-
+  let experiencesArray = user.experiences;
+  if (window.location.pathname.includes("/profile")) {
+    // {
+    //   fetchUser();
+    // }
+  } else {
+    experiencesArray = user[0]?.experiences;
+  }
   //fetches all the experiences with GET method
   useEffect(() => {
     if (userId) {

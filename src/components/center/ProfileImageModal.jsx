@@ -7,11 +7,11 @@ import {
   Pencil,
   TrashFill,
 } from "react-bootstrap-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-function ProfileImageModal() {
+function ProfileImageModal(data) {
   const [show, setShow] = useState(false);
-  const currentUser = useSelector((state) => state.myProfile.detailsData);
+  const currentUser = data;
   const profileToView = useSelector((state) => state.otherUser.selectedUser);
   let pathname = window.location.pathname;
   // const user = useSelector((state) => state.user.user)
@@ -25,9 +25,7 @@ function ProfileImageModal() {
       : profileToView;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  useEffect(() => {
-    console.log(user);
-  });
+
   return (
     <>
       <div
@@ -36,7 +34,7 @@ function ProfileImageModal() {
       >
         <img
           src={
-            user.pfp.length === 0
+            user.pfp?.length === 0
               ? " https://i.stack.imgur.com/l60Hf.png"
               : user?.pfp
           }
@@ -68,7 +66,7 @@ function ProfileImageModal() {
             >
               <img
                 src={
-                  user.pfp.length === 0
+                  user.pfp?.length === 0
                     ? " https://i.stack.imgur.com/l60Hf.png"
                     : user?.pfp
                 }
