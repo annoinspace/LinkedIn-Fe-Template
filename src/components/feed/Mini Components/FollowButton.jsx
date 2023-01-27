@@ -1,8 +1,7 @@
-
-import { ArrowRight, Check, Dot, InfoSquareFill, Plus } from "react-bootstrap-icons"
+import { Check, Plus } from "react-bootstrap-icons"
 import { useSelector, useDispatch } from "react-redux"
 import { addNewConnection } from "../../../redux/actions"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 const FollowButton = ({ id }) => {
   const currentUser = useSelector((state) => state.myProfile.detailsData)
   const dispatch = useDispatch()
@@ -31,14 +30,12 @@ const FollowButton = ({ id }) => {
         {/* options */}
         {clicked ? (
           <>
-
             <div
               className="pr-1 d-flex justify-content-center align-items-center"
               style={{
                 fontSize: "20px",
 
                 fontWeight: "500"
-
               }}
             >
               <Check />
@@ -49,12 +46,10 @@ const FollowButton = ({ id }) => {
                 fontSize: "14px",
 
                 fontWeight: "500"
-
               }}
             >
               Following
             </div>
-
           </>
         ) : (
           <>
@@ -84,4 +79,3 @@ const FollowButton = ({ id }) => {
   )
 }
 export default FollowButton
-

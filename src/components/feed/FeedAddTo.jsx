@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from "react"
-import { ArrowRight, Dot, InfoSquareFill, Plus } from "react-bootstrap-icons"
+import { ArrowRight, InfoSquareFill } from "react-bootstrap-icons"
 import SideUser from "./Mini Components/SideUser"
 import { useSelector } from "react-redux"
 
@@ -26,13 +25,13 @@ const FeedAddTo = () => {
   }
   useEffect(() => {
     fetchAllUsers()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max)
   }
   console.log(getRandomInt(users.length))
-
 
   return (
     <div

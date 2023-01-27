@@ -1,9 +1,7 @@
-import { useSelector, useDispatch } from "react-redux"
-
 import FollowButton from "./FollowButton"
 
 const SideUser = (user) => {
-  const { name, surname, pfp, bio, posts, _id, job } = user
+  const { name, surname, pfp, posts, _id, job } = user
   console.log(user)
 
   return (
