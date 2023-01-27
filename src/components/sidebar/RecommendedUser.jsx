@@ -1,6 +1,6 @@
-import React from "react"
-import { RxDotFilled } from "react-icons/rx"
-import ButtonMessage from "./ButtonMessage"
+import React from "react";
+import { RxDotFilled } from "react-icons/rx";
+import ButtonMessage from "./ButtonMessage";
 // import { Image } from "react-bootstrap-icons"
 
 export default function RecommendedUser({ user }) {
@@ -8,7 +8,7 @@ export default function RecommendedUser({ user }) {
     <div className="recommended-user-container bg-white">
       <div className="d-flex recommended-user-content">
         <div className="border recommended-user-image">
-          <img src={user.image} alt="" />
+          <img src={user.pfp} alt="" />
           {/* <Image src={user.image} /> */}
         </div>
         <div className="text-left">
@@ -19,12 +19,12 @@ export default function RecommendedUser({ user }) {
             <span className="font-weight-light  small-header-text"> 1st </span>
           </h6>
           <div className="font-weight-light recommended-user-job-description-text">
-            {user.title}
+            {user.job}
           </div>
         </div>{" "}
       </div>
 
       <ButtonMessage />
     </div>
-  )
+  );
 }

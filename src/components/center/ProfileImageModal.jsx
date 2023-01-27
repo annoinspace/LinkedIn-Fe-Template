@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import {
   CameraFill,
@@ -7,13 +7,25 @@ import {
   Pencil,
   TrashFill,
 } from "react-bootstrap-icons";
-
-function ProfileImageModal({ profileData }) {
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+function ProfileImageModal() {
   const [show, setShow] = useState(false);
+  const currentUser = useSelector((state) => state.myProfile.detailsData);
+  const profileToView = useSelector((state) => state.otherUser.selectedUser);
+  // const user = useSelector((state) => state.user.user)
+  const params = useParams();
+  const id = params.id;
 
+  const user =
+    currentUser._id === id || window.location.pathname === "/me"
+      ? currentUser
+      : profileToView;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  useEffect(() => {
+    console.log(user);
+  });
   return (
     <>
       <div
@@ -21,7 +33,11 @@ function ProfileImageModal({ profileData }) {
         onClick={handleShow}
       >
         <img
-          src={profileData.image}
+          src={
+            user?.pfp === undefined
+              ? " https://i.stack.imgur.com/l60Hf.png"
+              : user?.pfp
+          }
           alt="User profile img"
           className="profileImage"
         />
@@ -49,14 +65,18 @@ function ProfileImageModal({ profileData }) {
               }}
             >
               <img
-                src={profileData.image}
+                src={
+                  user.pfp === undefined
+                    ? " https://i.stack.imgur.com/l60Hf.png"
+                    : user?.pfp
+                }
                 alt="avatar"
                 style={{ height: "100%" }}
               />
             </div>
           </div>
           <div className="d-flex">
-            {profileData._id === "6396f013c96dfb001521a5ba" ? (
+            {user?._id === user?._id ? (
               <div className="hoverWhiteBorder d-flex justify-content-center align-items-center border px-3 py-1 rounded-pill text-white font-weight-bold">
                 <EyeFill className="mr-3" /> Anyone
               </div>
@@ -65,7 +85,7 @@ function ProfileImageModal({ profileData }) {
             )}
           </div>
         </Modal.Body>
-        {profileData._id === "6396f013c96dfb001521a5ba" ? (
+        {user?._id === user?._id ? (
           <Modal.Footer
             style={{ backgroundColor: "#1D2226" }}
             className="justify-content-between p-0"

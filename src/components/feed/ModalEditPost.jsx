@@ -26,7 +26,8 @@ export default function ModalEditPost() {
   const postId = currentText._id;
 
   // Uploading image for POST
-  const [image, setImage] = useState(null);
+  const [text, setText] = useState(currentText.text)
+  const [image, setImage] = useState([]);
   const [imageUploaded, setImageUploaded] = useState(false);
 
   const onChangeHandler = (value, fieldToSet) => {
@@ -39,46 +40,52 @@ export default function ModalEditPost() {
     text: textToEdit,
   });
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    console.log(editFeedPost.text);
-    dispatch(hideEditPostModalAction());
-    dispatch(editMyFeedPostAction(editFeedPost, postId));
-    dispatch(updateSelectedFeedPost(editFeedPost));
-    dispatch(editShowToggleAction());
-    dispatch(getFeedPostsAction());
-
-    if (imageUploaded === true) {
-      submitFileData();
-      setImageUploaded(false);
-    }
+  const imageChangeHandler = (e) => {
+    setImage(e.target.files[0]);
+    console.log(image);
   };
 
-  const submitFileData = async () => {
+  const onSubmitHandler = () => {
     const formData = new FormData();
+    formData.append("text", text);
+    imageUploaded ? formData.append("post", image) : setImage([]);
 
-    formData.append("post", image);
-
-    const optionsPost = {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-      },
-    };
-
-    try {
-      let res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/${postId}`,
-        optionsPost
-      );
-      console.log("sucessfully updated " + res);
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
+    // console.log(editFeedPost.text);
+    dispatch(hideEditPostModalAction());
+    dispatch(editMyFeedPostAction(formData, postId));
+    // dispatch(updateSelectedFeedPost(editFeedPost));
+    dispatch(editShowToggleAction());
+    // if (imageUploaded === true) {
+    //   submitFileData();
+    //   setImageUploaded(false);
+    // }
   };
+
+  // const submitFileData = async () => {
+  //   const formData = new FormData();
+
+  //   formData.append("post", image);
+
+  //   const optionsPost = {
+  //     method: "POST",
+  //     body: formData,
+  //     headers: {
+  //       Authorization:
+  //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
+  //     },
+  //   };
+
+  //   try {
+  //     let res = await fetch(
+  //       `https://striveschool-api.herokuapp.com/api/posts/${postId}`,
+  //       optionsPost
+  //     );
+  //     console.log("sucessfully updated " + res);
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Modal
@@ -90,11 +97,11 @@ export default function ModalEditPost() {
       </Modal.Header>
       <div className="p-feed ml-2 d-flex">
         <div className="border recommended-user-image">
-          <img src={isFetched ? details.image : placeholder} alt="avatar" />
+          <img src={isFetched ? details.pfp : placeholder} alt="avatar" />
         </div>
         <div>
           <div className="small-header-text font-weight-bold">
-            Alexander Spomer
+            {details.name} {details.surname}
           </div>
           <div
             id="select-viewing-options"
@@ -116,26 +123,26 @@ export default function ModalEditPost() {
             <Form.Control
               className="border-0"
               as="textarea"
-              placeholder={textToEdit}
-              value={editFeedPost.text}
+              value={text}
               rows={5}
-              onChange={(e) => onChangeHandler(e.target.value, "text")}
+              onChange={(e) => setText(e.target.value)}
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>Upload your Image</Form.Label>
             <Form.File
+              name="post"
+              accept="image/jpg, image/jpeg, image/png, image/gif"
               onChange={(e) => {
-                setImage(e.target.files[0]);
+                imageChangeHandler(e);
                 setImageUploaded(true);
               }}
-              name={"post"}
             />
           </Form.Group>
         </Form>
       </div>
       <Modal.Footer>
-        <Button variant="primary" onClick={onSubmitHandler}>
+        <Button variant="primary" onClick={() => onSubmitHandler()}>
           Save Changes
         </Button>
       </Modal.Footer>
