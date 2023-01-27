@@ -179,7 +179,7 @@ const CustomNavbar = () => {
                         <div className="d-flex mb-2">
                           <div className="me-dropdown-image">
                             <img
-                              src={user[0]?.pfp}
+                              src={currentUser?.pfp}
                               alt=""
                               className="d-flex align-items-center justify-content-center"
                             />
@@ -215,7 +215,7 @@ const CustomNavbar = () => {
                         <div>Job Posting Account</div>
                       </ListGroup.Item>
                       <ListGroup.Item className="underline-on-hover" onClick={signOut}>
-                        <div>Sing Out</div>
+                        <div>Sign Out</div>
                       </ListGroup.Item>
                     </ListGroup>
                   </div>
