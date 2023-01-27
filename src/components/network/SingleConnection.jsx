@@ -1,15 +1,18 @@
 import { Card, Col, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux"
+import { useState } from "react"
 import { addNewConnection } from "../../redux/actions"
 
 const SingleConnection = (props) => {
   const { name, surname, pfp, background, job, _id, description, createdAt } = props
+  const [follow, setFollow] = useState("Follow")
   const currentUser = useSelector((state) => state.myProfile.detailsData)
   const dispatch = useDispatch()
   const currentUserId = currentUser._id
   const onclickHandler = () => {
     console.log("userId clicked", _id)
     dispatch(addNewConnection(currentUserId, _id))
+    setFollow("Following")
   }
   return (
     <Col xs={4} className="p-1">
@@ -40,14 +43,14 @@ const SingleConnection = (props) => {
           <Card.Title>
             {name} {surname}
           </Card.Title>
-          <Card.Text className="text-truncate">{job}</Card.Text>
+          <Card.Text className="text-truncate">{job ? job : "Software Developer"}</Card.Text>
           <Button
             variant="outline-primary"
             style={{ borderRadius: "20px" }}
             className="w-100 pt-1 pb-1"
             onClick={onclickHandler}
           >
-            Follow
+            {follow}
           </Button>
         </Card.Body>
       </Card>

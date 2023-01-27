@@ -1,14 +1,12 @@
-import FollowButton from "./FollowButton";
-import {
-  ArrowRight,
-  Check,
-  Dot,
-  InfoSquareFill,
-  Plus,
-} from "react-bootstrap-icons";
+
+import { useSelector, useDispatch } from "react-redux"
+
+import FollowButton from "./FollowButton"
+
 const SideUser = (user) => {
-  const { name, surname, pfp, bio, posts } = user;
-  console.log(user);
+  const { name, surname, pfp, bio, posts, _id } = user
+  console.log(user)
+
   return (
     <>
       <div className="d-flex align-items-start p-feed-x mt-2">
@@ -18,15 +16,13 @@ const SideUser = (user) => {
             aspectRatio: "1/1",
             overflow: "hidden",
             borderRadius: "50%",
-            objectFit: "cover",
+
+            objectFit: "cover"
           }}
         >
           <img
-            src={
-              pfp
-                ? pfp
-                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-            }
+            src={pfp ? pfp : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+
             alt="feed logo"
             style={{ width: "100%" }}
           />
@@ -35,17 +31,16 @@ const SideUser = (user) => {
           <div style={{ fontSize: "12px", fontWeight: "500" }}>
             {name} {surname}
           </div>
-          <div
-            className="pb-1 text-truncate"
-            style={{ fontSize: "12px", width: "100px" }}
-          >
+
+          <div className="pb-1 text-truncate" style={{ fontSize: "12px", width: "100px" }}>
             {bio ? bio : "Author of " + posts?.length + " posts."}
           </div>
 
-          <FollowButton />
+          <FollowButton id={_id} />
         </div>
       </div>
     </>
-  );
-};
-export default SideUser;
+  )
+}
+export default SideUser
+

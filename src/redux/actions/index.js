@@ -1,36 +1,40 @@
-export const UPDATE_STATE_OF_EXPERIENCES = "UPDATE_STATE_OF_EXPERIENCES";
-export const GET_USERS = "GET_USERS";
-export const USER_SEARCH_SUBMITTED = "USER_SEARCH_SUBMITTED";
-export const SHOW_SEARCH_RESULTS = "SHOW_SEARCH_RESULTS";
-export const HIDE_SEARCH_RESULTS = "HIDE_SEARCH_RESULTS";
-export const EXPAND_MESSENGER = "EXPAND_MESSENGER";
-export const COLLAPSE_MESSENGER = "COLLAPSE_MESSENGER";
-export const GET_EXPERIENCES = "GET_EXPERIENCES";
-export const GET_MY_PROFILEDETAILS = "GET_MY_PROFILEDETAILS";
-export const GET_IS_FETCHED = "GET_IS_FETCHED";
-export const CHANGE_PROFILE_DETAILS = "CHANGE_PROFILE_DETAILS";
-export const OTHER_USER_SELECTED = "OTHER_USER_SELECTED";
-export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
-export const GET_SELECTEDEXP = "GET_SELECTEDEXP";
-export const EDIT_SINGLE_EXPERIENCE = "EDIT_SINGLE_EXPERIENCE";
-export const SHOW_WRITE_A_POST = "SHOW_WRITE_A_POST";
-export const HIDE_WRITE_A_POST = "HIDE_WRITE_A_POST";
-export const GET_FEED_POSTS = " GET_FEED_POSTS";
-export const ADD_NEW_FEED_POST = "ADD_NEW_FEED_POST";
-export const SAVE_SELECTED_FEED_POST = "SAVE_SELECTED_FEED_POST";
-export const REMOVE_SELECTED_FEED_POST = "REMOVE_SELECTED_FEED_POST";
 
-export const SHOW_EDIT_POST_MODAL = "SHOW_EDIT_POST_MODAL";
-export const HIDE_EDIT_POST_MODAL = "HIDE_EDIT_POST_MODAL";
-export const UPDATE_CHANGED_TEXT = "UPDATE_CHANGED_TEXT";
-export const SHOW_EDIT_DROPDOWN = "SHOW_EDIT_DROPDOWN";
-export const HIDE_EDIT_DROPDOWN = "HIDE_EDIT_DROPDOWN";
-export const GET_CURRENT_USER_DATA = "GET_CURRENT_USER_DATA";
-export const SHOW_DELETE_MODAL = "SHOW_DELETE_MODAL";
-export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL";
-export const SET_USER = "SET_USER";
+export const UPDATE_STATE_OF_EXPERIENCES = "UPDATE_STATE_OF_EXPERIENCES"
+export const GET_USERS = "GET_USERS"
+export const USER_SEARCH_SUBMITTED = "USER_SEARCH_SUBMITTED"
+export const SHOW_SEARCH_RESULTS = "SHOW_SEARCH_RESULTS"
+export const HIDE_SEARCH_RESULTS = "HIDE_SEARCH_RESULTS"
+export const EXPAND_MESSENGER = "EXPAND_MESSENGER"
+export const COLLAPSE_MESSENGER = "COLLAPSE_MESSENGER"
+export const GET_EXPERIENCES = "GET_EXPERIENCES"
+export const GET_MY_PROFILEDETAILS = "GET_MY_PROFILEDETAILS"
+export const GET_IS_FETCHED = "GET_IS_FETCHED"
+export const CHANGE_PROFILE_DETAILS = "CHANGE_PROFILE_DETAILS"
+export const OTHER_USER_SELECTED = "OTHER_USER_SELECTED"
+export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE"
+export const GET_SELECTEDEXP = "GET_SELECTEDEXP"
+export const EDIT_SINGLE_EXPERIENCE = "EDIT_SINGLE_EXPERIENCE"
+export const SHOW_WRITE_A_POST = "SHOW_WRITE_A_POST"
+export const HIDE_WRITE_A_POST = "HIDE_WRITE_A_POST"
+export const GET_FEED_POSTS = " GET_FEED_POSTS"
+export const ADD_NEW_FEED_POST = "ADD_NEW_FEED_POST"
+export const SAVE_SELECTED_FEED_POST = "SAVE_SELECTED_FEED_POST"
+export const REMOVE_SELECTED_FEED_POST = "REMOVE_SELECTED_FEED_POST"
 
-export const GET_USER_CONNECTIONS = "GET_USER_CONNECTIONS";
+export const SHOW_EDIT_POST_MODAL = "SHOW_EDIT_POST_MODAL"
+export const HIDE_EDIT_POST_MODAL = "HIDE_EDIT_POST_MODAL"
+export const UPDATE_CHANGED_TEXT = "UPDATE_CHANGED_TEXT"
+export const SHOW_EDIT_DROPDOWN = "SHOW_EDIT_DROPDOWN"
+export const HIDE_EDIT_DROPDOWN = "HIDE_EDIT_DROPDOWN"
+export const GET_CURRENT_USER_DATA = "GET_CURRENT_USER_DATA"
+export const SHOW_DELETE_MODAL = "SHOW_DELETE_MODAL"
+export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL"
+export const SET_USER = "SET_USER"
+
+export const GET_USER_CONNECTIONS = "GET_USER_CONNECTIONS"
+export const UPDATE_USER_CONNECTIONS = "UPDATE_USER_CONNECTIONS"
+export const GET_UNCONNECTED_USERS = "GET_UNCONNECTED_USERS"
+
 
 //constants to use for fetching dat
 
@@ -470,13 +474,12 @@ export const deleteMyFeedPostAction = (deleteFeedPost, postId) => {
       method: "DELETE",
       body: JSON.stringify(deleteFeedPost),
       headers: {
-        "Content-Type": "application/json",
-        //   Authorization:
-        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-        //
-      },
-    };
-    console.log("-------------DELETING My Feed Post-----------------");
+
+        "Content-Type": "application/json"
+      }
+    }
+    console.log("-------------DELETING My Feed Post-----------------")
+
     try {
       let response = await fetch(baseEndPointPosts + postId, optionsDelete);
       if (response.ok) {
@@ -670,29 +673,47 @@ export const getUserConnectionsAction = (currentUserId) => {
 };
 
 export const addNewConnection = (currentUserId, newConnectionId) => {
-  console.log("--------------------currentUserId", currentUserId);
-  console.log("--------------------newConnectionId", newConnectionId);
-  console.log("--------------------newConnectionId", typeof newConnectionId);
-  const userNetworkUrl = `https://linkedin-backend-production.up.railway.app/mynetwork/${currentUserId}`;
+
+  console.log("--------------------currentUserId", currentUserId)
+  console.log("--------------------newConnectionId", newConnectionId)
+  console.log("--------------------newConnectionId", typeof newConnectionId)
+  const body = JSON.stringify({
+    connection: newConnectionId
+  })
+  const userNetworkUrl = `https://linkedin-backend-production.up.railway.app/mynetwork/${currentUserId}`
+
   return async (dispatch) => {
     try {
       let response = await fetch(userNetworkUrl, {
         method: "POST",
-        body: newConnectionId,
-        "Content-Type": "undefined",
-      });
-      console.log("response", response);
+
+        body: body,
+        headers: { "Content-Type": "application/json" }
+      })
+      console.log("response", response)
       if (response.ok) {
-        let data = await response.json();
-        console.log(
-          "---------------userConnections updated ------------------ ",
-          data
-        );
+        let data = await response.json()
+        console.log("---------------userConnections updated ------------------ ", data)
+        let userConnections = data.connections
+        dispatch({
+          type: UPDATE_USER_CONNECTIONS,
+          payload: userConnections
+        })
+
       } else {
         console.log("error while fetching newtork connections");
       }
     } catch (error) {
       console.log(error);
     }
-  };
-};
+
+  }
+}
+
+export const getUnconnectedUsers = (filteredUsersCurrentUser) => {
+  return {
+    type: GET_UNCONNECTED_USERS,
+    payload: filteredUsersCurrentUser
+  }
+}
+
