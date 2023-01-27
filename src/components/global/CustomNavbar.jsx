@@ -11,6 +11,8 @@ const CustomNavbar = () => {
   const navigate = useNavigate()
   const [meSelected, setMeSelected] = useState(false)
   const user = useSelector((state) => state.user.user)
+
+  const currentUser = useSelector((state) => state.myProfile.detailsData)
   // const userTitle = useSelector((state) => state.myProfile.detailsData.title);
 
   const dispatch = useDispatch()
@@ -160,7 +162,7 @@ const CustomNavbar = () => {
                 }}
               >
                 <div className="me-icon-container d-sm-flex my-auto d-md-block my-md-0">
-                  <img src={user[0]?.pfp} alt="" className="d-flex align-items-center justify-content-center" />
+                  <img src={currentUser?.pfp} alt="" className="d-flex align-items-center justify-content-center" />
                 </div>
                 <div className="d-flex justify-content-center align-items-center">
                   <div className="d-none d-md-block">Me</div>
