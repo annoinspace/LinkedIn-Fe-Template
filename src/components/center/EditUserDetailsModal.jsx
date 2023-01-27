@@ -86,7 +86,7 @@ function EditUserDetailsModal() {
       method: "POST",
       body: formData,
       headers: {
-        "Content-Type": "underfined",
+        "Content-Type": "undefined",
         // Authorization:
         //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE"
       },
