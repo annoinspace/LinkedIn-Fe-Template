@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, ListGroup } from "react-bootstrap";
+import { Container, Row, ListGroup, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -34,6 +34,8 @@ const ExperienceComponent = ({ profileData }) => {
     (state) => state.experiences.deletedExp
   );
 
+  const newUserId = id !== userId ? otherUserID : userId;
+
   //gets all the experiences from the redux state
 
   // const experiencesArray = useSelector((state) => state.experiences.experiences)
@@ -46,9 +48,10 @@ const ExperienceComponent = ({ profileData }) => {
   );
 
   const experiencesArray =
-    userId === otherUserID ||
-    window.location.pathname === "/me" ||
-    window.location.pathname === "/editexperiences"
+    userId ===
+    (otherUserID ||
+      window.location.pathname === "/me" ||
+      window.location.pathname === "/editexperiences")
       ? myExperiencesArray
       : otherUserExperiences;
 
@@ -164,6 +167,11 @@ const ExperienceComponent = ({ profileData }) => {
                       })
                     : "No experience yet"}
                 </ListGroup>
+                <a
+                  href={`https://linkedin-backend-production.up.railway.app/users/${newUserId}/experiences/csv`}
+                >
+                  <Button>Export Experiences</Button>
+                </a>
               </div>
             </div>
           </Row>
