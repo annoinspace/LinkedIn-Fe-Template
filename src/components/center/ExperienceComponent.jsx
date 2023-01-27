@@ -37,7 +37,11 @@ const ExperienceComponent = ({ profileData }) => {
   const otherUserExperiences = useSelector((state) => state.otherUser.selectedUser.experiences)
 
   const experiencesArray =
-    userId === (otherUserID || window.location.pathname === "/me" || window.location.pathname === "/editexperiences")
+
+    userId === otherUserID ||
+    window.location.pathname === "/me" ||
+    window.location.pathname === "/editexperiences"
+
       ? myExperiencesArray
       : otherUserExperiences
 
