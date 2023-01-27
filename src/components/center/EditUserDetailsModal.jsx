@@ -22,11 +22,11 @@ function EditUserDetailsModal() {
 
   const [name, setName] = useState(`${details.name}`)
   const [surname, setSurname] = useState(`${details.surname}`)
-  const [email, setEmail] = useState(`${details.email}`)
+  // const [email, setEmail] = useState(`${details.email}`)
   const [bio, setBio] = useState(`${details.bio}`)
-  const [title, setTitle] = useState(`${details.title}`)
-  const [area, setArea] = useState(`${details.area}`)
-  const [imageUrl, setImageUrl] = useState(`${details.image}`)
+  const [title, setTitle] = useState(`${details.job}`)
+  const [area, setArea] = useState(`${details.location}`)
+  const [imageUrl, setImageUrl] = useState(`${details.pfp}`)
   const [image, setImage] = useState(null)
   const [imageUploaded, setImageUploaded] = useState(false)
 
@@ -35,19 +35,19 @@ function EditUserDetailsModal() {
       ? {
           name: name,
           surname: surname,
-          email: email,
+          // email: email,
           bio: bio,
           title: title,
-          area: area
+          location: area
         }
       : {
           name: name,
           surname: surname,
-          email: email,
+          // email: email,
           bio: bio,
           title: title,
-          area: area,
-          image: imageUrl
+          location: area,
+          pfp: imageUrl
         }
 
   const onSubmitHandler = (e) => {
@@ -142,7 +142,7 @@ function EditUserDetailsModal() {
                     <p className="mb-0">this can only be added using our mobile app</p>
                   </div>
                 </Form.Group>
-                <Form.Group controlId="exampleForm.ControlInput1">
+                {/* <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Label>E-Mail*</Form.Label>
                   <Form.Control
                     type="email"
@@ -150,7 +150,7 @@ function EditUserDetailsModal() {
                     value={email}
                     onChange={(e) => onChangeHandler(e.target.value, setEmail)}
                   />
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Label>Bio*</Form.Label>
                   <Form.Control

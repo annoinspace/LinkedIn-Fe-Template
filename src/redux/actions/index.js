@@ -193,6 +193,7 @@ export const changeProfileDetailsAction = (changedDetails) => {
       let response = await fetch(baseUrlMe, optionsPut);
       if (response.ok) {
         console.log("Profile Details sucessfully updated ->", response);
+        dispatch(getMyProfileDetailsAction())
       } else {
         console.log("Error changing profile details");
       }
