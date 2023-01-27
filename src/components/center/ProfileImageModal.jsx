@@ -36,7 +36,7 @@ function ProfileImageModal() {
       >
         <img
           src={
-            user.pfp.length === 0
+            user?.pfp.length === 0
               ? " https://i.stack.imgur.com/l60Hf.png"
               : user?.pfp
           }

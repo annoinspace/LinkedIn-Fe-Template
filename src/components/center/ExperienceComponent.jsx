@@ -39,16 +39,16 @@ const ExperienceComponent = ({ profileData }) => {
   // const experiencesArray = useSelector((state) => state.experiences.experiences)
 
   const myExperiencesArray = useSelector(
-    (state) => state.experiences.experiences
+    (state) => state.myProfile.detailsData.experiences
   );
   const otherUserExperiences = useSelector(
     (state) => state.otherUser.selectedUser.experiences
   );
 
   const experiencesArray =
-    userId === otherUserID || window.location.pathname === "/me"
+    userId === otherUserID || window.location.pathname === "/me" || window.location.pathname === "/editexperiences"
       ? myExperiencesArray
-      : otherUserExperiences
+      : otherUserExperiences;
 
   // useEffect(() => {
   //   dispatch(getMyProfileDetailsAction());

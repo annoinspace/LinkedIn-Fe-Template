@@ -193,7 +193,7 @@ export const changeProfileDetailsAction = (changedDetails) => {
       let response = await fetch(baseUrlMe, optionsPut);
       if (response.ok) {
         console.log("Profile Details sucessfully updated ->", response);
-        dispatch(getMyProfileDetailsAction())
+        dispatch(getMyProfileDetailsAction());
       } else {
         console.log("Error changing profile details");
       }
@@ -548,27 +548,33 @@ export const hideDeleteModalAction = () => {
 
 // Add Picture to Experience
 
-export const submitFileData = async (image, userId, expId) => {
-  const formData = new FormData();
+export const submitFileData = (image, userId, expId) => {
+  return async (dispatch) => {
+    const formData = new FormData();
 
-  formData.append("experience", image);
+    formData.append("experience", image);
 
-  const optionsPost = {
-    method: "POST",
-    body: formData,
-    headers: {},
+    const optionsPost = {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "undefined",
+      },
+    };
+
+    try {
+      let res = await fetch(
+        `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences/${expId}/picture`,
+        optionsPost
+      );
+      console.log(res);
+      if (res.ok) {
+        dispatch(getExperiencesAction(userId));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  try {
-    let res = await fetch(
-      `https://linkedin-backend-production.up.railway.app/users/${userId}/experiences/${expId}/picture`,
-      optionsPost
-    );
-    console.log(res);
-    window.location.reload();
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 // --------Comments on Posts --------------
