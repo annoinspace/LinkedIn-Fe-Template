@@ -13,11 +13,9 @@ function ProfileImageModal() {
   const [show, setShow] = useState(false);
   const currentUser = useSelector((state) => state.myProfile.detailsData);
   const profileToView = useSelector((state) => state.otherUser.selectedUser);
-  let pathname = window.location.pathname;
   // const user = useSelector((state) => state.user.user)
   const params = useParams();
   const id = params.id;
-  const currentUserId = params.id;
 
   const user =
     currentUser._id === id || window.location.pathname === "/me"
@@ -36,7 +34,7 @@ function ProfileImageModal() {
       >
         <img
           src={
-            user?.pfp.length === 0
+            user?.pfp === undefined
               ? " https://i.stack.imgur.com/l60Hf.png"
               : user?.pfp
           }
@@ -68,7 +66,7 @@ function ProfileImageModal() {
             >
               <img
                 src={
-                  user.pfp.length === 0
+                  user.pfp === undefined
                     ? " https://i.stack.imgur.com/l60Hf.png"
                     : user?.pfp
                 }

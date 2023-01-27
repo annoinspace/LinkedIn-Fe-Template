@@ -34,25 +34,33 @@ function EditUserDetailsModal() {
   const [image, setImage] = useState([]);
   const [imageUploaded, setImageUploaded] = useState(false);
 
-  const changedDetails =
-    imageUploaded === true
-      ? {
-          name: name,
-          surname: surname,
-          // email: email,
-          bio: bio,
-          title: title,
-          location: area,
-        }
-      : {
-          name: name,
-          surname: surname,
-          // email: email,
-          bio: bio,
-          title: title,
-          location: area,
-          pfp: image,
-        };
+  // const changedDetails =
+  //   imageUploaded === true
+  //     ? {
+  //         name: name,
+  //         surname: surname,
+  //         // email: email,
+  //         bio: bio,
+  //         title: title,
+  //         location: area,
+  //         pfp: image,
+  //       }
+  //     : {
+  //         name: name,
+  //         surname: surname,
+  //         // email: email,
+  //         bio: bio,
+  //         title: title,
+  //         location: area,
+  //       };
+
+  const changedDetails = {
+    name: name,
+    surname: surname,
+    bio: bio,
+    title: title,
+    location: area,
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -65,9 +73,11 @@ function EditUserDetailsModal() {
     dispatch(changeProfileDetailsAction(changedDetails));
     handleClose();
 
-    if (imageUploaded === true) {
-      submitFileData();
-      setImageUploaded(false);
+    if (image !== undefined) {
+      setTimeout(() => {
+        submitFileData();
+        setImageUploaded(false);
+      }, 1000);
     }
   };
 
@@ -79,7 +89,6 @@ function EditUserDetailsModal() {
 
   const submitFileData = async () => {
     const formData = new FormData();
-
     formData.append("pfp", image);
 
     const optionsPost = {

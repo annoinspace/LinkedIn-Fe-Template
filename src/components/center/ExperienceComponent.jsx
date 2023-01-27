@@ -63,6 +63,7 @@ const ExperienceComponent = ({ profileData }) => {
         dispatch(getExperiencesAction(userId));
       }
     },
+    [],
     [myExperiencesArray],
     [otherUserExperiences]
   );
