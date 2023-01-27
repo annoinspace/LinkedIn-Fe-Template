@@ -4,7 +4,7 @@ import { useState } from "react"
 import { addNewConnection } from "../../redux/actions"
 
 const SingleConnection = (props) => {
-  const { name, surname, pfp, background, job, _id, description, createdAt } = props
+  const { name, surname, pfp, background, job, _id } = props
   const [follow, setFollow] = useState("Follow")
   const currentUser = useSelector((state) => state.myProfile.detailsData)
   const dispatch = useDispatch()
