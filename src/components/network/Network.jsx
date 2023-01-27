@@ -74,7 +74,7 @@ const Network = () => {
                       <div>Connections</div>
                     </Link>
                   </div>
-                  <span>{connections.length}</span>
+                  {connections && <span>{connections.length}</span>}
                 </div>
                 <div id="network-item">
                   <div id="network-item-inside">

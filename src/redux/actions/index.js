@@ -625,3 +625,28 @@ export const getUserConnectionsAction = (currentUserId) => {
     }
   }
 }
+
+export const addNewConnection = (currentUserId, newConnectionId) => {
+  console.log("--------------------currentUserId", currentUserId)
+  console.log("--------------------newConnectionId", newConnectionId)
+  console.log("--------------------newConnectionId", typeof newConnectionId)
+  const userNetworkUrl = `https://linkedin-backend-production.up.railway.app/mynetwork/${currentUserId}`
+  return async (dispatch) => {
+    try {
+      let response = await fetch(userNetworkUrl, {
+        method: "POST",
+        body: newConnectionId,
+        "Content-Type": "undefined"
+      })
+      console.log("response", response)
+      if (response.ok) {
+        let data = await response.json()
+        console.log("---------------userConnections updated ------------------ ", data)
+      } else {
+        console.log("error while fetching newtork connections")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
