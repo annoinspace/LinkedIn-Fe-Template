@@ -1,58 +1,49 @@
-import { useEffect, useState } from "react";
-import { Container, Row, ListGroup, Button } from "react-bootstrap";
-import * as Icon from "react-bootstrap-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import ExperienceModal from "./ExperienceModal";
-import {
-  getExperiencesAction,
-  getMyProfileDetailsAction,
-} from "../../redux/actions";
-import { UPDATE_STATE_OF_EXPERIENCES } from "../../redux/actions";
-import { useNavigate } from "react-router-dom";
-import SingleExperience from "./SingleExperience";
-import SingleExperienceMainPage from "./SingleExperienceMainPage";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { Container, Row, ListGroup, Button } from "react-bootstrap"
+import * as Icon from "react-bootstrap-icons"
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import ExperienceModal from "./ExperienceModal"
+import { getExperiencesAction } from "../../redux/actions"
+import { UPDATE_STATE_OF_EXPERIENCES } from "../../redux/actions"
+import { useNavigate } from "react-router-dom"
+import SingleExperience from "./SingleExperience"
+import SingleExperienceMainPage from "./SingleExperienceMainPage"
+import { useParams } from "react-router-dom"
 
 const ExperienceComponent = ({ profileData }) => {
-  let pathname = window.location.pathname;
-  const params = useParams();
-  const id = params.id;
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  let pathname = window.location.pathname
+  const params = useParams()
+  const id = params.id
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  let userId = useSelector((state) => state.myProfile.detailsData._id);
-  const otherUserID = useSelector((state) => state.otherUser.selectedUser._id);
+  let userId = useSelector((state) => state.myProfile.detailsData._id)
+  const otherUserID = useSelector((state) => state.otherUser.selectedUser._id)
 
   //checks if a new experience has been added
-  let isNewExperienceAdded = useSelector(
-    (state) => state.experiences.newExperienceAdded
-  );
+  let isNewExperienceAdded = useSelector((state) => state.experiences.newExperienceAdded)
 
   //checks if an experience has been deleted
-  let didWeDeleteAnExperience = useSelector(
-    (state) => state.experiences.deletedExp
-  );
+  let didWeDeleteAnExperience = useSelector((state) => state.experiences.deletedExp)
 
-  const newUserId = id !== userId ? otherUserID : userId;
+  const newUserId = id !== userId ? otherUserID : userId
 
   //gets all the experiences from the redux state
 
   // const experiencesArray = useSelector((state) => state.experiences.experiences)
 
-  const myExperiencesArray = useSelector(
-    (state) => state.myProfile.detailsData.experiences
-  );
-  const otherUserExperiences = useSelector(
-    (state) => state.otherUser.selectedUser.experiences
-  );
+  const myExperiencesArray = useSelector((state) => state.myProfile.detailsData.experiences)
+  const otherUserExperiences = useSelector((state) => state.otherUser.selectedUser.experiences)
 
   const experiencesArray =
+
     userId === otherUserID ||
     window.location.pathname === "/me" ||
     window.location.pathname === "/editexperiences"
+
       ? myExperiencesArray
-      : otherUserExperiences;
+      : otherUserExperiences
 
   // useEffect(() => {
   //   dispatch(getMyProfileDetailsAction());
@@ -62,35 +53,35 @@ const ExperienceComponent = ({ profileData }) => {
   useEffect(
     () => {
       if (userId) {
-        dispatch(getExperiencesAction(userId));
+        dispatch(getExperiencesAction(userId))
       }
     },
     [],
     [myExperiencesArray],
     [otherUserExperiences]
-  );
+  )
 
   useEffect(() => {
     if (userId) {
-      dispatch(getExperiencesAction(userId));
+      dispatch(getExperiencesAction(userId))
     }
-  }, [userId, didWeDeleteAnExperience]);
+  }, [userId, didWeDeleteAnExperience])
 
   useEffect(() => {
     if (userId && isNewExperienceAdded === true) {
-      dispatch(getExperiencesAction(userId));
+      dispatch(getExperiencesAction(userId))
       dispatch({
         type: UPDATE_STATE_OF_EXPERIENCES,
-        payload: false,
-      });
+        payload: false
+      })
     }
-  }, [userId, isNewExperienceAdded]);
+  }, [userId, isNewExperienceAdded])
 
   //the plus button for showing the little dropdown with the "Add position" for opening the modal
   //for adding a new experience
-  const [plusButton, setPlusButton] = useState(false);
+  const [plusButton, setPlusButton] = useState(false)
 
-  const location = window.location.pathname;
+  const location = window.location.pathname
 
   return (
     <>
@@ -101,19 +92,11 @@ const ExperienceComponent = ({ profileData }) => {
               <div className="d-flex justify-content-between">
                 <div className="d-flex">
                   <div className="editButtonIconDiv d-flex justify-content-center align-items-center">
-                    <Link
-                      to={-1}
-                      className="text-decoration-none text-secondary"
-                    >
-                      <Icon.ArrowLeft
-                        style={{ fontSize: "25px" }}
-                        className="text-dark"
-                      />
+                    <Link to={-1} className="text-decoration-none text-secondary">
+                      <Icon.ArrowLeft style={{ fontSize: "25px" }} className="text-dark" />
                     </Link>
                   </div>
-                  <h5 className="text-left ml-4 mb-0 normal-cursor-on-hover font-weight-bold">
-                    Experience
-                  </h5>
+                  <h5 className="text-left ml-4 mb-0 normal-cursor-on-hover font-weight-bold">Experience</h5>
                 </div>
                 <div className="d-flex justify-content-between">
                   <div className="d-flex flex-column justify-content-center align-items-center cursor-on-hover">
@@ -125,9 +108,9 @@ const ExperienceComponent = ({ profileData }) => {
                       }
                       onClick={() => {
                         if (plusButton === false) {
-                          setPlusButton(true);
+                          setPlusButton(true)
                         } else {
-                          setPlusButton(false);
+                          setPlusButton(false)
                         }
                       }}
                     >
@@ -157,18 +140,11 @@ const ExperienceComponent = ({ profileData }) => {
                   {/* we are mapping all the experiences and displaying them with SingleExp comp */}
                   {experiencesArray.length !== 0
                     ? experiencesArray.map((experience) => {
-                        return (
-                          <SingleExperience
-                            key={experience._id}
-                            exp={experience}
-                          />
-                        );
+                        return <SingleExperience key={experience._id} exp={experience} />
                       })
                     : "No experience yet"}
                 </ListGroup>
-                <a
-                  href={`https://linkedin-backend-production.up.railway.app/users/${newUserId}/experiences/csv`}
-                >
+                <a href={`https://linkedin-backend-production.up.railway.app/users/${newUserId}/experiences/csv`}>
                   <Button>Export Experiences</Button>
                 </a>
               </div>
@@ -180,16 +156,8 @@ const ExperienceComponent = ({ profileData }) => {
           <Row className="my-2">
             <div className="col experience-container-design p-4 normal-cursor-on-hover">
               <div className="d-flex justify-content-between">
-                <h5 className="text-left mb-0 normal-cursor-on-hover font-weight-bold">
-                  Experience
-                </h5>
-                <div
-                  className={
-                    pathname === "/me"
-                      ? "d-flex text-center cursor-on-hover"
-                      : "d-none"
-                  }
-                >
+                <h5 className="text-left mb-0 normal-cursor-on-hover font-weight-bold">Experience</h5>
+                <div className={pathname === "/me" ? "d-flex text-center cursor-on-hover" : "d-none"}>
                   <div
                     className={
                       plusButton === true
@@ -198,9 +166,9 @@ const ExperienceComponent = ({ profileData }) => {
                     }
                     onClick={() => {
                       if (plusButton === false) {
-                        setPlusButton(true);
+                        setPlusButton(true)
                       } else {
-                        setPlusButton(false);
+                        setPlusButton(false)
                       }
                     }}
                   >
@@ -208,10 +176,7 @@ const ExperienceComponent = ({ profileData }) => {
                   </div>
                   <div className="d-flex editButtonIconDiv justify-content-center align-items-center edit-icon">
                     <Link to={"/editexperiences"}>
-                      <Icon.Pencil
-                        className="text-dark pb-1"
-                        style={{ fontSize: "23px" }}
-                      />
+                      <Icon.Pencil className="text-dark pb-1" style={{ fontSize: "23px" }} />
                     </Link>
                   </div>
                   <div
@@ -232,19 +197,13 @@ const ExperienceComponent = ({ profileData }) => {
                 </div>
               </div>
               <div>
-                {experiencesArray?.length !== 0 &&
-                experiencesArray !== undefined ? (
+                {experiencesArray?.length !== 0 && experiencesArray !== undefined ? (
                   <ListGroup variant="flush" className="px-0 text-left">
                     <div className="">
                       {/* we are mapping all the experiences and displaying them with SingleExp comp */}
                       {experiencesArray.length !== 0
                         ? experiencesArray.map((experience) => {
-                            return (
-                              <SingleExperienceMainPage
-                                key={experience._id}
-                                exp={experience}
-                              />
-                            );
+                            return <SingleExperienceMainPage key={experience._id} exp={experience} />
                           })
                         : "No experience yet"}
                     </div>
@@ -253,7 +212,7 @@ const ExperienceComponent = ({ profileData }) => {
                         <div
                           className="cursor-on-hover"
                           onClick={() => {
-                            navigate("/editexperiences");
+                            navigate("/editexperiences")
                           }}
                         >
                           Show all {experiencesArray.length} experiences
@@ -271,7 +230,7 @@ const ExperienceComponent = ({ profileData }) => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ExperienceComponent;
+export default ExperienceComponent

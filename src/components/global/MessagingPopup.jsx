@@ -1,26 +1,23 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  expandMessengerAction,
-  collapseMessengerAction,
-} from "../../redux/actions";
-import { BsThreeDots } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
-import { FiEdit } from "react-icons/fi";
-import { SlArrowDown, SlArrowUp } from "react-icons/sl";
-import { FaSlidersH } from "react-icons/fa";
-import placeholder from "../../assets/v-team-logo.png";
-import UserMessages from "./UserMessages";
+import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { expandMessengerAction, collapseMessengerAction } from "../../redux/actions"
+import { BsThreeDots } from "react-icons/bs"
+import { BiSearch } from "react-icons/bi"
+import { FiEdit } from "react-icons/fi"
+import { SlArrowDown, SlArrowUp } from "react-icons/sl"
+import { FaSlidersH } from "react-icons/fa"
+import placeholder from "../../assets/v-team-logo.png"
+import UserMessages from "./UserMessages"
 
 export default function MessagingPopup() {
-  let showMessages = useSelector((state) => state.messenger.showMessages);
-  let details = useSelector((state) => state.myProfile.detailsData);
-  let isFetched = useSelector((state) => state.myProfile.isFetched);
-  const user = useSelector((state) => state.user.user);
+  let showMessages = useSelector((state) => state.messenger.showMessages)
 
-  const dispatch = useDispatch();
-  if (user.length === 0) {
-    return <></>;
+  const currentUser = useSelector((state) => state.myProfile.detailsData)
+  console.log("user pfp", currentUser.pfp)
+
+  const dispatch = useDispatch()
+  if (currentUser.length === 0) {
+    return <></>
   } else {
     return (
       <>
@@ -29,11 +26,9 @@ export default function MessagingPopup() {
             <div className="top-messenger-wrapper ">
               <div className="d-flex align-items-center">
                 <div className="border recommended-user-image ml-1 mr-2">
-                  <img src={user[0]?.pfp} alt="avatar" />
+                  <img src={currentUser?.pfp} alt="avatar" />
                 </div>
-                <div className="font-weight-bold small-header-text ">
-                  Messaging
-                </div>
+                <div className="font-weight-bold small-header-text ">Messaging</div>
               </div>
               <div className="d-flex">
                 <div className="mr-1 gray-hover icon-wrapper-messenger">
@@ -66,17 +61,12 @@ export default function MessagingPopup() {
         ) : (
           <>
             {" "}
-            <div
-              id="messaging-popup-wrapper"
-              className="border pointer top-messenger-wrapper"
-            >
+            <div id="messaging-popup-wrapper" className="border pointer top-messenger-wrapper">
               <div className="d-flex align-items-center">
                 <div className="border recommended-user-image ml-auto mr-2">
-                  <img src={user[0]?.pfp} alt="" />
+                  <img src={currentUser?.pfp} alt="" />
                 </div>
-                <div className="font-weight-bold  small-header-text">
-                  Messaging
-                </div>
+                <div className="font-weight-bold  small-header-text">Messaging</div>
               </div>
               <div className="d-flex">
                 <div className="mr-1 gray-hover icon-wrapper-messenger">
@@ -96,6 +86,6 @@ export default function MessagingPopup() {
           </>
         )}
       </>
-    );
+    )
   }
 }

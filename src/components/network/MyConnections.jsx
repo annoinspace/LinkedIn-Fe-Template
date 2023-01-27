@@ -26,8 +26,8 @@ export default function MyConnections() {
             <div className=" border side-component-border bg-white p-3 ">
               <div className="pl-2 pt-1">{connections.length} Connections</div>
               <div className="d-flex justify-content-between p-2">
-                <div>sort by</div>
-                <div>sort by</div>
+                {/* <div>sort by</div>
+                <div>sort by</div> */}
               </div>
               {connections.map((connection) => (
                 <div key={connection._id} className="d-flex p-1 mt-1 mb-1  ">

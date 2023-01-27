@@ -237,11 +237,10 @@ const CustomNavbar = () => {
                         <div>Posts & Activity</div>
                         <div>Job Posting Account</div>
                       </ListGroup.Item>
-                      <ListGroup.Item
-                        className="underline-on-hover"
-                        onClick={signOut}
-                      >
-                        <div>Sing Out</div>
+
+                      <ListGroup.Item className="underline-on-hover" onClick={signOut}>
+                        <div>Sign Out</div>
+
                       </ListGroup.Item>
                     </ListGroup>
                   </div>
