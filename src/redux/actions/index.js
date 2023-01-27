@@ -31,6 +31,8 @@ export const HIDE_DELETE_MODAL = "HIDE_DELETE_MODAL"
 export const SET_USER = "SET_USER"
 
 export const GET_USER_CONNECTIONS = "GET_USER_CONNECTIONS"
+export const UPDATE_USER_CONNECTIONS = "UPDATE_USER_CONNECTIONS"
+export const GET_UNCONNECTED_USERS = "GET_UNCONNECTED_USERS"
 
 //constants to use for fetching dat
 
@@ -448,9 +450,6 @@ export const deleteMyFeedPostAction = (deleteFeedPost, postId) => {
       body: JSON.stringify(deleteFeedPost),
       headers: {
         "Content-Type": "application/json"
-        //   Authorization:
-        //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk2ZjAxM2M5NmRmYjAwMTUyMWE1YmEiLCJpYXQiOjE2NzA4MzYyNDMsImV4cCI6MTY3MjA0NTg0M30.y7kED45MhN6V7jWF7PwyZ4DryRe6OJ6b9-so68M-zaE",
-        //
       }
     }
     console.log("-------------DELETING My Feed Post-----------------")
@@ -630,23 +629,38 @@ export const addNewConnection = (currentUserId, newConnectionId) => {
   console.log("--------------------currentUserId", currentUserId)
   console.log("--------------------newConnectionId", newConnectionId)
   console.log("--------------------newConnectionId", typeof newConnectionId)
+  const body = JSON.stringify({
+    connection: newConnectionId
+  })
   const userNetworkUrl = `https://linkedin-backend-production.up.railway.app/mynetwork/${currentUserId}`
   return async (dispatch) => {
     try {
       let response = await fetch(userNetworkUrl, {
         method: "POST",
-        body: newConnectionId,
-        "Content-Type": "undefined"
+        body: body,
+        headers: { "Content-Type": "application/json" }
       })
       console.log("response", response)
       if (response.ok) {
         let data = await response.json()
         console.log("---------------userConnections updated ------------------ ", data)
+        let userConnections = data.connections
+        dispatch({
+          type: UPDATE_USER_CONNECTIONS,
+          payload: userConnections
+        })
       } else {
         console.log("error while fetching newtork connections")
       }
     } catch (error) {
       console.log(error)
     }
+  }
+}
+
+export const getUnconnectedUsers = (filteredUsersCurrentUser) => {
+  return {
+    type: GET_UNCONNECTED_USERS,
+    payload: filteredUsersCurrentUser
   }
 }

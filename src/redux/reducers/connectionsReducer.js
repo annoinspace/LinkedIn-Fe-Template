@@ -1,7 +1,8 @@
-import { GET_USER_CONNECTIONS } from "../actions"
+import { GET_USER_CONNECTIONS, GET_UNCONNECTED_USERS } from "../actions"
 
 const initialState = {
-  allConnections: []
+  allConnections: [],
+  unconnectedUsers: []
 }
 
 const getConnectionsReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const getConnectionsReducer = (state = initialState, action) => {
       return {
         ...state,
         allConnections: action.payload
+      }
+    case GET_UNCONNECTED_USERS:
+      return {
+        ...state,
+        unconnectedUsers: action.payload
       }
     default:
       return state

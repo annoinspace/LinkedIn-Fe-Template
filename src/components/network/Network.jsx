@@ -1,10 +1,10 @@
-import { Container, Button, Form, Row, Col, Spinner } from "react-bootstrap"
+import { Container, Button, Form, Row, Spinner } from "react-bootstrap"
 import * as Icon from "react-bootstrap-icons"
 import React from "react"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getUserConnectionsAction } from "../../redux/actions"
+import { getUnconnectedUsers, getUserConnectionsAction } from "../../redux/actions"
 import FeedFooter from "../feed/FeedFooter"
 import "./styles.css"
 import SingleConnection from "./SingleConnection"
@@ -18,6 +18,8 @@ const Network = () => {
 
   useEffect(() => {
     dispatch(getUserConnectionsAction(currentUserId))
+    dispatch(getUnconnectedUsers(filteredUsersCurrentUser))
+    console.log("---------------------all filtered users remaining", filteredUsersCurrentUser)
   }, [dispatch, currentUserId])
 
   const [users, setUsers] = useState([])
