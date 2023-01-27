@@ -1,14 +1,18 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import CustomToggleMoreButton from "../../customToggleElements/CustomToggleMoreButton";
 import CustomMenuMoreButton from "../../customToggleElements/CustomMenuMoreButton";
+import { Link } from "react-router-dom";
 import {
   Arrow90degRight,
   Download,
   FileEarmark,
   InfoSquareFill,
 } from "react-bootstrap-icons";
+import { useSelector } from "react-redux";
 
 export default function MoreDropDownButton() {
+  const currentUserId = useSelector((state) => state.myProfile.detailsData._id)
+
   return (
     <div className="d-flex ml-0">
       <Dropdown>
@@ -38,9 +42,9 @@ export default function MoreDropDownButton() {
           <Dropdown.Item eventKey="3">
             <div className="d-flex align-items-center">
               <FileEarmark height={"20px"} />
-              <p className="m-0 ml-2" style={{ color: "grey" }}>
-                Build a resume
-              </p>
+                <p className="m-0 ml-2" style={{ color: "grey" }}>
+                  Build a resume
+                </p>
             </div>
           </Dropdown.Item>
           <Dropdown.Item eventKey="1">

@@ -1,5 +1,5 @@
 // import { useEffect } from "react"
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import { Dot, Linkedin, Pencil, XLg } from "react-bootstrap-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -28,6 +28,11 @@ const UserDetails = () => {
     currentUser._id === id || window.location.pathname === "/me"
       ? currentUser
       : profileToView;
+
+  const currentProfileId =
+    currentUser._id === id || window.location.pathname === "/me"
+      ? currentUser._id
+      : profileToView._id;
 
   const dispatch = useDispatch();
   console.log("user in user details", user);
@@ -175,6 +180,15 @@ const UserDetails = () => {
                   </div>
                 </div>
               </div>
+            </Row>
+            <Row className="justify-content-center">
+              <Col>
+                <a
+                  href={`https://linkedin-backend-production.up.railway.app/users/${currentProfileId}/cv`}
+                >
+                  <Button>CV</Button>
+                </a>
+              </Col>
             </Row>
           </div>
         </Col>
