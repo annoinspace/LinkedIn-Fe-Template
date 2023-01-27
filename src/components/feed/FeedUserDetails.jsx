@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 const FeedUserDetails = () => {
   let details = useSelector((state) => state.myProfile.detailsData);
   let isFetched = useSelector((state) => state.myProfile.isFetched);
-  const user = useSelector((state) => state.user.user);
+  // const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.myProfile.detailsData);
 
   return (
     <div
@@ -19,7 +20,7 @@ const FeedUserDetails = () => {
       {/* Header image */}
       <div style={{ height: "56px", overflow: "hidden" }}>
         <img
-          src={user[0]?.background}
+          src={user?.background}
           alt="User Header"
           style={{
             width: "100%",
@@ -44,7 +45,7 @@ const FeedUserDetails = () => {
           >
             {isFetched ? (
               <img
-                src={user[0]?.pfp}
+                src={user?.pfp}
                 alt="User Profilepic"
                 style={{ height: "100%" }}
               />
@@ -58,14 +59,14 @@ const FeedUserDetails = () => {
       <div style={{ transform: "translate3d(0px, -20px, 0px)" }}>
         <div className="d-flex justify-content-center text-center">
           <div style={{ fontSize: "16px", fontWeight: "500" }}>
-            {user[0]?.name} {user[0]?.surname}
+            {user?.name} {user?.surname}
           </div>
         </div>
         <div
           style={{ fontSize: "12px", color: "grey" }}
           className={"text-center p-feed-x border-bottom p-feed-bottom"}
         >
-          {user[0]?.job}
+          {user?.job}
         </div>
         {/* Center element */}
         <div className="p-feed-y">

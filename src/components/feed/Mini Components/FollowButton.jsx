@@ -1,3 +1,4 @@
+
 import { ArrowRight, Check, Dot, InfoSquareFill, Plus } from "react-bootstrap-icons"
 import { useSelector, useDispatch } from "react-redux"
 import { addNewConnection } from "../../../redux/actions"
@@ -30,11 +31,14 @@ const FollowButton = ({ id }) => {
         {/* options */}
         {clicked ? (
           <>
+
             <div
               className="pr-1 d-flex justify-content-center align-items-center"
               style={{
                 fontSize: "20px",
+
                 fontWeight: "500"
+
               }}
             >
               <Check />
@@ -43,11 +47,14 @@ const FollowButton = ({ id }) => {
               className="pr-1 d-flex justify-content-center align-items-center"
               style={{
                 fontSize: "14px",
+
                 fontWeight: "500"
+
               }}
             >
               Following
             </div>
+
           </>
         ) : (
           <>
@@ -77,3 +84,4 @@ const FollowButton = ({ id }) => {
   )
 }
 export default FollowButton
+
