@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import FeedLeftAccordeon from "../feed/FeedLeftAccordeon"
 import { getUserConnectionsAction } from "../../redux/actions"
 import { Container, Row, Col } from "react-bootstrap"
 import LargeFooter from "../global/LargeFooter"
@@ -56,9 +57,14 @@ export default function MyConnections() {
           <Col lg={4}>
             <>
               <div className=" border side-component-border bg-white">
-                <SimpleTextMyProfile text="Add personal contacts" />
-                <hr style={{ width: "90%" }} />
-                <SimpleTextMyProfile text="Add profile in another language" />
+                <div>
+                  <SimpleTextMyProfile text="Add personal contacts" />
+                  <hr style={{ width: "90%" }} />
+                  <SimpleTextMyProfile text="Add profile in another language" />
+                </div>
+              </div>
+              <div className="mt-2">
+                <FeedLeftAccordeon />
               </div>
             </>
           </Col>
