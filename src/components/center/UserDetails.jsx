@@ -34,7 +34,7 @@ const UserDetails = () => {
       {isFetched ? (
         <Col className="firstComponent">
           <div
-            className="position-relative headerImageDiv mb-4"
+            className="position-relative headerImageDiv "
             style={{
               borderRadius: "10px 10px 0 0"
             }}
@@ -51,7 +51,7 @@ const UserDetails = () => {
                 }}
                 alt="user profile banner"
               />
-              <Row className="d-flex position-absolute " style={{ bottom: "-17%" }}>
+              <Row className="d-flex position-absolute " style={{ bottom: "-10%" }}>
                 <ProfileImageModal {...user} />
               </Row>
             </div>
@@ -143,11 +143,15 @@ const UserDetails = () => {
                 </div>
               </div>
             </Row>
-            <Row className="justify-content-center">
-              <Col>
-                <a href={`https://linkedin-backend-production.up.railway.app/users/${currentProfileId}/cv`}>
-                  <Button>CV</Button>
-                </a>
+            <Row className="pl-4 pb-2">
+              <Col className="d-flex justify-content-start ">
+                <div className="">
+                  {/* <a href={`https://linkedin-backend-production.up.railway.app/users/${currentProfileId}/cv`}>
+                    <Button className="btn" variant="outline-primary" style={{ borderRadius: "20px" }}>
+                      Resume
+                    </Button>
+                  </a> */}
+                </div>
               </Col>
             </Row>
           </div>
